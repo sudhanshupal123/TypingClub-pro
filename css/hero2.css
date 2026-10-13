@@ -1,0 +1,655 @@
+.hero-metora {
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.metora-card {
+  margin-top: 3.5rem;
+  width: 90dvw;
+  height: 90dvh;
+  background: #ffffff;
+  border-radius: var(--card-radius);
+  box-shadow:
+    0 25px 60px -15px rgba(0, 0, 0, 0.12),
+    0 0 1px 1px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.4s ease;
+  padding-top: 1.6rem;
+}
+
+/* ==========================================================================
+   NAVIGATION HEADER
+   ========================================================================== */
+.metora-header {
+  width: 80%;
+  height: 50px;
+  position: fixed;
+  top: 10px;
+  border-radius: 100px;
+  padding: 5px;
+  z-index: 99999999;
+  background: rgba(red, green, blue, alpha);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(220, 226, 235, 0.85);
+  box-shadow: 0 0 5px var(--text-muted), inset 0 0 2px var(--headerbg);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: clamp(16px, 3.5vw, 40px);
+  padding: 0 1rem;
+}
+
+/* Logo */
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: var(--color-black);
+  text-transform: uppercase;
+  transition: transform 0.25s ease;
+  line-height: 1;
+}
+
+.brand-logo .logo {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin: 0;
+  display: block;
+}
+
+/* Nav Menu */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 5vw, 30px);
+  list-style: none;
+}
+
+.nav-link {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--color-red);
+  transition: width 0.25s ease;
+  border-radius: 2px;
+}
+
+.nav-link:hover {
+  color: var(--color-black);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Connect Wallet Button */
+.btn-wallet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-red);
+  background-color: var(--color-red-soft);
+  border: 1px solid var(--color-red-border);
+  padding: 9px 24px;
+  border-radius: 9999px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-wallet:hover {
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(234, 46, 46, 0.18);
+}
+
+.btn-wallet:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   HERO STAGE (CENTRAL VISUAL COMPOSITION)
+   ========================================================================== */
+.hero-stage {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 42px 0 42px;
+  overflow: hidden;
+}
+
+/* Huge Retro Pixel Title */
+.hero-pixel-title {
+  font-family: var(--font-pixel);
+  font-size: clamp(4.5rem, 14vw, 9rem);
+  font-weight: 900;
+  color: var(--color-black);
+  text-align: center;
+  line-height: 0.95;
+  user-select: none;
+  position: relative;
+  z-index: 1;
+  margin-top: 10px;
+  margin-bottom: -15px;
+}
+
+.pro-hero-text {
+  font-size: clamp(4.5rem, 14vw, 9rem);
+  color: var(--color-red);
+  position: absolute;
+  bottom: -7rem;
+  right: -30px;
+}
+
+/* Middle Content Layer */
+.hero-content-layer {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding-top: 30px;
+  pointer-events: none;
+  /* Let elements enable their own pointer events */
+}
+
+/* ── Left Side Column ── */
+.hero-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  max-width: 210px;
+  pointer-events: auto;
+  z-index: 8;
+}
+
+.hero-description-left {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* Circular Rotating Red Badge */
+.stamp-badge-wrap {
+  position: relative;
+  width: 78px;
+  height: 78px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.stamp-badge-wrap:hover {
+  transform: scale(1.08);
+}
+
+.stamp-badge {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--color-red);
+  box-shadow: 0 8px 24px var(--color-red-glow);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Rotating SVG text */
+.stamp-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: badgeSpin 12s linear infinite;
+  transform-origin: center center;
+}
+
+.stamp-badge-wrap:hover .stamp-svg {
+  animation-duration: 12s;
+}
+
+@keyframes badgeSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.stamp-text {
+  font-family: var(--font-pixel);
+  font-size: 7.2px;
+  fill: #ffffff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Center Arrow */
+.stamp-arrow {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+}
+
+.stamp-badge-wrap:hover .stamp-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* ── Right Side Column ── */
+.hero-right-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 220px;
+  pointer-events: auto;
+  z-index: 8;
+  gap: 25px;
+}
+
+/* 3D Stack of Collectible Cards */
+.nft-card-stack {
+  position: relative;
+  width: 175px;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  perspective: 800px;
+}
+
+.stack-card {
+  position: absolute;
+  width: 110px;
+  height: 145px;
+  background: #111111;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+}
+
+.stack-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Left tilted card */
+.stack-card-left {
+  transform: rotate(-14deg) translateX(-28px) translateY(8px);
+  z-index: 1;
+  opacity: 0.9;
+}
+
+/* Right tilted card */
+.stack-card-right {
+  transform: rotate(12deg) translateX(28px) translateY(8px);
+  z-index: 2;
+  opacity: 0.92;
+}
+
+/* Center upright card (Quantum Muse) */
+.stack-card-center {
+  transform: rotate(0deg) translate(0, 0);
+  z-index: 3;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.38);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-sparkle {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  z-index: 10;
+  filter: drop-shadow(0 0 6px rgba(234, 46, 46, 0.8));
+  animation: sparklePulse 2.5s ease-in-out infinite;
+}
+
+@keyframes sparklePulse {
+
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.2) rotate(15deg);
+  }
+}
+
+.card-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
+  padding: 8px 6px 6px 6px;
+  text-align: center;
+  font-family: var(--font-pixel);
+  font-size: 7.5px;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+/* Card Stack Hover Fan-Out Effect */
+.nft-card-stack:hover .stack-card-left {
+  transform: rotate(-22deg) translateX(-42px) translateY(4px);
+  opacity: 1;
+}
+
+.nft-card-stack:hover .stack-card-right {
+  transform: rotate(20deg) translateX(42px) translateY(4px);
+  opacity: 1;
+}
+
+.nft-card-stack:hover .stack-card-center {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.hero-description-right {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  text-align: right;
+  max-width: 180px;
+}
+
+/* ==========================================================================
+   CENTER HERO CHARACTER (HERO BOY)
+   Uses images/main-heroboy-transparent.png & main-heroboy.jpeg
+   ========================================================================== */
+.hero-character-anchor {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+  max-width: 580px;
+  width: 90%;
+  filter: drop-shadow(10px 10px 10px var(--color-red));
+}
+
+.hero-character-img {
+  width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: contain;
+  object-position: bottom center;
+  display: block;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.12));
+  transition: transform 0.4s ease;
+  pointer-events: auto;
+}
+
+.hero-character-img:hover {
+  transform: scale(1.015);
+}
+
+/* ==========================================================================
+   BOTTOM RETRO GRID SECTION
+   "A NEW WORLD OF" / "DIGITAL" | "OWNERSHIP"
+   ========================================================================== */
+.hero-bottom-grid {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  background: #ffffff;
+  border-top: 1.5px solid var(--color-border);
+}
+
+.grid-row-top {
+  width: 100%;
+  padding: 16px 20px;
+  border-bottom: 1.5px solid var(--color-border);
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.grid-row-bottom {
+  display: grid;
+  grid-template-columns: 46% 54%;
+  width: 100%;
+}
+
+.grid-cell {
+  padding: 16px 20px;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.grid-cell-left {
+  border-right: 1.5px solid var(--color-border);
+}
+
+.grid-text {
+  font-family: var(--font-pixel);
+  font-size: clamp(1.2rem, 3.4vw, 2.75rem);
+  font-weight: 700;
+  color: var(--color-black);
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.grid-row-top:hover,
+.grid-cell:hover {
+  background-color: #fafafa;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLETS & MOBILE)
+   ========================================================================== */
+@media (max-width: 980px) {
+  .hero-stage {
+    min-height: 460px;
+    padding: 10px 24px 0 24px;
+  }
+
+  .hero-left-col {
+    max-width: 170px;
+    gap: 40px;
+  }
+
+  .hero-right-col {
+    max-width: 170px;
+  }
+
+  .hero-character-anchor {
+    max-width: 440px;
+  }
+
+  .hero-character-img {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 16px 12px 40px 12px;
+  }
+
+  .metora-card {
+    border-radius: 20px;
+  }
+
+  .metora-header {
+    width: 92%;
+    height: auto;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 18px;
+    border-radius: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-menu {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 6px;
+  }
+
+  .hero-stage {
+    min-height: 420px;
+    padding: 10px 16px 0 16px;
+  }
+
+  .hero-content-layer {
+    padding-top: 10px;
+  }
+
+  .hero-left-col,
+  .hero-right-col {
+    max-width: 140px;
+  }
+
+  .hero-description-left,
+  .hero-description-right {
+    font-size: 0.74rem;
+  }
+
+  .stamp-badge-wrap {
+    width: 62px;
+    height: 62px;
+  }
+
+  .nft-card-stack {
+    width: 130px;
+    height: 130px;
+  }
+
+  .stack-card {
+    width: 85px;
+    height: 110px;
+    border-radius: 10px;
+  }
+
+  .hero-character-anchor {
+    max-width: 340px;
+  }
+
+  .hero-character-img {
+    max-height: 330px;
+  }
+
+  .grid-text {
+    letter-spacing: 0.08em;
+  }
+
+  .grid-row-top,
+  .grid-cell {
+    padding: 12px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-stage {
+    min-height: 380px;
+  }
+
+  .hero-left-col,
+  .hero-right-col {
+    max-width: 110px;
+  }
+
+  .hero-description-left,
+  .hero-description-right {
+    display: none;
+    /* Hide dense text on small mobile so hero character & logo shine */
+  }
+
+  .hero-content-layer {
+    align-items: flex-end;
+    padding-bottom: 20px;
+  }
+
+  .hero-character-anchor {
+    max-width: 270px;
+  }
+
+  .hero-character-img {
+    max-height: 280px;
+  }
+
+  .grid-row-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-cell-left {
+    border-right: none;
+    border-bottom: 1.5px solid var(--color-border);
+  }
+}

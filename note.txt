@@ -1,0 +1,19 @@
+level catogry bronze, silver, platinum, gold, dimond, typeMaster.
+level catogry = 6;
+level =32*6 =196   ;
+WPM = 200;
+wpm level 1=15 32
+wpm level 2=35 64
+wpm level 3=55  96
+wpm level 4=85 128
+wpm level 5=115 160
+wpm level 6=155 192 
+Last level = 199 8 //200 level
+
+
+20 = all keys
+30-40 = shift and tab
+50-70 = number
+
+
+2 + One word = 30= 30 level
