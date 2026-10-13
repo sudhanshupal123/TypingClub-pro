@@ -10,14 +10,13 @@ fetch('./json/word.json').then(response => response.json()).then(data => {
     console.log(data[0].text[5]);
 
     data.forEach((level, idx) => {
-        console.log(idx)
         levelHTML += `<div class="lessons">
                         <h1 class="lessonNumber">${level.level}</h1>
                         <p class="lessonDescription">${level.title}</p>
                         <div class="lock"><i class="fa-solid fa-lock"></i></div>
                     </div>
                     `;
-
+        console.log(level.tier,level.targetWpm)
     });
     document.querySelector('.lesson-grid').innerHTML = levelHTML;
     if (data[0]) {
