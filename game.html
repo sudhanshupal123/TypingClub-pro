@@ -21,7 +21,7 @@
   <header class="game-header">
     <div class="game-header-inner">
       <!-- Back Button -->
-      <button class="back-btn" id="backBtn" onclick="goBack()">
+      <button class="back-btn" id="backBtn">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
           <path d="M11 14L6 9l5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round" />
@@ -49,7 +49,7 @@
         </div>
         <!-- Timer -->
         <div class="stat-block">
-          <div class="stat-value" id="statTimer">0:00</div>
+          <div class="stat-value"><span id="startminuts">0</span>:<span id="statTimer">0</span></div>
           <div class="stat-label">TIME</div>
         </div>
         <!-- Words -->
@@ -60,7 +60,7 @@
       </div>
 
       <!-- Restart -->
-      <button class="icon-btn" id="restartBtn" title="Restart (Esc)" onclick="restartGame()">
+      <button class="icon-btn" id="restartBtn" title="Restart (Esc)">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
           <path
             d="M1.5 9C1.5 5.134 4.686 2 8.5 2c2.3 0 4.34 1.1 5.65 2.8M16.5 9c0 3.866-3.134 7-7 7-2.3 0-4.34-1.1-5.65-2.8"
