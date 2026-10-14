@@ -7,96 +7,96 @@
    (Overrides the surface variables set in style.css lightMode / darkMode)
    ============================================================ */
 body.lightMode {
-  --game-body-bg:     linear-gradient(135deg, #e0f7ff 0%, #f0e8ff 50%, #ffffff 100%);
-  --game-header-bg:   rgba(255, 255, 255, 0.80);
+  --game-body-bg: linear-gradient(135deg, #e0f7ff 0%, #f0e8ff 50%, #ffffff 100%);
+  --game-header-bg: rgba(255, 255, 255, 0.80);
   --game-header-border: rgba(255, 255, 255, 0.90);
   --game-header-shadow: 0 4px 24px rgba(56, 189, 248, 0.10);
-  --game-stat-bg:     rgba(255, 255, 255, 0.80);
+  --game-stat-bg: rgba(255, 255, 255, 0.80);
   --game-stat-border: rgba(255, 255, 255, 0.90);
-  --game-btn-bg:      rgba(255, 255, 255, 0.70);
-  --game-btn-border:  rgba(186, 230, 253, 0.70);
+  --game-btn-bg: rgba(255, 255, 255, 0.70);
+  --game-btn-border: rgba(186, 230, 253, 0.70);
   --game-btn-hover-bg: rgba(224, 247, 255, 0.80);
-  --game-text-bg:     rgba(255, 255, 255, 0.78);
+  --game-text-bg: rgba(255, 255, 255, 0.78);
   --game-text-border: rgba(186, 230, 253, 0.55);
-  --game-kbd-bg:      rgba(255, 255, 255, 0.75);
-  --game-kbd-border:  rgba(255, 255, 255, 0.90);
-  --game-key-bg:      rgba(255, 255, 255, 0.85);
-  --game-key-border:  rgba(186, 230, 253, 0.60);
-  --game-key-bottom:  rgba(0, 136, 255, 0.15);
-  --game-cwb-bg:      rgba(255, 255, 255, 0.80);
-  --game-cwb-border:  rgba(255, 255, 255, 0.90);
+  --game-kbd-bg: rgba(255, 255, 255, 0.75);
+  --game-kbd-border: rgba(255, 255, 255, 0.90);
+  --game-key-bg: rgba(255, 255, 255, 0.85);
+  --game-key-border: rgba(186, 230, 253, 0.60);
+  --game-key-bottom: rgba(0, 136, 255, 0.15);
+  --game-cwb-bg: rgba(255, 255, 255, 0.80);
+  --game-cwb-border: rgba(255, 255, 255, 0.90);
   --game-modal-overlay: rgba(224, 242, 254, 0.55);
-  --game-modal-bg:    rgba(255, 255, 255, 0.90);
+  --game-modal-bg: rgba(255, 255, 255, 0.90);
   --game-modal-border: rgba(255, 255, 255, 0.95);
   --game-modal-shadow: 0 24px 60px rgba(56, 189, 248, 0.20), 0 4px 20px rgba(0, 0, 0, 0.06);
   --game-modal-stat-bg: rgba(224, 247, 255, 0.50);
   --game-modal-stat-border: rgba(186, 230, 253, 0.55);
-  --game-tabs-bg:     rgba(224, 247, 255, 0.45);
+  --game-tabs-bg: rgba(224, 247, 255, 0.45);
   --game-tabs-border: rgba(186, 230, 253, 0.50);
   --game-atab-active: rgba(255, 255, 255, 0.90);
-  --game-chart-bg:    rgba(224, 247, 255, 0.40);
+  --game-chart-bg: rgba(224, 247, 255, 0.40);
   --game-chart-border: rgba(186, 230, 253, 0.55);
-  --game-wpm-bar-bg:  rgba(224, 247, 255, 0.55);
+  --game-wpm-bar-bg: rgba(224, 247, 255, 0.55);
   --game-wpm-bar-border: rgba(186, 230, 253, 0.55);
   --game-timing-chip-bg: rgba(224, 247, 255, 0.55);
-  --game-stuck-bg:    rgba(255, 255, 255, 0.75);
+  --game-stuck-bg: rgba(255, 255, 255, 0.75);
   --game-laps-border: rgba(186, 230, 253, 0.55);
   --game-laps-head-bg: rgba(224, 247, 255, 0.60);
-  --game-laps-hover:  rgba(224, 247, 255, 0.40);
+  --game-laps-hover: rgba(224, 247, 255, 0.40);
   --game-lap-td-border: rgba(255, 255, 255, 0.03);
-  --game-loading-bg:  rgba(255, 255, 255, 0.65);
-  --game-hint-bg:     rgba(255, 255, 255, 0.80);
+  --game-loading-bg: rgba(255, 255, 255, 0.65);
+  --game-hint-bg: rgba(255, 255, 255, 0.80);
   --game-hint-border: rgba(255, 255, 255, 0.90);
-  --game-btn2-bg:     rgba(224, 247, 255, 0.70);
+  --game-btn2-bg: rgba(224, 247, 255, 0.70);
   --game-btn2-border: rgba(56, 189, 248, 0.40);
-  --game-btn2-hover:  rgba(255, 255, 255, 0.92);
+  --game-btn2-hover: rgba(255, 255, 255, 0.92);
   --game-progress-bg: rgba(186, 230, 253, 0.35);
 }
 
 body.darkMode {
-  --game-body-bg:     linear-gradient(135deg, #0f1520 0%, #1a1228 50%, #141412 100%);
-  --game-header-bg:   rgba(16, 16, 14, 0.90);
+  --game-body-bg: linear-gradient(135deg, #0f1520 0%, #1a1228 50%, #141412 100%);
+  --game-header-bg: rgba(16, 16, 14, 0.90);
   --game-header-border: rgba(255, 255, 255, 0.06);
   --game-header-shadow: 0 4px 24px rgba(0, 0, 0, 0.50);
-  --game-stat-bg:     rgba(28, 27, 25, 0.90);
+  --game-stat-bg: rgba(28, 27, 25, 0.90);
   --game-stat-border: rgba(255, 255, 255, 0.07);
-  --game-btn-bg:      rgba(28, 27, 25, 0.80);
-  --game-btn-border:  rgba(255, 255, 255, 0.10);
+  --game-btn-bg: rgba(28, 27, 25, 0.80);
+  --game-btn-border: rgba(255, 255, 255, 0.10);
   --game-btn-hover-bg: rgba(40, 136, 255, 0.12);
-  --game-text-bg:     rgba(22, 21, 19, 0.88);
+  --game-text-bg: rgba(22, 21, 19, 0.88);
   --game-text-border: rgba(255, 255, 255, 0.08);
-  --game-kbd-bg:      rgba(18, 18, 16, 0.90);
-  --game-kbd-border:  rgba(255, 255, 255, 0.06);
-  --game-key-bg:      rgba(32, 31, 29, 0.95);
-  --game-key-border:  rgba(255, 255, 255, 0.10);
-  --game-key-bottom:  rgba(0, 136, 255, 0.25);
-  --game-cwb-bg:      rgba(22, 21, 19, 0.88);
-  --game-cwb-border:  rgba(255, 255, 255, 0.07);
+  --game-kbd-bg: rgba(18, 18, 16, 0.90);
+  --game-kbd-border: rgba(255, 255, 255, 0.06);
+  --game-key-bg: rgba(32, 31, 29, 0.95);
+  --game-key-border: rgba(255, 255, 255, 0.10);
+  --game-key-bottom: rgba(0, 136, 255, 0.25);
+  --game-cwb-bg: rgba(22, 21, 19, 0.88);
+  --game-cwb-border: rgba(255, 255, 255, 0.07);
   --game-modal-overlay: rgba(10, 10, 8, 0.75);
-  --game-modal-bg:    rgba(24, 23, 21, 0.96);
+  --game-modal-bg: rgba(24, 23, 21, 0.96);
   --game-modal-border: rgba(255, 255, 255, 0.08);
   --game-modal-shadow: 0 24px 60px rgba(0, 0, 0, 0.60), 0 4px 20px rgba(0, 0, 0, 0.40);
   --game-modal-stat-bg: rgba(30, 29, 27, 0.70);
   --game-modal-stat-border: rgba(255, 255, 255, 0.08);
-  --game-tabs-bg:     rgba(22, 21, 19, 0.60);
+  --game-tabs-bg: rgba(22, 21, 19, 0.60);
   --game-tabs-border: rgba(255, 255, 255, 0.08);
   --game-atab-active: rgba(36, 35, 32, 0.95);
-  --game-chart-bg:    rgba(22, 21, 19, 0.50);
+  --game-chart-bg: rgba(22, 21, 19, 0.50);
   --game-chart-border: rgba(255, 255, 255, 0.07);
-  --game-wpm-bar-bg:  rgba(28, 27, 25, 0.70);
+  --game-wpm-bar-bg: rgba(28, 27, 25, 0.70);
   --game-wpm-bar-border: rgba(255, 255, 255, 0.08);
   --game-timing-chip-bg: rgba(30, 29, 27, 0.70);
-  --game-stuck-bg:    rgba(28, 27, 25, 0.85);
+  --game-stuck-bg: rgba(28, 27, 25, 0.85);
   --game-laps-border: rgba(255, 255, 255, 0.08);
   --game-laps-head-bg: rgba(22, 21, 19, 0.80);
-  --game-laps-hover:  rgba(40, 136, 255, 0.08);
+  --game-laps-hover: rgba(40, 136, 255, 0.08);
   --game-lap-td-border: rgba(255, 255, 255, 0.04);
-  --game-loading-bg:  rgba(20, 20, 18, 0.82);
-  --game-hint-bg:     rgba(22, 21, 19, 0.88);
+  --game-loading-bg: rgba(20, 20, 18, 0.82);
+  --game-hint-bg: rgba(22, 21, 19, 0.88);
   --game-hint-border: rgba(255, 255, 255, 0.07);
-  --game-btn2-bg:     rgba(22, 21, 19, 0.80);
+  --game-btn2-bg: rgba(22, 21, 19, 0.80);
   --game-btn2-border: rgba(56, 189, 248, 0.20);
-  --game-btn2-hover:  rgba(36, 35, 32, 0.95);
+  --game-btn2-hover: rgba(36, 35, 32, 0.95);
   --game-progress-bg: rgba(255, 255, 255, 0.07);
 }
 
@@ -273,7 +273,8 @@ body.darkMode {
 
 /* ---- Game Main ---- */
 .game-main {
-  flex: 1;
+  margin-top: 12rem;
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -318,18 +319,21 @@ body.darkMode {
 .text-display-wrapper {
   position: relative;
   width: 100%;
-  max-width: 900px;
   margin-top: -100px;
+  height:13rem;
+  border: none;
+  
 }
 
 .text-display {
+  height:100%;
+  padding: 1.5rem;
   background: var(--game-text-bg, rgba(255, 255, 255, 0.78));
-  border: 2px solid var(--game-text-border, rgba(186, 230, 253, 0.55));
+  border: none;
   border-radius: var(--radius);
-  padding: 36px 40px;
   font-family: 'Fira Code', 'Consolas', monospace;
   font-size: 1.5rem;
-  line-height: 2.2;
+  line-height: 1.5;
   color: var(--text-muted);
   letter-spacing: 0.02em;
   min-height: 200px;
@@ -398,7 +402,7 @@ body.darkMode {
 .caret {
   position: absolute;
   width: 2px;
-  height: 1.6em;
+  height: 1.6rem;
   background: var(--primary-blue);
   border-radius: 2px;
   pointer-events: none;
@@ -427,8 +431,6 @@ body.darkMode {
 /* Hidden Input */
 .typing-input {
   position: fixed;
-  top: -9999px;
-  left: -9999px;
   opacity: 0;
   pointer-events: none;
   width: 1px;
@@ -521,19 +523,18 @@ body.darkMode {
 
 /* ---- Keyboard Visual ---- */
 .keyboard-visual {
+  width: 100%;
+  height: 12rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
   padding: 16px;
-  background: var(--game-kbd-bg, rgba(255, 255, 255, 0.75));
-  border-top: 1px solid var(--game-kbd-border, rgba(255, 255, 255, 0.90));
-  backdrop-filter: blur(14px) saturate(180%);
+  background: transparent;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  box-shadow: 0 -4px 20px rgba(56, 189, 248, 0.08);
   transition: background 0.4s ease, border-color 0.3s ease;
 }
 
@@ -544,7 +545,7 @@ body.darkMode {
 }
 
 .key {
-  width: 40px;
+  width: 50px;
   height: 36px;
   background: var(--game-key-bg, rgba(255, 255, 255, 0.85));
   border: 1px solid var(--game-key-border, rgba(186, 230, 253, 0.60));
@@ -553,7 +554,7 @@ body.darkMode {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.65rem;
+  font-size: clamp(0.2rem, 5vw, 1.5rem);
   font-weight: 600;
   color: var(--text-secondary);
   transition: all 0.08s;
@@ -1312,6 +1313,15 @@ body.diff-alpha .level-badge {
   border-color: rgba(167, 139, 250, 0.28);
 }
 
+.textComplete{
+  background:#17ff0b;
+}
+.textError{
+  background: #ff2a2a;
+}
+.textCurrent{
+  color: #000000;
+}
 /* ========================
    SHAKE + RESPONSIVE
    ======================== */

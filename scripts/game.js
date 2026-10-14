@@ -34,3 +34,46 @@ function restartGame() {
     })
 }
 restartGame();
+
+function textDisplay() {
+    const text = document.querySelector('#textDisplay');
+    const levelName = document.querySelector('#levelBadge');
+    const levelNameText = document.querySelector('#levelName');
+    const currentWord = document.querySelector('#currentTypedDisplay');
+    fetch('../json/word.json').then(response => response.json()).then(data => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlidx = urlParams.get('id');
+        const levelSplit = data[urlidx].text;
+
+
+        const levelText = `<div class="word"><span class="letter">${levelSplit.split('').join('</span><span class="letter">')}</span></div>`;
+
+        text.innerHTML = levelText;
+        levelNameText.innerHTML = data[urlidx].title;
+        levelName.innerHTML = `Level ${data[urlidx].level}`;
+
+        const letter = document.querySelectorAll('.letter');
+        currentWord.innerHTML = letter.length;
+
+
+    })
+}
+textDisplay();
+//Here
+document.addEventListener('keydown', (e) => {
+    document.querySelector('.letter').classList.add('textCurrent');
+    const letters = document.querySelector('.textCurrent');
+    const key = e.key;
+    if (key === letters.innerHTML) {
+        letters.classList.add("textComplete");
+        letters.classList.remove("textCurrent");
+        letters.nextSibling.classList.add("textCurrent");
+
+    } else if (key !== letters.innerHTML) {
+        letters.classList.add('textError');
+    }
+})
+
+
+
+

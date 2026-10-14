@@ -5,18 +5,16 @@ disableCopy();
 const TierName = ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "Master"];
 
 
-fetch('./json/word.json').then(response => response.json()).then(data => {
+fetch('../json/word.json').then(response => response.json()).then(data => {
     let levelHTML = '';
-    console.log(data[0].text[5]);
-
     data.forEach((level, idx) => {
-        levelHTML += `<div class="lessons">
+        levelHTML += `<div class="lessons" data-idx=${idx + 1}>
                         <h1 class="lessonNumber">${level.level}</h1>
                         <p class="lessonDescription">${level.title}</p>
                         <div class="lock"><i class="fa-solid fa-lock"></i></div>
                     </div>
                     `;
-        console.log(level.tier,level.targetWpm)
+
     });
     document.querySelector('.lesson-grid').innerHTML = levelHTML;
     if (data[0]) {
@@ -27,8 +25,10 @@ fetch('./json/word.json').then(response => response.json()).then(data => {
     const lessonEl = document.querySelectorAll('.lessons');
     lessonEl.forEach((lesson, d) => {
         lesson.addEventListener('click', () => {
-            window.location.href = "game.html";
+            window.location.href = `./game.html?id=${encodeURIComponent(d)}`;
+            
         })
+
     })
 
 });
