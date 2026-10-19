@@ -16,7 +16,13 @@ function restartGame() {
     })
 }
 restartGame();
-
+function keyHint() {
+    const keyHint = document.querySelector('#keyHint').style.display === "flex";
+    if (keyHint) {
+        document.querySelector('.game-main').classList.add("blur");
+    }
+}
+keyHint();
 function addClass(e, name) {
     if (!e) return;
     if (e.classList) {
@@ -91,10 +97,11 @@ function textDisplay() {
         addClass(document.querySelector('.letter_unit'), 'Current');
         updateCaret();
         text.focus();
-    })
-        .catch(err => {
-            console.error('Failed to load words JSON:', err);
-        });
+    }).catch(err => {
+        console.error('Failed to load words JSON:', err);
+        const loading_overlay = document.querySelector('.loading-overlay');
+        loading_overlay.style.display = 'flex';
+    });
 }
 textDisplay();
 
@@ -107,7 +114,7 @@ function updateCaret(lastLetter = null) {
     if (cursor && target) {
         const parentRect = (cursor.offsetParent || cursor.parentElement).getBoundingClientRect();
         const targetRect = target.getBoundingClientRect();
-        cursor.style.top = (targetRect.top - parentRect.top + 2) + 'px';
+        cursor.style.top = (targetRect.top - parentRect.top) + 'px';
         cursor.style.left = ((nextletter ? targetRect.left : targetRect.right) - parentRect.left) + 'px';
     }
 }
@@ -160,6 +167,7 @@ function type() {
         }
 
         if (isBackspace) {
+
             const prevUnit = letter_unit.previousElementSibling;
 
             if (prevUnit) {
@@ -183,8 +191,14 @@ function type() {
                     }
                 }
             }
-
         }
+
+        if (letter.getBoundingClientRect().top > 235) {
+            const words = document.querySelector('.words');
+            const margin = parseInt(words.style.marginTop || '0px');
+            words.style.marginTop = (margin - 35) + 'px';
+        }
+
         updateCaret(letter);
     });
 }

@@ -215,7 +215,7 @@ body.darkMode {
 }
 
 #timeCount {
-  width:1rem;
+  width: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -291,7 +291,7 @@ body.darkMode {
 /* ---- Game Main ---- */
 .game-main {
   margin-top: 12rem;
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -302,8 +302,9 @@ body.darkMode {
 
 /* Key hint */
 .key-hint {
+  display: none;
   transition: opacity 0.3s;
-  z-index: 10;
+  z-index: 1;
 }
 
 .key-hint.hidden {
@@ -338,15 +339,16 @@ body.darkMode {
   width: 100%;
   margin-top: -100px;
   height: 13rem;
-  border: none;
+  border: none !important;
 }
 
 .text-display {
+  border: none !important;
   height: auto;
   max-height: 12.8rem;
   padding: 1.5rem;
   background: var(--game-text-bg, rgba(255, 255, 255, 0.78));
-  border: none;
+
   border-radius: var(--radius);
   font-family: 'Fira Code', 'Consolas', monospace;
   font-size: 1.5rem;
@@ -376,8 +378,8 @@ body.darkMode {
   width: 100%;
 }
 
-.words .letter_unit{
-  margin:1px;
+.words .letter_unit {
+  margin: 1px;
 }
 
 /* Letter spans */
@@ -392,13 +394,13 @@ body.darkMode {
 .caret {
   position: absolute;
   width: 2px;
-  height: 1.6rem;
+  height: 2rem;
   background: var(--primary-blue);
   border-radius: 2px;
   pointer-events: none;
   box-shadow: 0 0 10px rgba(0, 136, 255, 0.45);
-  animation: blinkCaret 0.5s step-end infinite;
-  transition: left 0.06s ease, top 0.06s ease;
+  animation: blinkCaret 1s step-end infinite;
+  transition: all 0.3s, left 0.06s ease, top 0.06s ease;
   z-index: 10;
 }
 
@@ -472,16 +474,18 @@ body.darkMode {
 /* ---- Loading Overlay ---- */
 .loading-overlay {
   position: absolute;
+  width: 100%;
+  height: 100%;
   inset: 0;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: var(--game-loading-bg, rgba(255, 255, 255, 0.65));
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(32px);
   border-radius: var(--radius);
   gap: 16px;
-  z-index: 10;
+  z-index: 9999;
   transition: background 0.3s ease;
 }
 
@@ -490,9 +494,9 @@ body.darkMode {
 }
 
 .spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(186, 230, 253, 0.55);
+  width: 100px;
+  height: 100px;
+  border: 8px solid rgba(186, 230, 253, 0.55);
   border-top-color: var(--primary-blue);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -506,7 +510,7 @@ body.darkMode {
 
 .loading-text {
   color: var(--text-muted);
-  font-size: 0.875rem;
+  font-size: 1.5rem;
 }
 
 /* ---- Keyboard Visual ---- */
@@ -1324,6 +1328,13 @@ body.diff-alpha .level-badge {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.blur {
+  background: transparent;
+  z-index: 0;
+  border-radius: 30px;
+  filter: blur(50px);
 }
 
 /* ========================

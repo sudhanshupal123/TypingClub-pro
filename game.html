@@ -76,13 +76,18 @@
       <div class="lesson-progress-fill" id="lessonProgress"></div>
     </div>
   </header>
-
+  <!-- Loading Spinner -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+    <p class="loading-text">Loading words...</p>
+  </div>
+  <!-- Keyboard Hint (top) -->
+  <div class="key-hint" id="keyHint" style="display: none;">
+    <span class="key-hint-text">Press any key to start typing</span>
+  </div>
   <!-- Main Game Area -->
   <main class="game-main">
-    <!-- Keyboard Hint (top) -->
-    <div class="key-hint" id="keyHint" style="display: none;">
-      <span class="key-hint-text">Press any key to start typing</span>
-    </div>
+
 
     <!-- Text Display -->
     <div class="text-display-wrapper">
@@ -92,11 +97,6 @@
       <!-- Cursor Caret -->
       <div class="caret" id="caret"></div>
     </div>
-
-    <!-- Hidden Input -->
-    <input type="text" id="typingInput" class="typing-input" autocomplete="off" autocorrect="off" autocapitalize="off"
-      spellcheck="false" aria-label="Type here" placeholder="" />
-
     <!-- Current Word Display -->
     <div class="current-word-display">
       <div class="current-word-box">
@@ -113,91 +113,83 @@
     <div class="lap-strip" id="lapStrip">
       <!-- filled by JS as each word completes -->
     </div>
+    <div class="keyboard-plugin" style="width: 100%;">
+      <div class="keyboard-plugin-body" tabindex="-1" aria-hidden="true"
+        style="opacity: 1; width: 685px; position: relative; top:2rem;">
+        <div tabindex="-1" id="vkeyboardkeys" style="width: 685px;"><!--?xml version="1.0" encoding="utf-8"?-->
+          <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+          <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" viewBox="330 -124 683.3 263" style="enable-background:new 330 -124 683.3 263;"
+            xml:space="preserve" class="null">
+            <style type="text/css">
+              .edc-st0 {
+                fill: none;
+                stroke-width: 0.5;
+                stroke-miterlimit: 10;
+              }
 
-    <!-- Loading Spinner -->
-    <div style="display: none;" class="loading-overlay" id="loadingOverlay">
-      <div class="spinner"></div>
-      <p class="loading-text">Loading words...</p>
-    </div>
-  </main>
+              .edc-st1 {
+                opacity: 0;
+                font-family: 'ArialMT';
+                font-size: 14px;
+              }
 
-  <div class="keyboard-plugin" style="width: 100%;">
-    <div class="keyboard-plugin-body" tabindex="-1" aria-hidden="true"
-      style="opacity: 1; width: 685px; position: relative;">
-      <div tabindex="-1" id="vkeyboardkeys" style="width: 685px;"><!--?xml version="1.0" encoding="utf-8"?-->
-        <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-        <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px" y="0px" viewBox="330 -124 683.3 263" style="enable-background:new 330 -124 683.3 263;"
-          xml:space="preserve" class="null">
-          <style type="text/css">
-            .edc-st0 {
-              fill: none;
-              stroke-width: 0.5;
-              stroke-miterlimit: 10;
-            }
+              .edc-st2 {
+                opacity: 1;
+                fill: #777777;
+              }
 
-            .edc-st1 {
-              opacity: 0;
-              font-family: 'ArialMT';
-              font-size: 14px;
-            }
+              .b {
+                font-size: 21px;
+              }
 
-            .edc-st2 {
-              opacity: 1;
-              fill: #777777;
-            }
+              .b2 {
+                font-size: 23px;
+              }
 
-            .b {
-              font-size: 21px;
-            }
+              .edc-st7 {
+                font-size: 12px;
+              }
 
-            .b2 {
-              font-size: 23px;
-            }
+              .edc-st8 {
+                font-size: 11px;
+              }
 
-            .edc-st7 {
-              font-size: 12px;
-            }
+              path.active {
+                fill: rgba(25, 180, 123, 0.5);
+              }
 
-            .edc-st8 {
-              font-size: 11px;
-            }
+              path.deadkey {
+                fill: rgba(255, 165, 0, 0.8);
+              }
 
-            path.active {
-              fill: rgba(25, 180, 123, 0.5);
-            }
+              text {
+                user-select: none;
+                opacity: 0;
+              }
 
-            path.deadkey {
-              fill: rgba(255, 165, 0, 0.8);
-            }
+              text.active {
+                fill: #FFFFFF;
+              }
 
-            text {
-              user-select: none;
-              opacity: 0;
-            }
+              path.correct {
+                stroke: #C2EA9A;
+                stroke-width: 4;
+              }
 
-            text.active {
-              fill: #FFFFFF;
-            }
+              text.correct {
+                color: green;
+              }
 
-            path.correct {
-              stroke: #C2EA9A;
-              stroke-width: 4;
-            }
+              path.incorrect {
+                fill: rgba(218, 37, 37, 0.5);
+              }
 
-            text.correct {
-              color: green;
-            }
-
-            path.incorrect {
-              fill: rgba(218, 37, 37, 0.5);
-            }
-
-            text.incorrect {
-              fill: white;
-            }
-          </style>
-          <image style="overflow:visible;" width="1750" height="692" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABtYAAAK0CAYAAACX9QkVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+              text.incorrect {
+                fill: white;
+              }
+            </style>
+            <image style="overflow:visible;" width="1750" height="692" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABtYAAAK0CAYAAACX9QkVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 bWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
 bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
 eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1
@@ -2251,284 +2243,289 @@ MHhpsBOlahLJZ/KmByMAAAAAAOznek5aBevedYr20EB6O9fOZ7D1zlK7WwMAAAAAALC+GqwrfG+a
 n1dvrmqGCgAAAAAAAGNTwlqV7gUAAAAAAMBevkYAAAAAAAAAY8IaAAAAAAAABIQ1AAAAAAAACAhr
 AAAAAAAAEBDWAAAAAAAAICCsAQAAAAAAQEBYAwAAAAAAgICwBgAAAAAAAAFhDQAAAAAAAALCGgAA
 AAAAAASENQAAAAAAAAgIawAAAAAAABA4BBgAn/1UDJgCdNgAAAAASUVORK5CYII="
-            transform="matrix(0.396 3.569965e-04 -3.569965e-04 0.396 326.1237 -130.3443)">
-          </image>
-          <g id="keys">
-            <path id="tilda" class="edc-st0" d="M389.4-58.2c0,1.7-1.4,2.9-3,2.9h-36.5c-1.6,0-3-1.3-3-2.9v-34.6c0-1.7,1.3-2.9,3-2.9h36.5
+              transform="matrix(0.396 3.569965e-04 -3.569965e-04 0.396 326.1237 -130.3443)">
+            </image>
+            <g id="keys">
+              <path id="tilda" class="edc-st0" d="M389.4-58.2c0,1.7-1.4,2.9-3,2.9h-36.5c-1.6,0-3-1.3-3-2.9v-34.6c0-1.7,1.3-2.9,3-2.9h36.5
 		c1.6,0,3,1.3,3,2.9V-58.2z"></path>
-            <path id="key-1" class="edc-st0" d="M434.4-58.2c0,1.7-1.3,2.9-3,2.9h-36.5c-1.7,0-3-1.3-3-2.9v-34.6c0-1.6,1.3-2.9,3-2.9h36.5
+              <path id="key-1" class="edc-st0" d="M434.4-58.2c0,1.7-1.3,2.9-3,2.9h-36.5c-1.7,0-3-1.3-3-2.9v-34.6c0-1.6,1.3-2.9,3-2.9h36.5
 		c1.7,0,3,1.4,3,2.9V-58.2z"></path>
-            <path id="q" class="edc-st0" d="M457.7-14.4c0,1.6-1.3,3-3,3h-36.5c-1.7,0-3-1.4-3-3v-35.3c0-1.6,1.3-3,3-3h36.5c1.7,0,3,1.4,3,3V-14.4
+              <path id="q" class="edc-st0" d="M457.7-14.4c0,1.6-1.3,3-3,3h-36.5c-1.7,0-3-1.4-3-3v-35.3c0-1.6,1.3-3,3-3h36.5c1.7,0,3,1.4,3,3V-14.4
 		z"></path>
-            <path id="a" class="edc-st0"
-              d="M468.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.7,0-3-1.4-3-3V-5.9c0-1.7,1.3-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
-            </path>
-            <path id="z" class="edc-st0"
-              d="M491.8,73.4c0,1.7-1.4,3-3,3h-36.5c-1.7,0-3-1.3-3-3V38.1c0-1.7,1.3-3,3-3h36.5c1.6,0,3,1.3,3,3V73.4z">
-            </path>
-            <path id="x" class="edc-st0"
-              d="M536.8,73.4c0,1.7-1.4,3-3,3h-36.5c-1.7,0-3-1.3-3-3V38.1c0-1.6,1.3-3,3-3h36.5c1.6,0,3,1.4,3,3V73.4z">
-            </path>
-            <path id="c" class="edc-st0"
-              d="M581.8,73.4c0,1.7-1.4,3-3,3h-36.5c-1.7,0-3-1.3-3-3V38.1c0-1.6,1.3-3,3-3h36.5c1.6,0,3,1.4,3,3V73.4z">
-            </path>
-            <path id="v" class="edc-st0"
-              d="M626.8,73.4c0,1.7-1.4,3-3,3h-36.5c-1.7,0-3-1.3-3-3V38.1c0-1.6,1.3-3,3-3h36.5c1.6,0,3,1.4,3,3V73.4z">
-            </path>
-            <path id="b" class="edc-st0"
-              d="M671.8,73.4c0,1.7-1.4,3-3,3h-36.6c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.4-3,3-3h36.6c1.6,0,3,1.4,3,3V73.4z">
-            </path>
-            <path id="n" class="edc-st0"
-              d="M716.8,73.4c0,1.7-1.4,3-3,3h-36.5c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V73.4z">
-            </path>
-            <path id="m" class="edc-st0"
-              d="M761.8,73.4c0,1.7-1.4,3-3,3h-36.5c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V73.4z">
-            </path>
-            <path id="comma" class="edc-st0" d="M806.8,73.4c0,1.7-1.4,3-3,3h-36.5c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3
+              <path id="a" class="edc-st0"
+                d="M468.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.7,0-3-1.4-3-3V-5.9c0-1.7,1.3-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
+              </path>
+              <path id="z" class="edc-st0"
+                d="M491.8,73.4c0,1.7-1.4,3-3,3h-36.5c-1.7,0-3-1.3-3-3V38.1c0-1.7,1.3-3,3-3h36.5c1.6,0,3,1.3,3,3V73.4z">
+              </path>
+              <path id="x" class="edc-st0"
+                d="M536.8,73.4c0,1.7-1.4,3-3,3h-36.5c-1.7,0-3-1.3-3-3V38.1c0-1.6,1.3-3,3-3h36.5c1.6,0,3,1.4,3,3V73.4z">
+              </path>
+              <path id="c" class="edc-st0"
+                d="M581.8,73.4c0,1.7-1.4,3-3,3h-36.5c-1.7,0-3-1.3-3-3V38.1c0-1.6,1.3-3,3-3h36.5c1.6,0,3,1.4,3,3V73.4z">
+              </path>
+              <path id="v" class="edc-st0"
+                d="M626.8,73.4c0,1.7-1.4,3-3,3h-36.5c-1.7,0-3-1.3-3-3V38.1c0-1.6,1.3-3,3-3h36.5c1.6,0,3,1.4,3,3V73.4z">
+              </path>
+              <path id="b" class="edc-st0"
+                d="M671.8,73.4c0,1.7-1.4,3-3,3h-36.6c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.4-3,3-3h36.6c1.6,0,3,1.4,3,3V73.4z">
+              </path>
+              <path id="n" class="edc-st0"
+                d="M716.8,73.4c0,1.7-1.4,3-3,3h-36.5c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V73.4z">
+              </path>
+              <path id="m" class="edc-st0"
+                d="M761.8,73.4c0,1.7-1.4,3-3,3h-36.5c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V73.4z">
+              </path>
+              <path id="comma" class="edc-st0" d="M806.8,73.4c0,1.7-1.4,3-3,3h-36.5c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3
 		V73.4z"></path>
-            <path id="dot" class="edc-st0" d="M851.8,73.4c0,1.7-1.3,3-3,3h-36.5c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.4-3,3-3h36.5c1.7,0,3,1.4,3,3V73.4
+              <path id="dot" class="edc-st0" d="M851.8,73.4c0,1.7-1.3,3-3,3h-36.5c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.4-3,3-3h36.5c1.7,0,3,1.4,3,3V73.4
 		z"></path>
-            <path id="slash" class="edc-st0" d="M896.8,73.4c0,1.7-1.3,3-3,3h-36.5c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.4-3,3-3h36.5c1.7,0,3,1.4,3,3
+              <path id="slash" class="edc-st0" d="M896.8,73.4c0,1.7-1.3,3-3,3h-36.5c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.4-3,3-3h36.5c1.7,0,3,1.4,3,3
 		V73.4z"></path>
-            <path id="s" class="edc-st0"
-              d="M513.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
-            </path>
-            <path id="d" class="edc-st0"
-              d="M558.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
-            </path>
-            <path id="f" class="edc-st0"
-              d="M603.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
-            </path>
-            <path id="g" class="edc-st0"
-              d="M648.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
-            </path>
-            <path id="h" class="edc-st0"
-              d="M693.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
-            </path>
-            <path id="j" class="edc-st0"
-              d="M738.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
-            </path>
-            <path id="k" class="edc-st0"
-              d="M783.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
-            </path>
-            <path id="l" class="edc-st0"
-              d="M828.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
-            </path>
-            <path id="semicolon" class="edc-st0" d="M873.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5
+              <path id="s" class="edc-st0"
+                d="M513.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
+              </path>
+              <path id="d" class="edc-st0"
+                d="M558.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
+              </path>
+              <path id="f" class="edc-st0"
+                d="M603.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
+              </path>
+              <path id="g" class="edc-st0"
+                d="M648.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
+              </path>
+              <path id="h" class="edc-st0"
+                d="M693.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
+              </path>
+              <path id="j" class="edc-st0"
+                d="M738.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
+              </path>
+              <path id="k" class="edc-st0"
+                d="M783.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
+              </path>
+              <path id="l" class="edc-st0"
+                d="M828.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5c1.6,0,3,1.3,3,3V29.5z">
+              </path>
+              <path id="semicolon" class="edc-st0" d="M873.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.4-3,3-3h36.5
 		c1.6,0,3,1.3,3,3V29.5z"></path>
-            <path id="quote" class="edc-st0" d="M918.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.7,0-3-1.4-3-3V-5.9c0-1.7,1.3-3,3-3h36.5c1.6,0,3,1.3,3,3
+              <path id="quote" class="edc-st0" d="M918.4,29.5c0,1.6-1.4,3-3,3h-36.5c-1.7,0-3-1.4-3-3V-5.9c0-1.7,1.3-3,3-3h36.5c1.6,0,3,1.3,3,3
 		V29.5z"></path>
-            <path id="w" class="edc-st0" d="M502.7-14.4c0,1.6-1.3,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.7,0,3,1.4,3,3V-14.4
+              <path id="w" class="edc-st0" d="M502.7-14.4c0,1.6-1.3,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.7,0,3,1.4,3,3V-14.4
 		z"></path>
-            <path id="e" class="edc-st0" d="M547.7-14.4c0,1.6-1.3,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.7,1.4-3,3-3h36.5c1.7,0,3,1.3,3,3V-14.4
+              <path id="e" class="edc-st0" d="M547.7-14.4c0,1.6-1.3,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.7,1.4-3,3-3h36.5c1.7,0,3,1.3,3,3V-14.4
 		z"></path>
-            <path id="r" class="edc-st0" d="M592.7-14.4c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V-14.4
+              <path id="r" class="edc-st0" d="M592.7-14.4c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V-14.4
 		z"></path>
-            <path id="t" class="edc-st0" d="M637.7-14.4c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V-14.4
+              <path id="t" class="edc-st0" d="M637.7-14.4c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V-14.4
 		z"></path>
-            <path id="y" class="edc-st0" d="M682.7-14.4c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V-14.4
+              <path id="y" class="edc-st0" d="M682.7-14.4c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V-14.4
 		z"></path>
-            <path id="u" class="edc-st0" d="M727.7-14.4c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V-14.4
+              <path id="u" class="edc-st0" d="M727.7-14.4c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V-14.4
 		z"></path>
-            <path id="i" class="edc-st0" d="M772.7-14.4c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V-14.4
+              <path id="i" class="edc-st0" d="M772.7-14.4c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V-14.4
 		z"></path>
-            <path id="o" class="edc-st0" d="M817.7-14.4c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V-14.4
+              <path id="o" class="edc-st0" d="M817.7-14.4c0,1.6-1.4,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.6,0,3,1.4,3,3V-14.4
 		z"></path>
-            <path id="p" class="edc-st0" d="M862.7-14.4c0,1.6-1.3,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.7,0,3,1.4,3,3V-14.4
+              <path id="p" class="edc-st0" d="M862.7-14.4c0,1.6-1.3,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5c1.7,0,3,1.4,3,3V-14.4
 		z"></path>
-            <path id="open-bracket" class="edc-st0" d="M907.7-14.4c0,1.6-1.3,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5
+              <path id="open-bracket" class="edc-st0" d="M907.7-14.4c0,1.6-1.3,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5
 		c1.7,0,3,1.4,3,3V-14.4z"></path>
-            <path id="close-bracket" class="edc-st0" d="M952.7-14.4c0,1.6-1.3,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5
+              <path id="close-bracket" class="edc-st0" d="M952.7-14.4c0,1.6-1.3,3-3,3h-36.5c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.4-3,3-3h36.5
 		c1.7,0,3,1.4,3,3V-14.4z"></path>
-            <path id="backslash" class="edc-st0" d="M999.8-14.4c0,1.6-1.3,3-3,3h-38.6c-1.6,0-3-1.4-3-3v-35.2c0-1.6,1.4-3,3-3h38.6
+              <path id="backslash" class="edc-st0" d="M999.8-14.4c0,1.6-1.3,3-3,3h-38.6c-1.6,0-3-1.4-3-3v-35.2c0-1.6,1.4-3,3-3h38.6
 		c1.7,0,3,1.4,3,3V-14.4z"></path>
-            <path id="key-2" class="edc-st0" d="M479.4-58.2c0,1.7-1.4,2.9-3,2.9h-36.5c-1.6,0-3-1.3-3-2.9v-34.6c0-1.6,1.4-2.9,3-2.9h36.5
+              <path id="key-2" class="edc-st0" d="M479.4-58.2c0,1.7-1.4,2.9-3,2.9h-36.5c-1.6,0-3-1.3-3-2.9v-34.6c0-1.6,1.4-2.9,3-2.9h36.5
 		c1.6,0,3,1.4,3,2.9V-58.2z"></path>
-            <path id="key-3" class="edc-st0" d="M524.4-58.2c0,1.7-1.4,2.9-3,2.9h-36.5c-1.7,0-3-1.3-3-2.9v-34.6c0-1.6,1.3-2.9,3-2.9h36.5
+              <path id="key-3" class="edc-st0" d="M524.4-58.2c0,1.7-1.4,2.9-3,2.9h-36.5c-1.7,0-3-1.3-3-2.9v-34.6c0-1.6,1.3-2.9,3-2.9h36.5
 		c1.6,0,3,1.4,3,2.9V-58.2z"></path>
-            <path id="key-4" class="edc-st0" d="M569.4-58.2c0,1.7-1.4,2.9-3,2.9H530c-1.7,0-3-1.3-3-2.9v-34.6c0-1.7,1.3-2.9,3-2.9h36.5
+              <path id="key-4" class="edc-st0" d="M569.4-58.2c0,1.7-1.4,2.9-3,2.9H530c-1.7,0-3-1.3-3-2.9v-34.6c0-1.7,1.3-2.9,3-2.9h36.5
 		c1.6,0,3,1.3,3,2.9L569.4-58.2L569.4-58.2z"></path>
-            <path id="key-5" class="edc-st0" d="M614.4-58.2c0,1.7-1.3,2.9-3,2.9h-36.5c-1.7,0-3-1.3-3-2.9v-34.6c0-1.7,1.3-2.9,3-2.9h36.5
+              <path id="key-5" class="edc-st0" d="M614.4-58.2c0,1.7-1.3,2.9-3,2.9h-36.5c-1.7,0-3-1.3-3-2.9v-34.6c0-1.7,1.3-2.9,3-2.9h36.5
 		c1.7,0,3,1.3,3,2.9V-58.2z"></path>
-            <path id="key-6" class="edc-st0" d="M659.4-58.2c0,1.7-1.3,2.9-3,2.9h-36.5c-1.6,0-3-1.3-3-2.9v-34.6c0-1.7,1.4-2.9,3-2.9h36.5
+              <path id="key-6" class="edc-st0" d="M659.4-58.2c0,1.7-1.3,2.9-3,2.9h-36.5c-1.6,0-3-1.3-3-2.9v-34.6c0-1.7,1.4-2.9,3-2.9h36.5
 		c1.7,0,3,1.3,3,2.9V-58.2z"></path>
-            <path id="key-7" class="edc-st0" d="M704.4-58.2c0,1.7-1.3,2.9-3,2.9h-36.5c-1.6,0-3-1.3-3-2.9v-34.6c0-1.6,1.4-2.9,3-2.9h36.5
+              <path id="key-7" class="edc-st0" d="M704.4-58.2c0,1.7-1.3,2.9-3,2.9h-36.5c-1.6,0-3-1.3-3-2.9v-34.6c0-1.6,1.4-2.9,3-2.9h36.5
 		c1.7,0,3,1.4,3,2.9V-58.2z"></path>
-            <path id="key-8" class="edc-st0" d="M749.4-58.2c0,1.7-1.3,2.9-3,2.9h-36.5c-1.6,0-3-1.3-3-2.9v-34.6c0-1.6,1.4-2.9,3-2.9h36.5
+              <path id="key-8" class="edc-st0" d="M749.4-58.2c0,1.7-1.3,2.9-3,2.9h-36.5c-1.6,0-3-1.3-3-2.9v-34.6c0-1.6,1.4-2.9,3-2.9h36.5
 		c1.7,0,3,1.4,3,2.9V-58.2z"></path>
-            <path id="key-9" class="edc-st0" d="M794.4-58.2c0,1.7-1.3,2.9-3,2.9h-36.5c-1.6,0-3-1.3-3-2.9v-34.6c0-1.6,1.4-2.9,3-2.9h36.5
+              <path id="key-9" class="edc-st0" d="M794.4-58.2c0,1.7-1.3,2.9-3,2.9h-36.5c-1.6,0-3-1.3-3-2.9v-34.6c0-1.6,1.4-2.9,3-2.9h36.5
 		c1.7,0,3,1.4,3,2.9V-58.2z"></path>
-            <path id="key-0" class="edc-st0" d="M839.4-58.2c0,1.7-1.3,2.9-3,2.9h-36.5c-1.6,0-3-1.3-3-2.9v-34.6c0-1.6,1.4-2.9,3-2.9h36.5
+              <path id="key-0" class="edc-st0" d="M839.4-58.2c0,1.7-1.3,2.9-3,2.9h-36.5c-1.6,0-3-1.3-3-2.9v-34.6c0-1.6,1.4-2.9,3-2.9h36.5
 		c1.7,0,3,1.4,3,2.9V-58.2z"></path>
-            <path id="minus" class="edc-st0" d="M884.4-58.2c0,1.7-1.4,2.9-3,2.9h-36.5c-1.7,0-3-1.3-3-2.9v-34.6c0-1.7,1.4-2.9,3-2.9h36.5
+              <path id="minus" class="edc-st0" d="M884.4-58.2c0,1.7-1.4,2.9-3,2.9h-36.5c-1.7,0-3-1.3-3-2.9v-34.6c0-1.7,1.4-2.9,3-2.9h36.5
 		c1.6,0,3,1.3,3,2.9V-58.2z"></path>
-            <path id="equal" class="edc-st0" d="M929.4-58.2c0,1.7-1.4,2.9-3,2.9h-36.5c-1.7,0-3-1.3-3-2.9v-34.6c0-1.6,1.3-2.9,3-2.9h36.5
+              <path id="equal" class="edc-st0" d="M929.4-58.2c0,1.7-1.4,2.9-3,2.9h-36.5c-1.7,0-3-1.3-3-2.9v-34.6c0-1.6,1.3-2.9,3-2.9h36.5
 		c1.6,0,3,1.4,3,2.9V-58.2z"></path>
-            <path id="backspace" class="edc-st0" d="M999.8-58.2c0,1.6-1.3,2.9-3,2.9h-61.9c-1.7,0-3-1.2-3-2.9v-33.6c0-1.5,1.3-2.9,3-2.9h61.9
+              <path id="backspace" class="edc-st0" d="M999.8-58.2c0,1.6-1.3,2.9-3,2.9h-61.9c-1.7,0-3-1.2-3-2.9v-33.6c0-1.5,1.3-2.9,3-2.9h61.9
 		c1.7,0,3,1.3,3,2.9V-58.2z"></path>
-            <path id="tab" class="edc-st0" d="M412.7-14.4c0,1.6-1.3,3-3,3h-59.8c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.3-3,3-3h59.8c1.7,0,3,1.4,3,3
+              <path id="tab" class="edc-st0" d="M412.7-14.4c0,1.6-1.3,3-3,3h-59.8c-1.6,0-3-1.4-3-3v-35.3c0-1.6,1.3-3,3-3h59.8c1.7,0,3,1.4,3,3
 		V-14.4z"></path>
-            <path id="capslock" class="edc-st0" d="M423.4,29.5c0,1.6-1.3,3-3,3h-70.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.3-3,3-3h70.4c1.7,0,3,1.3,3,3
+              <path id="capslock" class="edc-st0" d="M423.4,29.5c0,1.6-1.3,3-3,3h-70.5c-1.6,0-3-1.4-3-3V-5.9c0-1.7,1.3-3,3-3h70.4c1.7,0,3,1.3,3,3
 		v35.4H423.4z"></path>
-            <path id="enter" class="edc-st0" d="M998.8,29.5c0,1.6-1.3,3-3,3h-72.9c-1.7,0-3-1.4-3-3V-5.9c0-1.7,1.3-3,3-3h72.9c1.7,0,3,1.3,3,3
+              <path id="enter" class="edc-st0" d="M998.8,29.5c0,1.6-1.3,3-3,3h-72.9c-1.7,0-3-1.4-3-3V-5.9c0-1.7,1.3-3,3-3h72.9c1.7,0,3,1.3,3,3
 		V29.5z"></path>
-            <path id="shift-left" class="edc-st0" d="M446.8,73.4c0,1.7-1.3,3-3,3h-93.9c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.3-3,3-3h93.8
+              <path id="shift-left" class="edc-st0" d="M446.8,73.4c0,1.7-1.3,3-3,3h-93.9c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.3-3,3-3h93.8
 		c1.7,0,3,1.4,3,3L446.8,73.4L446.8,73.4z"></path>
-            <path id="option-left" class="edc-st0" d="M523.2,118.7c0,1.5-1.2,2.6-2.6,2.6h-60.2c-1.5,0-2.6-1.1-2.6-2.6V81.6
+              <path id="option-left" class="edc-st0" d="M523.2,118.7c0,1.5-1.2,2.6-2.6,2.6h-60.2c-1.5,0-2.6-1.1-2.6-2.6V81.6
 		c0-1.5,1.1-2.6,2.6-2.6h60.2c1.4,0,2.6,1.1,2.6,2.6V118.7z"></path>
-            <path id="option-right" class="edc-st0" d="M849.8,79c1.7,0,2.9,1.3,2.9,2.8v38.5c0,1.6-1.3,2.8-2.9,2.8h-61.3c-1.6,0-2.9-1.2-2.9-2.8
+              <path id="option-right" class="edc-st0" d="M849.8,79c1.7,0,2.9,1.3,2.9,2.8v38.5c0,1.6-1.3,2.8-2.9,2.8h-61.3c-1.6,0-2.9-1.2-2.9-2.8
 		V81.8c0-1.5,1.4-2.8,2.9-2.8H849.8z"></path>
-            <path id="space" class="edc-st0" d="M782.7,79c1.5,0,2.8,1.2,2.8,2.6v37.1c0,1.5-1.3,2.6-2.8,2.6H527.3c-1.5,0-2.8-1.1-2.8-2.6V81.6
+              <path id="space" class="edc-st0" d="M782.7,79c1.5,0,2.8,1.2,2.8,2.6v37.1c0,1.5-1.3,2.6-2.8,2.6H527.3c-1.5,0-2.8-1.1-2.8-2.6V81.6
 		c0-1.4,1.3-2.6,2.8-2.6H782.7z"></path>
-            <path id="shift-right" class="edc-st0" d="M998.8,73.4c0,1.7-1.3,3-3,3h-93.8c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.4-3,3-3h93.8
+              <path id="shift-right" class="edc-st0" d="M998.8,73.4c0,1.7-1.3,3-3,3h-93.8c-1.6,0-3-1.3-3-3V38.1c0-1.6,1.4-3,3-3h93.8
 		c1.7,0,3,1.4,3,3V73.4z"></path>
-          </g>
-          <g id="letters">
-            <text transform="matrix(1 0 0 1 363.4903 -80.196)" class="edc-st1 edc-st2" dx="0" dy="0">~</text>
-            <text transform="matrix(1 0 0 1 365.8009 -61.3357)" class="edc-st1 edc-st2" dx="0" dy="0">`</text>
-            <text transform="matrix(1 0 0 1 408.626 -65.5929)" class="edc-st1 edc-st2" dx="0" dy="0">1</text>
-            <text transform="matrix(1 0 0 1 453.299 -64.8235)" class="edc-st1 edc-st2" dx="0" dy="0">2</text>
-            <text transform="matrix(1 0 0 1 499.6841 -64.596)" class="edc-st1 edc-st2" dx="0" dy="0">3</text>
-            <text transform="matrix(1 0 0 1 543.0758 -64.596)" class="edc-st1 edc-st2" dx="0" dy="0">4</text>
-            <text transform="matrix(1 0 0 1 588.0724 -64.596)" class="edc-st1 edc-st2" dx="0" dy="0">5</text>
-            <text transform="matrix(1 0 0 1 633.2822 -64.9109)" class="edc-st1 edc-st2" dx="0" dy="0">6</text>
-            <text transform="matrix(1 0 0 1 679.5064 -64.9109)" class="edc-st1 edc-st2" dx="0" dy="0">7</text>
-            <text transform="matrix(1 0 0 1 723.281 -64.7843)" class="edc-st1 edc-st2" dx="0" dy="0">8</text>
-            <text transform="matrix(1 0 0 1 768.5742 -64.7843)" class="edc-st1 edc-st2" dx="0" dy="0">9</text>
-            <text transform="matrix(1 0 0 1 813.4907 -64.7843)" class="edc-st1 edc-st2" dx="0" dy="0">0</text>
-            <text transform="matrix(1 0 0 1 860.4011 -65.5929)" class="edc-st1 edc-st2" dx="0" dy="0">-</text>
-            <text transform="matrix(1 0 0 1 903.5195 -64.7843)" class="edc-st1 edc-st2" dx="0" dy="0">=</text>
-            <text transform="matrix(1 0 0 1 410.5513 -80.2395)" class="edc-st1 edc-st2" dx="0" dy="0">!</text>
-            <text transform="matrix(1 0 0 1 449.8565 -81.55)" class="edc-st1 edc-st2" dx="0" dy="0">@</text>
-            <text transform="matrix(1 0 0 1 499.6841 -80.24)" class="edc-st1 edc-st2" dx="0" dy="0">#</text>
-            <text transform="matrix(1 0 0 1 543.0758 -80.7829)" class="edc-st1 edc-st2" dx="0" dy="0">$</text>
-            <text transform="matrix(1 0 0 1 585.5748 -81.1682)" class="edc-st1 edc-st2" dx="0" dy="0">%</text>
-            <text transform="matrix(1 0 0 1 633.9556 -79.5573)" class="edc-st1 edc-st2" dx="0" dy="0">^</text>
-            <text transform="matrix(1 0 0 1 678.2554 -80.24)" class="edc-st1 edc-st2" dx="0" dy="0">&amp;</text>
-            <text transform="matrix(1 0 0 1 724.5334 -79.1764)" class="edc-st1 edc-st2" dx="0" dy="0">*</text>
-            <text transform="matrix(1 0 0 1 770.3076 -81.3565)" class="edc-st1 edc-st2" dx="0" dy="0">(</text>
-            <text transform="matrix(1 0 0 1 815.1645 -81.3565)" class="edc-st1 edc-st2" dx="0" dy="0">)</text>
-            <text transform="matrix(1 0 0 1 858.7588 -86.4577)" class="edc-st1 edc-st2" dx="0" dy="0">_</text>
-            <text transform="matrix(1 0 0 1 903.5195 -79.5578)" class="edc-st1 edc-st2" dx="0" dy="0">+</text>
-            <text transform="matrix(1 0 0 1 430.9088 -38.5257)" class="edc-st1" dx="0" dy="0">Q</text>
-            <text transform="matrix(1 0 0 1 430.9088 -22.5257)" class="edc-st1 edc-st2 b" dx="-2.606250286102295"
-              dy="-5">Q</text>
-            <text transform="matrix(1 0 0 1 475.3644 -38.5256)" class="edc-st1" dx="0" dy="0">W</text>
-            <text transform="matrix(1 0 0 1 475.3644 -22.5256)" class="edc-st1 edc-st2 b" dx="-2.9999818801879883"
-              dy="-5">W</text>
-            <text transform="matrix(1 0 0 1 523.5943 -38.5256)" class="edc-st1" dx="0" dy="0">E</text>
-            <text transform="matrix(1 0 0 1 523.5943 -22.5256)" class="edc-st1 edc-st2 b" dx="-2.23126220703125"
-              dy="-5">E</text>
-            <text transform="matrix(1 0 0 1 566.9933 -38.5257)" class="edc-st1" dx="0" dy="0">R</text>
-            <text transform="matrix(1 0 0 1 566.9933 -22.5257)" class="edc-st1 edc-st2 b" dx="-2.9999635219573975"
-              dy="-5">R</text>
-            <text transform="matrix(1 0 0 1 613.608 -38.5256)" class="edc-st1" dx="0" dy="0">T</text>
-            <text transform="matrix(1 0 0 1 613.608 -22.5256)" class="edc-st1 edc-st2 b " dx="-2.6312255859375"
-              dy="-5">T</text>
-            <text transform="matrix(1 0 0 1 658.5138 -38.5256)" class="edc-st1" dx="0" dy="0">Y</text>
-            <text transform="matrix(1 0 0 1 658.5138 -22.5256)" class="edc-st1 edc-st2 b" dx="-2.6062378883361816"
-              dy="-5">Y</text>
-            <text transform="matrix(1 0 0 1 703.1386 -38.5257)" class="edc-st1" dx="0" dy="0">U</text>
-            <text transform="matrix(1 0 0 1 703.1386 -22.5257)" class="edc-st1 edc-st2 b" dx="-2.6062254905700684"
-              dy="-5">U</text>
-            <text transform="matrix(1 0 0 1 751.5557 -38.5257)" class="edc-st1" dx="0" dy="0">I</text>
-            <text transform="matrix(1 0 0 1 751.5557 -22.5257)" class="edc-st1 edc-st2 b" dx="-0.6000244617462158"
-              dy="-5">I</text>
-            <text transform="matrix(1 0 0 1 791.9639 -38.5257)" class="edc-st1" dx="0" dy="0">O</text>
-            <text transform="matrix(1 0 0 1 791.9639 -22.5257)" class="edc-st1 edc-st2 b" dx="-3.006274461746216"
-              dy="-5">O</text>
-            <text transform="matrix(1 0 0 1 838.9335 -38.5257)" class="edc-st1" dx="0" dy="0">P</text>
-            <text transform="matrix(1 0 0 1 838.9335 -22.5257)" class="edc-st1 edc-st2 b" dx="-0.8562502861022949"
-              dy="-5">P</text>
-            <text transform="matrix(1 0 0 1 443.1346 5.3303)" class="edc-st1" dx="0" dy="0">A</text>
-            <text transform="matrix(1 0 0 1 445.1346 21.3303)" class="edc-st1 edc-st2 b" dx="-3.4062442779541016"
-              dy="-5">A</text>
-            <text transform="matrix(1 0 0 1 488.0135 5.3303)" class="edc-st1" dx="0" dy="0">S</text>
-            <text transform="matrix(1 0 0 1 488.0135 21.3303)" class="edc-st1 edc-st2 b" dx="-2.0562498569488525"
-              dy="-5">S</text>
-            <text transform="matrix(1 0 0 1 531.5241 5.3303)" class="edc-st1" dx="0" dy="0">D</text>
-            <text transform="matrix(1 0 0 1 531.5241 21.3303)" class="edc-st1 edc-st2 b" dx="-2.6062378883361816"
-              dy="-5">D</text>
-            <text transform="matrix(1 0 0 1 577.1121 5.3303)" class="edc-st1" dx="0" dy="0">F</text>
-            <text transform="matrix(1 0 0 1 577.1121 21.3303)" class="edc-st1 edc-st2 b" dx="-1.2562501430511475"
-              dy="-5">F</text>
-            <text transform="matrix(1 0 0 1 620.4753 5.3303)" class="edc-st1" dx="0" dy="0">G</text>
-            <text transform="matrix(1 0 0 1 620.4753 21.3303)" class="edc-st1 edc-st2 b" dx="-3.006237745285034"
-              dy="-5">G</text>
-            <text transform="matrix(1 0 0 1 666.5886 5.3303)" class="edc-st1" dx="0" dy="0">H</text>
-            <text transform="matrix(1 0 0 1 666.5886 21.3303)" class="edc-st1 edc-st2 b" dx="-2.20623779296875"
-              dy="-5">H</text>
-            <text transform="matrix(1 0 0 1 713.2692 5.3303)" class="edc-st1" dx="0" dy="0">J</text>
-            <text transform="matrix(1 0 0 1 713.2692 21.3303)" class="edc-st1 edc-st2 b" dx="-0.6500000953674316"
-              dy="-5">J</text>
-            <text transform="matrix(1 0 0 1 758.0182 5.3303)" class="edc-st1" dx="0" dy="0">K</text>
-            <text transform="matrix(1 0 0 1 758.0182 21.3303)" class="edc-st1 edc-st2 b" dx="-2.5999999046325684"
-              dy="-5">K</text>
-            <text transform="matrix(1 0 0 1 803.8706 5.3303)" class="edc-st1" dx="0" dy="0">L</text>
-            <text transform="matrix(1 0 0 1 803.8706 21.3303)" class="edc-st1 edc-st2 b" dx="-3.431201219558716"
-              dy="-5">L</text>
-            <text transform="matrix(1 0 0 1 467.7896 49.7458)" class="edc-st1" dx="0" dy="0">Z</text>
-            <text transform="matrix(1 0 0 1 467.7896 65.7458)" class="edc-st1 edc-st2 b" dx="-2.231243848800659"
-              dy="-5">Z</text>
-            <text transform="matrix(1 0 0 1 512.2339 49.7458)" class="edc-st1" dx="0" dy="0">X</text>
-            <text transform="matrix(1 0 0 1 512.2339 65.7458)" class="edc-st1 edc-st2 b" dx="-2.606274127960205"
-              dy="-5">X</text>
-            <text transform="matrix(1 0 0 1 555.5416 49.7458)" class="edc-st1" dx="0" dy="0">C</text>
-            <text transform="matrix(1 0 0 1 555.5416 65.7458)" class="edc-st1 edc-st2 b" dx="-2.82501220703125"
-              dy="-5">C</text>
-            <text transform="matrix(1 0 0 1 602.3973 49.7458)" class="edc-st1" dx="0" dy="0">V</text>
-            <text transform="matrix(1 0 0 1 602.3973 65.7458)" class="edc-st1 edc-st2 b" dx="-2.6062378883361816"
-              dy="-5">V</text>
-            <text transform="matrix(1 0 0 1 647.0098 49.7458)" class="edc-st1" dx="0" dy="0">B</text>
-            <text transform="matrix(1 0 0 1 647.0098 65.7458)" class="edc-st1 edc-st2 b" dx="-2.0250000953674316"
-              dy="-5">B</text>
-            <text transform="matrix(1 0 0 1 691.4863 49.7458)" class="edc-st1" dx="0" dy="0">N</text>
-            <text transform="matrix(1 0 0 1 691.4863 65.7458)" class="edc-st1 edc-st2 b" dx="-2.606250286102295"
-              dy="-5">N</text>
-            <text transform="matrix(1 0 0 1 734.6816 49.7458)" class="edc-st1" dx="0" dy="0">M</text>
-            <text transform="matrix(1 0 0 1 734.6816 65.7458)" class="edc-st1 edc-st2 b" dx="-2.362475872039795"
-              dy="-5">M</text>
-            <text transform="matrix(1 0 0 1 849.074 21.7127)" class="edc-st1 edc-st2" dx="0" dy="0">;</text>
-            <text transform="matrix(1 0 0 1 849.074 4.3763)" class="edc-st1 edc-st2" dx="0" dy="0">:</text>
-            <text transform="matrix(1 0 0 1 781.3285 65.0409)" class="edc-st1 edc-st2 b2" dx="-1.1312257051467896"
-              dy="0">,</text>
-            <text transform="matrix(1 0 0 1 780.2827 49.3396)" class="edc-st1 edc-st2" dx="0" dy="0">&lt;</text>
-            <text transform="matrix(1 0 0 1 825.9731 66.0409)" class="edc-st1 edc-st2 b2" dx="-1.1312743425369263"
-              dy="0">.</text>
-            <text transform="matrix(1 0 0 1 824.9274 49.3396)" class="edc-st1 edc-st2" dx="0" dy="0">&gt;</text>
-            <text transform="matrix(1 0 0 1 873.4077 66.0408)" class="edc-st1 edc-st2" dx="0" dy="0">/</text>
-            <text transform="matrix(1 0 0 1 871.3276 48.2498)" class="edc-st1 edc-st2" dx="0" dy="0">?</text>
-            <text transform="matrix(1 0 0 1 895.621 23.7127)" class="edc-st1 edc-st2" dx="0" dy="0">'</text>
-            <text transform="matrix(1 0 0 1 895.621 5.3763)" class="edc-st1 edc-st2" dx="0" dy="0">"</text>
-            <text transform="matrix(1 0 0 1 883.3923 -23.574)" class="edc-st1 edc-st2" dx="0" dy="0">[</text>
-            <text transform="matrix(1 0 0 1 882.9709 -39.1231)" class="edc-st1 edc-st2" dx="0" dy="0">{</text>
-            <text transform="matrix(1 0 0 1 928.7657 -23.574)" class="edc-st1 edc-st2" dx="0" dy="0">]</text>
-            <text transform="matrix(1 0 0 1 928.3443 -39.2151)" class="edc-st1 edc-st2" dx="0" dy="0">}</text>
-            <text transform="matrix(1 0 0 1 974.3574 -18.1193)" class="edc-st1 edc-st2" dx="0" dy="0">\</text>
-            <text transform="matrix(1 0 0 1 974.4941 -40.1231)" class="edc-st1 edc-st2" dx="0" dy="0">|</text>
-            <text id="text-tab" transform="matrix(1 0 0 1 357.3467 -23.7658)" class="edc-st1 edc-st7 edc-st2">tab</text>
-            <text id="text-caps-lock" transform="matrix(1 0 0 1 357.3467 20.7127)" class="edc-st1 edc-st7 edc-st2">caps
-              lock</text>
-            <text id="text-shift-left" transform="matrix(1 0 0 1 357.3467 64.0408)"
-              class="edc-st1 edc-st7 edc-st2">shift</text>
-            <text id="text-shift-right" transform="matrix(1 0 0 1 963.826 65.0408)"
-              class="edc-st1 edc-st7 edc-st2">shift</text>
-            <text id="text-backspace" transform="matrix(1 0 0 1 939.4653 -64.8235)"
-              class="edc-st1 edc-st8 edc-st2">backspace</text>
-            <text id="text-enter" transform="matrix(1 0 0 1 958.3144 22.7128)"
-              class="edc-st1 edc-st7 edc-st2">enter</text>
-            <text id="text-option-left" transform="matrix(1 0 0 1 472.2338 108.4646)"
-              class="edc-st1 edc-st7 edc-st2">option</text>
-            <text id="text-space" transform="matrix(1 0 0 1 538.7899 109.4646)"
-              class="edc-st1 edc-st7 edc-st2">space</text>
-            <text id="text-option-right" transform="matrix(1 0 0 1 803.8864 108.4646)"
-              class="edc-st1 edc-st7 edc-st2">option</text>
-          </g>
-        </svg>
-      </div><object type="image/svg+xml" tabindex="-1" data="/m/engine/img/hand/hand-both.svg"
-        style="position: absolute; pointer-events: none; height: 363px; top: -10px; left: 0px; opacity: 0.8; transform: translateX(55px) scale(1.55);"></object>
+            </g>
+            <g id="letters">
+              <text transform="matrix(1 0 0 1 363.4903 -80.196)" class="edc-st1 edc-st2" dx="0" dy="0">~</text>
+              <text transform="matrix(1 0 0 1 365.8009 -61.3357)" class="edc-st1 edc-st2" dx="0" dy="0">`</text>
+              <text transform="matrix(1 0 0 1 408.626 -65.5929)" class="edc-st1 edc-st2" dx="0" dy="0">1</text>
+              <text transform="matrix(1 0 0 1 453.299 -64.8235)" class="edc-st1 edc-st2" dx="0" dy="0">2</text>
+              <text transform="matrix(1 0 0 1 499.6841 -64.596)" class="edc-st1 edc-st2" dx="0" dy="0">3</text>
+              <text transform="matrix(1 0 0 1 543.0758 -64.596)" class="edc-st1 edc-st2" dx="0" dy="0">4</text>
+              <text transform="matrix(1 0 0 1 588.0724 -64.596)" class="edc-st1 edc-st2" dx="0" dy="0">5</text>
+              <text transform="matrix(1 0 0 1 633.2822 -64.9109)" class="edc-st1 edc-st2" dx="0" dy="0">6</text>
+              <text transform="matrix(1 0 0 1 679.5064 -64.9109)" class="edc-st1 edc-st2" dx="0" dy="0">7</text>
+              <text transform="matrix(1 0 0 1 723.281 -64.7843)" class="edc-st1 edc-st2" dx="0" dy="0">8</text>
+              <text transform="matrix(1 0 0 1 768.5742 -64.7843)" class="edc-st1 edc-st2" dx="0" dy="0">9</text>
+              <text transform="matrix(1 0 0 1 813.4907 -64.7843)" class="edc-st1 edc-st2" dx="0" dy="0">0</text>
+              <text transform="matrix(1 0 0 1 860.4011 -65.5929)" class="edc-st1 edc-st2" dx="0" dy="0">-</text>
+              <text transform="matrix(1 0 0 1 903.5195 -64.7843)" class="edc-st1 edc-st2" dx="0" dy="0">=</text>
+              <text transform="matrix(1 0 0 1 410.5513 -80.2395)" class="edc-st1 edc-st2" dx="0" dy="0">!</text>
+              <text transform="matrix(1 0 0 1 449.8565 -81.55)" class="edc-st1 edc-st2" dx="0" dy="0">@</text>
+              <text transform="matrix(1 0 0 1 499.6841 -80.24)" class="edc-st1 edc-st2" dx="0" dy="0">#</text>
+              <text transform="matrix(1 0 0 1 543.0758 -80.7829)" class="edc-st1 edc-st2" dx="0" dy="0">$</text>
+              <text transform="matrix(1 0 0 1 585.5748 -81.1682)" class="edc-st1 edc-st2" dx="0" dy="0">%</text>
+              <text transform="matrix(1 0 0 1 633.9556 -79.5573)" class="edc-st1 edc-st2" dx="0" dy="0">^</text>
+              <text transform="matrix(1 0 0 1 678.2554 -80.24)" class="edc-st1 edc-st2" dx="0" dy="0">&amp;</text>
+              <text transform="matrix(1 0 0 1 724.5334 -79.1764)" class="edc-st1 edc-st2" dx="0" dy="0">*</text>
+              <text transform="matrix(1 0 0 1 770.3076 -81.3565)" class="edc-st1 edc-st2" dx="0" dy="0">(</text>
+              <text transform="matrix(1 0 0 1 815.1645 -81.3565)" class="edc-st1 edc-st2" dx="0" dy="0">)</text>
+              <text transform="matrix(1 0 0 1 858.7588 -86.4577)" class="edc-st1 edc-st2" dx="0" dy="0">_</text>
+              <text transform="matrix(1 0 0 1 903.5195 -79.5578)" class="edc-st1 edc-st2" dx="0" dy="0">+</text>
+              <text transform="matrix(1 0 0 1 430.9088 -38.5257)" class="edc-st1" dx="0" dy="0">Q</text>
+              <text transform="matrix(1 0 0 1 430.9088 -22.5257)" class="edc-st1 edc-st2 b" dx="-2.606250286102295"
+                dy="-5">Q</text>
+              <text transform="matrix(1 0 0 1 475.3644 -38.5256)" class="edc-st1" dx="0" dy="0">W</text>
+              <text transform="matrix(1 0 0 1 475.3644 -22.5256)" class="edc-st1 edc-st2 b" dx="-2.9999818801879883"
+                dy="-5">W</text>
+              <text transform="matrix(1 0 0 1 523.5943 -38.5256)" class="edc-st1" dx="0" dy="0">E</text>
+              <text transform="matrix(1 0 0 1 523.5943 -22.5256)" class="edc-st1 edc-st2 b" dx="-2.23126220703125"
+                dy="-5">E</text>
+              <text transform="matrix(1 0 0 1 566.9933 -38.5257)" class="edc-st1" dx="0" dy="0">R</text>
+              <text transform="matrix(1 0 0 1 566.9933 -22.5257)" class="edc-st1 edc-st2 b" dx="-2.9999635219573975"
+                dy="-5">R</text>
+              <text transform="matrix(1 0 0 1 613.608 -38.5256)" class="edc-st1" dx="0" dy="0">T</text>
+              <text transform="matrix(1 0 0 1 613.608 -22.5256)" class="edc-st1 edc-st2 b " dx="-2.6312255859375"
+                dy="-5">T</text>
+              <text transform="matrix(1 0 0 1 658.5138 -38.5256)" class="edc-st1" dx="0" dy="0">Y</text>
+              <text transform="matrix(1 0 0 1 658.5138 -22.5256)" class="edc-st1 edc-st2 b" dx="-2.6062378883361816"
+                dy="-5">Y</text>
+              <text transform="matrix(1 0 0 1 703.1386 -38.5257)" class="edc-st1" dx="0" dy="0">U</text>
+              <text transform="matrix(1 0 0 1 703.1386 -22.5257)" class="edc-st1 edc-st2 b" dx="-2.6062254905700684"
+                dy="-5">U</text>
+              <text transform="matrix(1 0 0 1 751.5557 -38.5257)" class="edc-st1" dx="0" dy="0">I</text>
+              <text transform="matrix(1 0 0 1 751.5557 -22.5257)" class="edc-st1 edc-st2 b" dx="-0.6000244617462158"
+                dy="-5">I</text>
+              <text transform="matrix(1 0 0 1 791.9639 -38.5257)" class="edc-st1" dx="0" dy="0">O</text>
+              <text transform="matrix(1 0 0 1 791.9639 -22.5257)" class="edc-st1 edc-st2 b" dx="-3.006274461746216"
+                dy="-5">O</text>
+              <text transform="matrix(1 0 0 1 838.9335 -38.5257)" class="edc-st1" dx="0" dy="0">P</text>
+              <text transform="matrix(1 0 0 1 838.9335 -22.5257)" class="edc-st1 edc-st2 b" dx="-0.8562502861022949"
+                dy="-5">P</text>
+              <text transform="matrix(1 0 0 1 443.1346 5.3303)" class="edc-st1" dx="0" dy="0">A</text>
+              <text transform="matrix(1 0 0 1 445.1346 21.3303)" class="edc-st1 edc-st2 b" dx="-3.4062442779541016"
+                dy="-5">A</text>
+              <text transform="matrix(1 0 0 1 488.0135 5.3303)" class="edc-st1" dx="0" dy="0">S</text>
+              <text transform="matrix(1 0 0 1 488.0135 21.3303)" class="edc-st1 edc-st2 b" dx="-2.0562498569488525"
+                dy="-5">S</text>
+              <text transform="matrix(1 0 0 1 531.5241 5.3303)" class="edc-st1" dx="0" dy="0">D</text>
+              <text transform="matrix(1 0 0 1 531.5241 21.3303)" class="edc-st1 edc-st2 b" dx="-2.6062378883361816"
+                dy="-5">D</text>
+              <text transform="matrix(1 0 0 1 577.1121 5.3303)" class="edc-st1" dx="0" dy="0">F</text>
+              <text transform="matrix(1 0 0 1 577.1121 21.3303)" class="edc-st1 edc-st2 b" dx="-1.2562501430511475"
+                dy="-5">F</text>
+              <text transform="matrix(1 0 0 1 620.4753 5.3303)" class="edc-st1" dx="0" dy="0">G</text>
+              <text transform="matrix(1 0 0 1 620.4753 21.3303)" class="edc-st1 edc-st2 b" dx="-3.006237745285034"
+                dy="-5">G</text>
+              <text transform="matrix(1 0 0 1 666.5886 5.3303)" class="edc-st1" dx="0" dy="0">H</text>
+              <text transform="matrix(1 0 0 1 666.5886 21.3303)" class="edc-st1 edc-st2 b" dx="-2.20623779296875"
+                dy="-5">H</text>
+              <text transform="matrix(1 0 0 1 713.2692 5.3303)" class="edc-st1" dx="0" dy="0">J</text>
+              <text transform="matrix(1 0 0 1 713.2692 21.3303)" class="edc-st1 edc-st2 b" dx="-0.6500000953674316"
+                dy="-5">J</text>
+              <text transform="matrix(1 0 0 1 758.0182 5.3303)" class="edc-st1" dx="0" dy="0">K</text>
+              <text transform="matrix(1 0 0 1 758.0182 21.3303)" class="edc-st1 edc-st2 b" dx="-2.5999999046325684"
+                dy="-5">K</text>
+              <text transform="matrix(1 0 0 1 803.8706 5.3303)" class="edc-st1" dx="0" dy="0">L</text>
+              <text transform="matrix(1 0 0 1 803.8706 21.3303)" class="edc-st1 edc-st2 b" dx="-3.431201219558716"
+                dy="-5">L</text>
+              <text transform="matrix(1 0 0 1 467.7896 49.7458)" class="edc-st1" dx="0" dy="0">Z</text>
+              <text transform="matrix(1 0 0 1 467.7896 65.7458)" class="edc-st1 edc-st2 b" dx="-2.231243848800659"
+                dy="-5">Z</text>
+              <text transform="matrix(1 0 0 1 512.2339 49.7458)" class="edc-st1" dx="0" dy="0">X</text>
+              <text transform="matrix(1 0 0 1 512.2339 65.7458)" class="edc-st1 edc-st2 b" dx="-2.606274127960205"
+                dy="-5">X</text>
+              <text transform="matrix(1 0 0 1 555.5416 49.7458)" class="edc-st1" dx="0" dy="0">C</text>
+              <text transform="matrix(1 0 0 1 555.5416 65.7458)" class="edc-st1 edc-st2 b" dx="-2.82501220703125"
+                dy="-5">C</text>
+              <text transform="matrix(1 0 0 1 602.3973 49.7458)" class="edc-st1" dx="0" dy="0">V</text>
+              <text transform="matrix(1 0 0 1 602.3973 65.7458)" class="edc-st1 edc-st2 b" dx="-2.6062378883361816"
+                dy="-5">V</text>
+              <text transform="matrix(1 0 0 1 647.0098 49.7458)" class="edc-st1" dx="0" dy="0">B</text>
+              <text transform="matrix(1 0 0 1 647.0098 65.7458)" class="edc-st1 edc-st2 b" dx="-2.0250000953674316"
+                dy="-5">B</text>
+              <text transform="matrix(1 0 0 1 691.4863 49.7458)" class="edc-st1" dx="0" dy="0">N</text>
+              <text transform="matrix(1 0 0 1 691.4863 65.7458)" class="edc-st1 edc-st2 b" dx="-2.606250286102295"
+                dy="-5">N</text>
+              <text transform="matrix(1 0 0 1 734.6816 49.7458)" class="edc-st1" dx="0" dy="0">M</text>
+              <text transform="matrix(1 0 0 1 734.6816 65.7458)" class="edc-st1 edc-st2 b" dx="-2.362475872039795"
+                dy="-5">M</text>
+              <text transform="matrix(1 0 0 1 849.074 21.7127)" class="edc-st1 edc-st2" dx="0" dy="0">;</text>
+              <text transform="matrix(1 0 0 1 849.074 4.3763)" class="edc-st1 edc-st2" dx="0" dy="0">:</text>
+              <text transform="matrix(1 0 0 1 781.3285 65.0409)" class="edc-st1 edc-st2 b2" dx="-1.1312257051467896"
+                dy="0">,</text>
+              <text transform="matrix(1 0 0 1 780.2827 49.3396)" class="edc-st1 edc-st2" dx="0" dy="0">&lt;</text>
+              <text transform="matrix(1 0 0 1 825.9731 66.0409)" class="edc-st1 edc-st2 b2" dx="-1.1312743425369263"
+                dy="0">.</text>
+              <text transform="matrix(1 0 0 1 824.9274 49.3396)" class="edc-st1 edc-st2" dx="0" dy="0">&gt;</text>
+              <text transform="matrix(1 0 0 1 873.4077 66.0408)" class="edc-st1 edc-st2" dx="0" dy="0">/</text>
+              <text transform="matrix(1 0 0 1 871.3276 48.2498)" class="edc-st1 edc-st2" dx="0" dy="0">?</text>
+              <text transform="matrix(1 0 0 1 895.621 23.7127)" class="edc-st1 edc-st2" dx="0" dy="0">'</text>
+              <text transform="matrix(1 0 0 1 895.621 5.3763)" class="edc-st1 edc-st2" dx="0" dy="0">"</text>
+              <text transform="matrix(1 0 0 1 883.3923 -23.574)" class="edc-st1 edc-st2" dx="0" dy="0">[</text>
+              <text transform="matrix(1 0 0 1 882.9709 -39.1231)" class="edc-st1 edc-st2" dx="0" dy="0">{</text>
+              <text transform="matrix(1 0 0 1 928.7657 -23.574)" class="edc-st1 edc-st2" dx="0" dy="0">]</text>
+              <text transform="matrix(1 0 0 1 928.3443 -39.2151)" class="edc-st1 edc-st2" dx="0" dy="0">}</text>
+              <text transform="matrix(1 0 0 1 974.3574 -18.1193)" class="edc-st1 edc-st2" dx="0" dy="0">\</text>
+              <text transform="matrix(1 0 0 1 974.4941 -40.1231)" class="edc-st1 edc-st2" dx="0" dy="0">|</text>
+              <text id="text-tab" transform="matrix(1 0 0 1 357.3467 -23.7658)"
+                class="edc-st1 edc-st7 edc-st2">tab</text>
+              <text id="text-caps-lock" transform="matrix(1 0 0 1 357.3467 20.7127)"
+                class="edc-st1 edc-st7 edc-st2">caps
+                lock</text>
+              <text id="text-shift-left" transform="matrix(1 0 0 1 357.3467 64.0408)"
+                class="edc-st1 edc-st7 edc-st2">shift</text>
+              <text id="text-shift-right" transform="matrix(1 0 0 1 963.826 65.0408)"
+                class="edc-st1 edc-st7 edc-st2">shift</text>
+              <text id="text-backspace" transform="matrix(1 0 0 1 939.4653 -64.8235)"
+                class="edc-st1 edc-st8 edc-st2">backspace</text>
+              <text id="text-enter" transform="matrix(1 0 0 1 958.3144 22.7128)"
+                class="edc-st1 edc-st7 edc-st2">enter</text>
+              <text id="text-option-left" transform="matrix(1 0 0 1 472.2338 108.4646)"
+                class="edc-st1 edc-st7 edc-st2">option</text>
+              <text id="text-space" transform="matrix(1 0 0 1 538.7899 109.4646)"
+                class="edc-st1 edc-st7 edc-st2">space</text>
+              <text id="text-option-right" transform="matrix(1 0 0 1 803.8864 108.4646)"
+                class="edc-st1 edc-st7 edc-st2">option</text>
+            </g>
+          </svg>
+        </div><object type="image/svg+xml" tabindex="-1" data="/m/engine/img/hand/hand-both.svg"
+          style="position: absolute; pointer-events: none; height: 363px; top: -10px; left: 0px; opacity: 0.8; transform: translateX(55px) scale(1.55);"></object>
+      </div>
     </div>
-  </div>
+  </main>
+
+
   <!-- ===================== RESULTS MODAL ===================== -->
   <div class="modal-overlay" id="resultsModal" style="display:none">
     <div class="modal-card analytics-card">
@@ -2653,7 +2650,7 @@ AAAAAASENQAAAAAAAAgIawAAAAAAABA4BBgAn/1UDJgCdNgAAAAASUVORK5CYII="
       </div>
     </div>
   </div>
- 
+
   <script type="module" src="./scripts/game.js"></script>
 </body>
 
