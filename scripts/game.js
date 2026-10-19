@@ -160,27 +160,27 @@ function type() {
         }
 
         if (isBackspace) {
-            if (!isBackspace) return;
-            // const letterAll = [...document.querySelectorAll("letter")];
-            // letterAll.forEach((letter) => {
-            //     console.log(letter);
-            // })
-            // const ctrlisBackspace = e.ctrlKey && key === "Backspace";
+            const prevUnit = letter_unit.previousElementSibling;
 
-            removeClass(letter_unit.previousElementSibling, "Correct");
-            removeClass(letter_unit.previousElementSibling, "Error");
-            removeClass(letter_unit, "Current");
-            addClass(letter_unit.previousElementSibling, "Current");
-
-            if (!letter_unit.previousElementSibling) {
-                addClass(letter.previousSibling, 'Current');
-                removeClass(letter, "Current");
-
+            if (prevUnit) {
+                removeClass(prevUnit, "Correct");
+                removeClass(prevUnit, "Error");
+                removeClass(letter_unit, "Current");
+                addClass(prevUnit, "Current");
+            } else {
                 const preWord = letter.previousElementSibling;
 
                 if (preWord && preWord.classList.contains('letter')) {
+                    removeClass(letter, "Current");
                     addClass(preWord, 'Current');
 
+                    const lastUnit = preWord.lastElementChild;
+                    if (lastUnit) {
+                        removeClass(letter_unit, "Current");
+                        removeClass(lastUnit, "Correct");
+                        removeClass(lastUnit, "Error");
+                        addClass(lastUnit, "Current");
+                    }
                 }
             }
 
