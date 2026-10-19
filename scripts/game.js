@@ -173,15 +173,16 @@ function type() {
             addClass(letter_unit.previousElementSibling, "Current");
 
             if (!letter_unit.previousElementSibling) {
-                addClass(letter, 'Current');
+                addClass(letter.previousSibling, 'Current');
+                removeClass(letter, "Current");
+
                 const preWord = letter.previousElementSibling;
+
                 if (preWord && preWord.classList.contains('letter')) {
                     addClass(preWord, 'Current');
-                    const firstUnit = preWord.querySelector('.letter_unit');
-                    if (firstUnit) addClass(firstUnit, 'Current');
+
                 }
             }
-
 
         }
         updateCaret(letter);

@@ -350,7 +350,7 @@ body.darkMode {
   border-radius: var(--radius);
   font-family: 'Fira Code', 'Consolas', monospace;
   font-size: 1.5rem;
-  line-height: 1.5;
+  line-height: 1.4;
   letter-spacing: 0.02em;
   position: relative;
   overflow: hidden;
@@ -374,20 +374,18 @@ body.darkMode {
   position: relative;
   transition: background 0.15s;
   width: 100%;
-  word-wrap: break-word;
 }
 
-/* .words .letter{
-  border: 1px solid red;
-} */
+.words .letter_unit{
+  margin:1px;
+}
 
 /* Letter spans */
 .letter {
   position: relative;
   transition: color 0.1s;
-  margin: 1px;
   color: var(--color);
-  white-space: pre;
+  word-wrap: normal;
 }
 
 /* Caret */
