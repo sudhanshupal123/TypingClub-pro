@@ -706,6 +706,7 @@ body::after {
   grid-template-columns: repeat(auto-fill, 1fr);
   gap: 10rem;
   background: transparent;
+  text-overflow: ellipsis;
 }
 
 
@@ -722,6 +723,7 @@ body::after {
   border-radius: 1rem;
   overflow: hidden;
   cursor: pointer;
+  text-overflow: ellipsis;
 }
 
 .lessons h1 {
