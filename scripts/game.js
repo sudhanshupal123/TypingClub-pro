@@ -116,14 +116,13 @@ function type() {
     const keybordIMG = document.querySelector('#keys');
 
     document.addEventListener('keydown', (e) => {
-        // Re-query on every keydown so we always have the live Current elements
         const letter = document.querySelector('.letter.Current');
         const letter_unit = document.querySelector('.letter_unit.Current');
         const key = e.key;
         const isletter = key.length === 1 && key !== ' ';
         const isBackspace = key === 'Backspace';
         const isSpace = key === ' ';
-
+        const expected = letter_unit.textContent;
         function keybordimg() {
             if (keybordIMG) {
                 const targetId = getKeyId(key);
@@ -141,7 +140,7 @@ function type() {
 
         if (isletter || isSpace) {
             if (!letter || !letter_unit) return;
-            const expected = letter_unit.textContent;
+
             addClass(letter_unit, key === expected ? 'Correct' : 'Error');
             removeClass(letter_unit, 'Current');
 
@@ -149,8 +148,9 @@ function type() {
             if (nextUnit) {
                 addClass(nextUnit, 'Current');
             } else {
-                const nextWord = letter.nextElementSibling;
                 removeClass(letter, 'Current');
+
+                const nextWord = letter.nextElementSibling;
                 if (nextWord && nextWord.classList.contains('letter')) {
                     addClass(nextWord, 'Current');
                     const firstUnit = nextWord.querySelector('.letter_unit');
@@ -159,6 +159,31 @@ function type() {
             }
         }
 
+        if (isBackspace) {
+            if (!isBackspace) return;
+            // const letterAll = [...document.querySelectorAll("letter")];
+            // letterAll.forEach((letter) => {
+            //     console.log(letter);
+            // })
+            // const ctrlisBackspace = e.ctrlKey && key === "Backspace";
+
+            removeClass(letter_unit.previousElementSibling, "Correct");
+            removeClass(letter_unit.previousElementSibling, "Error");
+            removeClass(letter_unit, "Current");
+            addClass(letter_unit.previousElementSibling, "Current");
+
+            if (!letter_unit.previousElementSibling) {
+                addClass(letter, 'Current');
+                const preWord = letter.previousElementSibling;
+                if (preWord && preWord.classList.contains('letter')) {
+                    addClass(preWord, 'Current');
+                    const firstUnit = preWord.querySelector('.letter_unit');
+                    if (firstUnit) addClass(firstUnit, 'Current');
+                }
+            }
+
+
+        }
         updateCaret(letter);
     });
 }
