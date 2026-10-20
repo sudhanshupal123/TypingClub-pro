@@ -57,7 +57,7 @@ body.lightMode {
 
 body.darkMode {
   --color: #f0f0f0;
-  --game-body-bg: linear-gradient(135deg, #0f1520 0%, #1a1228 50%, #141412 100%);
+  --game-body-bg: #0e0e0e;
   --game-header-bg: rgba(16, 16, 14, 0.90);
   --game-header-border: rgba(255, 255, 255, 0.06);
   --game-header-shadow: 0 4px 24px rgba(0, 0, 0, 0.50);
@@ -338,14 +338,14 @@ body.darkMode {
   position: relative;
   width: 100%;
   margin-top: -100px;
-  height: 13rem;
+  height: 12.5rem;
   border: none !important;
 }
 
 .text-display {
   border: none !important;
   height: auto;
-  max-height: 12.8rem;
+  max-height: 12.5rem;
   padding: 1.5rem;
   background: var(--game-text-bg, rgba(255, 255, 255, 0.78));
 
@@ -424,51 +424,6 @@ body.darkMode {
   pointer-events: none;
   width: 1px;
   height: 1px;
-}
-
-/* ---- Current Word Display ---- */
-.current-word-display {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.current-word-box {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--game-cwb-bg, rgba(255, 255, 255, 0.80));
-  border: 1px solid var(--game-cwb-border, rgba(255, 255, 255, 0.90));
-  padding: 10px 24px;
-  border-radius: var(--radius-pill);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 18px rgba(56, 189, 248, 0.12);
-  transition: background 0.3s ease, border-color 0.3s ease;
-}
-
-.cwb-label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.cwb-word {
-  font-family: 'Fira Code', monospace;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  letter-spacing: 0.05em;
-}
-
-.cwb-typed {
-  font-family: 'Fira Code', monospace;
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--primary-blue);
-  min-width: 60px;
 }
 
 /* ---- Loading Overlay ---- */
@@ -1328,6 +1283,7 @@ body.diff-alpha .level-badge {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 2rem
 }
 
 .blur {
@@ -1335,6 +1291,25 @@ body.diff-alpha .level-badge {
   z-index: 0;
   border-radius: 30px;
   filter: blur(50px);
+}
+
+.ThemeMode {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.ThemeMode img {
+  width: 2rem;
+  border-radius: 50%;
+  object-fit: contain;
+  overflow: hidden;
+  background: var(rgba(186, 230, 253, 0.70));
+
 }
 
 /* ========================

@@ -1,9 +1,11 @@
 import { disableCopy } from './window.js';
 import { ThemeMode } from './ThemeMode.js';
+import { testwordRender } from './test.js';
 ThemeMode();
 disableCopy();
-const TierName = ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "Master"];
+testwordRender();
 
+const TierName = ["Bronze", "Silver", "Platinum", "Gold", "Diamond", "TypeMaster", "TypeMaster Pro"];
 
 fetch('../json/word.json').then(response => response.json()).then(data => {
     let levelHTML = '';
@@ -12,11 +14,10 @@ fetch('../json/word.json').then(response => response.json()).then(data => {
                         <h1 class="lessonNumber">${level.level}</h1>
                         <p class="lessonDescription">${level.title}</p>
                         <div class="lock"><i class="fa-solid fa-lock"></i></div>
-                    </div>
-                    `;
-
+                    </div>`;
     });
-    document.querySelector('.lesson-grid').innerHTML = levelHTML;
+
+    document.querySelector('.lesson-grid').innerHTML = `${levelHTML}`;
     if (data[0]) {
         document.querySelector('.lock').style.display = 'none';
     } else {
@@ -24,13 +25,27 @@ fetch('../json/word.json').then(response => response.json()).then(data => {
     }
     const lessonEl = document.querySelectorAll('.lessons');
     lessonEl.forEach((lesson, d) => {
-        lesson.addEventListener('click', () => {
-            window.location.href = `./game.html?id=${encodeURIComponent(d)}`;
-            
+        const locklevel = document.querySelector(".locklevel");
+        lesson.addEventListener('click', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            locklevel.style.display = "block";
+
+            const width = locklevel.offsetWidth;
+            const height = locklevel.offsetHeight;
+
+            const left = Math.min(x, window.innerWidth - width - 5);
+            const top = Math.min(y + 5, window.innerHeight - height - 5);
+            locklevel.style.left = Math.max(5, left) + 'px';
+            locklevel.style.top = Math.max(5, top) + 'px';
+
+            const locklevelContinue = document.querySelector('.locklevelContinue');
+            if (locklevel.style.display === "block") {
+                locklevelContinue.addEventListener('click', () => {
+                    window.location.href = `./game.html?id=${encodeURIComponent(d)}`;
+                })
+            }
         })
-
     })
-
 });
-
 

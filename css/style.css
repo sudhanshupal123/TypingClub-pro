@@ -98,6 +98,9 @@ body.lightMode {
   --lessons-dark: rgba(8, 8, 19, 0.8);
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.07), 0 4px 14px rgba(0, 0, 0, 0.06);
   --shadow-nav: 0 1px 0 rgba(0, 0, 0, 0.08);
+  --royalblue: #191970;
+  --whiteout: #f0f0f0ec;
+  --backstone: #212529;
 
   --device-color: #d1cfc9;
   --device-screen: #e8e6e2;
@@ -105,7 +108,7 @@ body.lightMode {
   --feedback-card-bg: #f0ede8;
   --feedback-header: #e8e4de;
 
-  --footer-bg: #1a1a18;
+  --footer-bg: #f0f0f0ec;
   --footer-text: #c8c4bc;
   --footer-heading: #f5f4f2;
   --copyright-bg: #111110;
@@ -127,6 +130,23 @@ body.lightMode {
   --border-hover: rgba(56, 189, 248, 0.60);
   --header-shadow: 0 4px 24px rgba(56, 189, 248, 0.10);
   --lockui-bg: #ffffff;
+
+  /* New hero color */
+  --color-black: #0d0d0d;
+  --color-dark: #141414;
+  --color-red: #ea2e2e;
+  --color-red-glow: rgba(234, 46, 46, 0.45);
+  --color-red-soft: #fff1f1;
+  --color-red-border: #fecaca;
+  --color-text-muted: #4b5563;
+  --color-border: #111111;
+  --headerbg: #ffffffe2;
+  --font-pixel: 'Silkscreen', monospace, sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  --card-radius: 28px;
+  --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body.darkMode {
@@ -135,6 +155,10 @@ body.darkMode {
   --bg-card: #242320;
   --bg-input: #2c2b28;
   --bg-nav: rgba(20, 20, 18, 0.84);
+
+  --royalblue: #191970;
+  --whiteout: #ddddddde;
+  --backstone: #212529;
 
   --border: #333230;
   --lessons-light: rgba(160, 189, 219, 0.8);
@@ -153,7 +177,7 @@ body.darkMode {
   --feedback-card-bg: #2a2928;
   --feedback-header: #323130;
 
-  --footer-bg: #0d0d0b;
+  --footer-bg: #212529;
   --footer-text: #7a7872;
   --footer-heading: #c8c4bc;
   --copyright-bg: #080807;
@@ -167,7 +191,7 @@ body.darkMode {
   --surface-chip: rgba(36, 35, 32, 0.90);
   --surface-input: rgba(28, 27, 25, 0.80);
   --surface-tint: rgba(30, 29, 27, 0.60);
-  --body-gradient: linear-gradient(135deg, #0f1520 0%, #1a1228 50%, #141412 100%);
+  --body-gradient: linear-gradient(45deg, #0b0d10 0%, #0b0c0e 100%);
   --blob-top: radial-gradient(circle, rgba(0, 136, 255, 0.10) 0%, transparent 70%);
   --blob-bot: radial-gradient(circle, rgba(139, 92, 246, 0.10) 0%, transparent 70%);
   --scrollbar-track: rgba(30, 29, 27, 0.60);
@@ -175,6 +199,23 @@ body.darkMode {
   --border-hover: rgba(56, 189, 248, 0.35);
   --header-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
   --lockui-bg: #242320;
+
+  /* New hero color */
+  --color-black: #f1f1f1;
+  --color-dark: #b1acac;
+  --color-red: #be2e2e;
+  --color-red-glow: rgba(56, 9, 9, 0.45);
+  --color-red-soft: #4b2e2e;
+  --color-red-border: #b37676;
+  --color-text-muted: #1a1f27;
+  --color-border: #ebe9e9;
+  --headerbg: #1e1d1de2;
+  --font-pixel: 'Silkscreen', monospace, sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  --card-radius: 28px;
+  --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @font-face {
@@ -198,23 +239,23 @@ html {
 }
 
 body {
-  width: 100dvw;
-  height: 100dvh;
+  width: 100%;
+  height: 100%;
   font-family: var(--font-body);
-  background: var(--body-gradient, linear-gradient(135deg, #e0f7ff 0%, #f0e8ff 50%, #ffffff 100%));
   background-attachment: fixed;
   color: var(--text-primary);
   overflow-x: hidden;
-  background-color: #f3f3f5;
   /* Ambient red gradient glow at top center matching reference image */
   background-image:
     radial-gradient(circle at 50% -80px, #ff3838e2 0%, #ff5252 14%, rgba(255, 120, 120, 0.4) 32%, #f2f2f4 62%, #ebebef 100%);
   color: var(--color-black);
+
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  background: var(--body-gradient);
   display: flex;
   flex-direction: column;
   align-items: center;
-  -webkit-font-smoothing: antialiased;
-  scroll-behavior: smooth;
 }
 
 /* Decorative floating blobs */
@@ -626,10 +667,8 @@ body::after {
    ============================================================ */
 .main-content {
   width: 100dvw;
-  height: 100dvh;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: calc(var(--header-h) + 48px) 28px 0px;
+  height: auto;
+  padding: 5rem;
   position: relative;
   z-index: 1;
 }
@@ -684,7 +723,7 @@ body::after {
 }
 
 #level-catogry {
-  color: var(--lessons-dark);
+  color: var(--text-primary);
   font-weight: 900;
   font-size: clamp(1rem, 7vw, 5rem);
 }
@@ -711,7 +750,7 @@ body::after {
 
 
 .lessons {
-  background: var(--lessons-light);
+  background: var(--whiteout);
   border: 1px solid var(--lessons-dark);
   position: relative;
   width: auto;
@@ -732,16 +771,15 @@ body::after {
   justify-content: center;
   align-items: center;
   font-size: clamp(0.5rem, 8vw, 8rem);
-  border-bottom: 1px solid var(--accent);
   font-family: "LevelText";
-  color: var(--footer-bg);
+  color: var(--backstone);
 }
 
 .lessons p {
   display: flex;
   align-items: flex-end;
   font-size: clamp(0.2rem, 5vw, 0.8rem);
-  color: var(--text-secondary);
+  color: var(--backstone);
 }
 
 .lock {
@@ -749,7 +787,7 @@ body::after {
   right: 0;
   top: 0;
   font-size: 2rem;
-  color: var(--text-secondary);
+  color: var(--royalblue);
 }
 
 .displaynone {
@@ -778,7 +816,7 @@ body::after {
   width: 100%;
 
   font-weight: bold;
-  color: var(--text-secondary);
+  color: var(--backstone);
 }
 
 .lockUI {
@@ -1071,11 +1109,10 @@ body::after {
    ============================================================ */
 
 .site-footer {
-  margin-top: 5rem;
   width: 90%;
   height: 30rem;
   display: flex;
-  background: var(--bg);
+  background: var(--footer-bg);
   border: none;
   z-index: 10;
   border-radius: 2rem;
@@ -1112,7 +1149,7 @@ body::after {
 .footerArticle-left img {
   width: 3rem;
   background: transparent;
-  border-radius:5px;
+  border-radius: 5px;
   border: 1px solid var(--text-primary);
 }
 
@@ -1121,7 +1158,7 @@ body::after {
   background-color: transparent;
   width: auto;
   height: auto;
-  color: var(--footer-bg);
+  color: var(--text-black);
 }
 
 .footer-social-links {
@@ -1167,6 +1204,116 @@ body::after {
   font-size: clamp(5rem, 22vw, 25rem);
   font-family: "Leveltext";
   color: var(--copyright-bg);
+}
+
+.connectTheme {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.locklevel {
+  position: fixed;
+  display: none;
+  z-index: 99999999;
+  width: 23rem;
+  height: auto;
+  background: #90c2f482;
+  border-radius: 5px;
+  border: 2px solid var(--accent);
+  padding: 0.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.text-sm {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--backstone);
+}
+
+.font-bold {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-red);
+  margin-bottom: 0.3rem;
+}
+.locklevel-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  gap:1rem;
+}
+.locklevelClose {
+  top: 0;
+  right: 0;
+  position: absolute;
+  border-top-right-radius: 10%;
+  border-bottom-left-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.locklevelClose:hover {
+  background: var(--bg);
+}
+
+.locklevelClose:active {
+  opacity: 0.5;
+}
+
+.locklevelTest,
+.locklevelContinue {
+  border: none;
+  background: var(--accent);
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--bg);
+  margin-top: 5px;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  border: 2px solid var(--accent);
+  transition: all 0.15s;
+}
+
+.locklevelTest:hover,
+.locklevelContinue:hover {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--text-primary);
+}
+
+.locklevelTest:active {
+  background: var(--accent-2);
+}
+
+.copywrite {
+  margin-top: 2rem;
+  width: 100%;
+  height: auto;
+  background: rgb(221, 221, 221);
+  border-top: 1px solid var(--accent);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.copywrite h1 {
+  font-size: 1rem;
+  color: rgb(27, 27, 27);
 }
 
 /* ============================================================

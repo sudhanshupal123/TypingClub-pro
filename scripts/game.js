@@ -1,4 +1,6 @@
-import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
+import { ThemeMode } from './ThemeMode.js';
+ThemeMode();
+
 
 function goBack() {
     const backBTN = document.querySelector('#backBtn');
@@ -16,6 +18,24 @@ function restartGame() {
     })
 }
 restartGame();
+function statValue() {
+    let count = 59;
+    let minuts = 0;
+    const seconds = document.querySelector('#statTimer');
+    const minut = document.querySelector('#startminuts');
+    setInterval(() => {
+        count++;
+        if (count > 60) {
+            minuts++;
+            count = 0;
+        }
+        seconds.innerHTML = count;
+        minut.innerHTML = minuts;
+    }, 1000);
+}
+statValue();
+
+
 function keyHint() {
     const keyHint = document.querySelector('#keyHint').style.display === "flex";
     if (keyHint) {
@@ -130,6 +150,7 @@ function type() {
         const isBackspace = key === 'Backspace';
         const isSpace = key === ' ';
         const expected = letter_unit.textContent;
+
         function keybordimg() {
             if (keybordIMG) {
                 const targetId = getKeyId(key);
@@ -203,6 +224,7 @@ function type() {
     });
 }
 type();
+
 window.addEventListener('resize', () => updateCaret());
 
 document.querySelector('.text-display-wrapper')?.addEventListener('click', () => {

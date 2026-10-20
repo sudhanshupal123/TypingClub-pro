@@ -10,7 +10,7 @@
   margin-top: 3.5rem;
   width: 90dvw;
   height: 90dvh;
-  background: #ffffff;
+  background:var(--footer-bg);
   border-radius: var(--card-radius);
   box-shadow:
     0 25px 60px -15px rgba(0, 0, 0, 0.12),
@@ -36,8 +36,8 @@
   z-index: 99999999;
   background: rgba(red, green, blue, alpha);
   backdrop-filter: blur(15px);
-  border: 1px solid rgba(220, 226, 235, 0.85);
-  box-shadow: 0 0 5px var(--text-muted), inset 0 0 2px var(--headerbg);
+  border: 1px solid var(--text-back);
+  box-shadow: 0 0 5px var(--text-back), inset 0 0 2px var(--headerbg);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -84,7 +84,7 @@
   font-family: var(--font-body);
   font-size: 0.88rem;
   font-weight: 500;
-  color: var(--color-text-muted);
+  color: var(--color-black);
   text-decoration: none;
   position: relative;
   transition: color 0.2s ease;
@@ -203,7 +203,7 @@
   font-family: var(--font-body);
   font-size: 0.85rem;
   line-height: 1.45;
-  color: var(--color-text-muted);
+  color: var(--color-dark);
   font-weight: 500;
 }
 
@@ -411,7 +411,7 @@
   font-family: var(--font-body);
   font-size: 0.82rem;
   line-height: 1.45;
-  color: var(--color-text-muted);
+  color: var(--color-dark);
   font-weight: 500;
   text-align: right;
   max-width: 180px;
@@ -460,7 +460,7 @@
   width: 100%;
   position: relative;
   z-index: 10;
-  background: #ffffff;
+  background: transparent;
   border-top: 1.5px solid var(--color-border);
 }
 
@@ -497,11 +497,6 @@
   line-height: 1;
   text-transform: uppercase;
   user-select: none;
-}
-
-.grid-row-top:hover,
-.grid-cell:hover {
-  background-color: #fafafa;
 }
 
 /* ==========================================================================
