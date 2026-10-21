@@ -11,6 +11,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
     rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
+    integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/game.css" />
 </head>
@@ -2519,14 +2522,12 @@ AAAAAASENQAAAAAAAAgIawAAAAAAABA4BBgAn/1UDJgCdNgAAAAASUVORK5CYII="
 
 
   <!-- ===================== RESULTS MODAL ===================== -->
-  <div class="modal-overlay" id="resultsModal" style="display:none">
+  <div class="modal-overlay" id="resultsModal" style="display:none;">
     <div class="modal-card analytics-card">
 
       <!-- Header -->
       <div class="modal-header">
-        <div class="modal-icon" id="modalIcon">🏆</div>
         <h2 class="modal-title" id="modalTitle">Level Complete!</h2>
-        <p class="modal-subtitle" id="modalSubtitle">Great job!</p>
       </div>
 
       <!-- Top Stats Row -->
@@ -2543,10 +2544,7 @@ AAAAAASENQAAAAAAAAgIawAAAAAAABA4BBgAn/1UDJgCdNgAAAAASUVORK5CYII="
           <div class="modal-stat-value" id="resTime">0:00</div>
           <div class="modal-stat-label">Total Time</div>
         </div>
-        <div class="modal-stat">
-          <div class="modal-stat-value" id="resWords">0</div>
-          <div class="modal-stat-label">Words Done</div>
-        </div>
+
         <div class="modal-stat">
           <div class="modal-stat-value" id="resCorrect">0</div>
           <div class="modal-stat-label">✓ Correct</div>
@@ -2557,88 +2555,27 @@ AAAAAASENQAAAAAAAAgIawAAAAAAABA4BBgAn/1UDJgCdNgAAAAASUVORK5CYII="
         </div>
       </div>
 
-      <!-- Stars -->
-      <div class="star-rating" id="starRating">
-        <span class="star" id="star1">★</span>
-        <span class="star" id="star2">★</span>
-        <span class="star" id="star3">★</span>
-      </div>
-
-      <!-- Analytics Tabs -->
-      <div class="analytics-tabs">
-        <button class="atab active" id="tab-wpm" onclick="switchTab('wpm')">📈 WPM Graph</button>
-        <button class="atab" id="tab-timing" onclick="switchTab('timing')">⏱ Word Timing</button>
-        <button class="atab" id="tab-stuck" onclick="switchTab('stuck')">🔴 Stuck Words</button>
-        <button class="atab" id="tab-laps" onclick="switchTab('laps')">📋 Lap Times</button>
-      </div>
-
       <!-- Tab: WPM Graph -->
       <div class="analytics-panel" id="panel-wpm">
         <div class="chart-title">WPM over every completed word</div>
         <div class="chart-wrap">
-          <canvas id="wpmChart" width="700" height="200"></canvas>
+          <canvas id="wpmChart"></canvas>
         </div>
-        <div class="chart-legend">
-          <span class="legend-pill accent">── Live WPM</span>
-          <span class="legend-pill easy">── Avg WPM</span>
-        </div>
+
       </div>
 
-      <!-- Tab: Word Timing Bars -->
-      <div class="analytics-panel hidden" id="panel-timing">
-        <div class="chart-title">Time per word (seconds) — hover for details</div>
-        <div class="chart-wrap">
-          <canvas id="timingChart" width="700" height="200"></canvas>
-        </div>
-        <div class="timing-summary" id="timingSummary"></div>
-      </div>
-
-      <!-- Tab: Stuck Words -->
-      <div class="analytics-panel hidden" id="panel-stuck">
-        <div class="chart-title">Slowest / most-errored words</div>
-        <div class="stuck-grid" id="stuckGrid"></div>
-      </div>
-
-      <!-- Tab: Lap Times -->
-      <div class="analytics-panel hidden" id="panel-laps">
-        <div class="chart-title">Every word — time, WPM, result</div>
-        <div class="laps-scroll">
-          <table class="laps-table" id="lapsTable">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Word</th>
-                <th>Time</th>
-                <th>WPM</th>
-                <th>Backspaces</th>
-                <th>Result</th>
-              </tr>
-            </thead>
-            <tbody id="lapsBody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Overall WPM Speed Bar -->
-      <div class="wpm-bar-container">
-        <div class="wpm-bar-label">
-          <span>Speed Gauge</span>
-          <span id="wpmBarPct">0 WPM</span>
-        </div>
-        <div class="wpm-bar">
-          <div class="wpm-bar-fill" id="wpmBarFill" style="width:0%"></div>
-          <div class="wpm-bar-goal" id="wpmBarGoal"></div>
-        </div>
-        <div class="wpm-bar-markers">
-          <span>0</span><span>50</span><span>100</span><span>150</span><span>200+</span>
-        </div>
-      </div>
 
       <!-- Action Buttons -->
       <div class="modal-actions">
-        <button class="btn-secondary" id="retryBtn" onclick="restartGame()">↺ Retry</button>
-        <button class="btn-primary" id="nextBtn" onclick="nextLesson()">Next Level →</button>
-        <button class="btn-ghost" onclick="goBack()">⬅ Map</button>
+        <button class="btn-secondary" id="retryBtn">↺ Retry</button>
+        <button class="btn-primary" id="nextlessonBtn">Next Level →</button>
+        <button class="btn-ghost">⬅ Map</button>
+      </div>
+      <!-- Stars -->
+      <div class="star-rating">
+        <span class="star" id="star1"><i class="fa-solid fa-star"></i></span>
+        <span class="star" id="star2"><i class="fa-solid fa-star"></i></span>
+        <span class="star" id="star3"><i class="fa-solid fa-star"></i></span>
       </div>
     </div>
   </div>

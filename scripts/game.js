@@ -1,7 +1,7 @@
 import { ThemeMode } from './ThemeMode.js';
 ThemeMode();
 
-
+console.log('game.js');
 function goBack() {
     const backBTN = document.querySelector('#backBtn');
     backBTN.addEventListener('click', () => {
@@ -14,10 +14,18 @@ function restartGame() {
     const resetBTN = document.querySelector('#restartBtn');
     resetBTN.addEventListener('click', () => {
         location.reload();
-    })
+    });
+
 }
 restartGame();
 
+function goBackMap() {
+    const map = document.querySelector('.btn-ghost');
+    map.addEventListener('click', () => {
+        window.location.href = '../index.html';
+    })
+}
+goBackMap();
 function statValue() {
     let count = 0;
     let minuts = 0;
@@ -103,11 +111,19 @@ function textDisplay() {
 
     fetch('../json/word.json').then(response => response.json()).then(data => {
         const urlParams = new URLSearchParams(window.location.search);
-        const urlidx = urlParams.get('id') ?? 0;
+        const urlidx = urlParams.get('id') || 200;
         const leveltexts = data[urlidx].text;
         const levelText = `<div class="words">${leveltexts.split(' ').map(word => `<span class="letter">${word.split('').map(letter => `<span class="letter_unit">${letter}</span>`).join('')}<span class="letter_unit"> </span></span>`).join('')}</div>`;
+//here
+        console.log(urlidx == 200)
+        if (urlidx == 200) {
+            const val = JSON.parse(localStorage.getItem('testWord'));
+            text.innerHTML = val;
+            console.log(val)
+        } else if (!urlidx == 200) {
+            text.innerHTML = levelText;
+        }
 
-        text.innerHTML = levelText;
         levelNameText.innerHTML = data[urlidx].title;
         levelName.innerHTML = `Level ${data[urlidx].level}`;
 
@@ -142,15 +158,24 @@ function updateCaret(lastLetter = null) {
 
 function type() {
     const keybordIMG = document.querySelector('#keys');
-
+    let statTime = null;
     document.addEventListener('keydown', (e) => {
         const letter = document.querySelector('.letter.Current');
         const letter_unit = document.querySelector('.letter_unit.Current');
+        const letter_unit2 = document.querySelectorAll('.letter_unit.Correct');
         const key = e.key;
         const isletter = key.length === 1 && key !== ' ';
         const isBackspace = key === 'Backspace';
         const isSpace = key === ' ';
         const expected = letter_unit.textContent;
+
+        const typed = letter_unit2.length
+        if (statTime === null && typed > 0) {
+            statTime = Date.now();
+        }
+        const elapsed = (Date.now() - statTime) / 1000;
+        const wpm = elapsed > 0 ? Math.round((typed / 5) * (60 / elapsed)) : 0;
+        document.querySelector('#statWpm').innerHTML = wpm;
 
         function keybordimg() {
             if (keybordIMG) {
@@ -166,6 +191,7 @@ function type() {
             }
         }
         keybordimg();
+
 
         if (isletter || isSpace) {
             if (!letter || !letter_unit) return;
@@ -185,6 +211,12 @@ function type() {
                     const firstUnit = nextWord.querySelector('.letter_unit');
                     if (firstUnit) addClass(firstUnit, 'Current');
                 }
+            }
+
+            if (letter.getBoundingClientRect().top > 235) {
+                const words = document.querySelector('.words');
+                const margin = parseInt(words.style.marginTop || '0px');
+                words.style.marginTop = (margin - 35) + 'px';
             }
         }
 
@@ -215,13 +247,42 @@ function type() {
             }
         }
 
-        if (letter.getBoundingClientRect().top > 235) {
-            const words = document.querySelector('.words');
-            const margin = parseInt(words.style.marginTop || '0px');
-            words.style.marginTop = (margin - 35) + 'px';
-        }
-
         updateCaret(letter);
+
+        const allletter_unit = document.querySelectorAll('.letter_unit');
+        const lastWord = allletter_unit[allletter_unit.length - 1];
+
+        if (lastWord && lastWord.classList.contains("Current")) {
+            const result = document.querySelector('#resultsModal');
+            const nextlessonBtn = document.querySelector('.btn-primary');
+            const retryBtn = document.querySelector('#retryBtn');
+            const levelidx = JSON.parse(localStorage.getItem('levelidx'));
+            result.style.display = 'flex';
+
+            retryBtn.addEventListener('click', () => {
+                result.style.display = 'none';
+                window.location.reload();
+            });
+            function nextLevel() {
+                let idxlevel = levelidx;
+                idxlevel++;
+                nextlevel(idxlevel);
+                localStorage.removeItem('levelidx');
+                localStorage.setItem('levelidx', JSON.stringify(idxlevel));
+            }
+            function lastLevel() {
+                nextlessonBtn.innerHTML = 'All level complete Goback →';
+                window.location.href = '../index.html';
+            }
+
+            nextlessonBtn.addEventListener('click', () => {
+                const finallevel = levelidx === 159 ? lastLevel() : nextLevel();
+                if (!finallevel) return;
+            });
+        }
+        function nextlevel(idx) {
+            window.location.href = `./game.html?id=${encodeURIComponent(idx)}`;
+        }
     });
 }
 type();

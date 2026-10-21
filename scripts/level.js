@@ -5,6 +5,28 @@ ThemeMode();
 disableCopy();
 testwordRender();
 
+const navlinks = [...document.querySelectorAll('.n')];
+navlinks.forEach((nav) => {
+    nav.addEventListener('click', (e) => {
+        const text = document.querySelector('.InformationNavBar');
+        const x = e.clientX;
+        const y = e.clientY;
+        text.style.display = "block";
+
+        const width = text.offsetWidth;
+        const height = text.offsetHeight;
+
+        const left = Math.min(x, window.innerWidth - width - 5);
+        const top = Math.min(y + 5, window.innerHeight - height - 5);
+        text.style.left = Math.max(5, left - 60) + 'px';
+        text.style.top = Math.max(5, top) + 'px';
+        setTimeout(() => {
+            text.style.display = "none";
+        }, 1000)
+    })
+})
+
+
 const TierName = ["Bronze", "Silver", "Platinum", "Gold", "Diamond", "TypeMaster", "TypeMaster Pro"];
 
 fetch('../json/word.json').then(response => response.json()).then(data => {
@@ -43,6 +65,7 @@ fetch('../json/word.json').then(response => response.json()).then(data => {
             if (locklevel.style.display === "block") {
                 locklevelContinue.addEventListener('click', () => {
                     window.location.href = `./game.html?id=${encodeURIComponent(d)}`;
+                    localStorage.setItem('levelidx', JSON.stringify(d));
                 })
             }
         })

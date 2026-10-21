@@ -1227,6 +1227,21 @@ body::after {
   backdrop-filter: blur(10px);
 }
 
+.InformationNavBar {
+  width: auto;
+  height: auto;
+  position: fixed;
+  display: none;
+  z-index: 99999999;
+  background: var(--backstone);
+  border-radius: 0;
+  padding: 0.5rem;
+  cursor: not-allowed;
+  color: var(--whiteout);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
 .text-sm {
   font-size: 14px;
   font-weight: 400;
@@ -1239,13 +1254,15 @@ body::after {
   color: var(--color-red);
   margin-bottom: 0.3rem;
 }
-.locklevel-btn{
+
+.locklevel-btn {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-content: center;
-  gap:1rem;
+  gap: 1rem;
 }
+
 .locklevelClose {
   top: 0;
   right: 0;
@@ -1299,6 +1316,7 @@ body::after {
 .locklevelTest:active {
   background: var(--accent-2);
 }
+
 
 .copywrite {
   margin-top: 2rem;

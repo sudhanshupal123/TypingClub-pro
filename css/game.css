@@ -8,7 +8,7 @@
    ============================================================ */
 body.lightMode {
   --color: #111111;
-
+  --star: #cac7c7;
   --game-body-bg: linear-gradient(135deg, #e0f7ff 0%, #f0e8ff 50%, #ffffff 100%);
   --game-header-bg: rgba(255, 255, 255, 0.80);
   --game-header-border: rgba(255, 255, 255, 0.90);
@@ -57,6 +57,7 @@ body.lightMode {
 
 body.darkMode {
   --color: #f0f0f0;
+  --star: #525050;
   --game-body-bg: #0e0e0e;
   --game-header-bg: rgba(16, 16, 14, 0.90);
   --game-header-border: rgba(255, 255, 255, 0.06);
@@ -345,7 +346,8 @@ body.darkMode {
 .text-display {
   border: none !important;
   height: auto;
-  max-height: 12.5rem;
+  min-height: 5rem;
+  height: 15rem;
   padding: 1.5rem;
   background: var(--game-text-bg, rgba(255, 255, 255, 0.78));
 
@@ -543,13 +545,15 @@ body.darkMode {
 
 /* ---- Results Modal — Analytics Card ---- */
 .modal-overlay {
+  width: 100%;
+  height: 100%;
   position: fixed;
   inset: 0;
   background: var(--game-modal-overlay, rgba(224, 242, 254, 0.55));
-  backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  z-index: 1000;
-  display: flex;
+  z-index: 99999;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 16px;
@@ -570,12 +574,12 @@ body.darkMode {
 
 /* Wider card for analytics */
 .analytics-card {
+  width: 80dvw;
+  height: 80dvh;
   background: var(--game-modal-bg, rgba(255, 255, 255, 0.90));
   border: 1px solid var(--game-modal-border, rgba(255, 255, 255, 0.95));
   border-radius: 28px;
   padding: 32px 36px;
-  width: 100%;
-  max-width: 780px;
   display: flex;
   flex-direction: column;
   gap: 22px;
@@ -598,40 +602,27 @@ body.darkMode {
 }
 
 .modal-header {
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
   text-align: center;
-}
-
-.modal-icon {
-  font-size: 2.8rem;
-  margin-bottom: 8px;
-  animation: bounceIn 0.5s ease 0.2s both;
-  display: block;
-}
-
-@keyframes bounceIn {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-
-  60% {
-    transform: scale(1.2);
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+  margin-bottom: 2rem;
+  position: relative;
 }
 
 .modal-title {
+  z-index: 1;
+  position: absolute;
+  top: 40px;
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 900;
-  background: linear-gradient(135deg, var(--primary-blue), var(--violet), var(--accent-pink));
+  background: linear-gradient(135deg, var(--color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  opacity: 0.8;
 }
 
 .modal-subtitle {
@@ -640,10 +631,11 @@ body.darkMode {
   margin-top: 4px;
 }
 
-/* 6-col stats grid */
 .modal-stats {
+  margin-top: 1rem;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+  flex-direction: row;
   gap: 10px;
 }
 
@@ -684,19 +676,42 @@ body.darkMode {
 
 /* Stars */
 .star-rating {
+  position: absolute;
   display: flex;
   justify-content: center;
   gap: 10px;
 }
 
-.star {
-  font-size: 2.2rem;
-  color: var(--text-muted);
-  filter: grayscale(1);
+.star i {
+  font-size: 4.5rem;
+  color: var(--star);
+}
+
+.staractive {
+  color: #f4ac11;
+}
+
+#star1 i {
+  position: absolute;
+  left: 23rem;
+  top: 10px;
+}
+
+#star2 i {
+  position: absolute;
+  left: 33rem;
+  top: -25px;
+  z-index: -1;
+}
+
+#star3 i {
+  position: absolute;
+  left: 43rem;
+  top: 10px;
 }
 
 .star.lit {
-  color: var(--medium);
+  color: red;
   filter: grayscale(0) drop-shadow(0 0 8px rgba(251, 191, 36, 0.6));
   animation: starPop 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
@@ -779,6 +794,8 @@ body.darkMode {
 }
 
 .chart-wrap {
+  width: 100%;
+  height: 100%;
   background: var(--game-chart-bg, rgba(224, 247, 255, 0.40));
   border-radius: 14px;
   border: 1px solid var(--game-chart-border, rgba(186, 230, 253, 0.55));
@@ -792,7 +809,7 @@ body.darkMode {
 .chart-wrap canvas {
   display: block;
   width: 100% !important;
-  height: 200px !important;
+  height: 100% !important;
 }
 
 .chart-legend {
