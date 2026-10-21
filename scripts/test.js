@@ -1,16 +1,26 @@
 export function testwordRender() {
+    const locklevelTest = document.querySelector('.locklevelTest');
+
     fetch('../json/randomwordTest.json').then(response => response.json()).then(data => {
-        const locklevelTest = document.querySelector('.locklevelTest');
+        let randomworddata = [];
         data.forEach((randomword) => {
-            for (const i = 0; i >= 100; i++) {
-                console.log(i)
-            }
+            return randomworddata.push(randomword);
         })
-        locklevelTest.addEventListener('click', () => {
-            window.location.href = "../game.html";
-        })
+
+
+        for (let i = 0; i <= 200; i++) {
+            randomworddata[i];
+            
+        }
+
+
+
     }).catch(err => {
-        console.error('Failed to load randomwordTest JSON:', err);
+        console.error('RandomwordTest JSON:', err);
+    });
+    locklevelTest.addEventListener('click', () => {
+        window.location.href = "../game.html";
+        console.log('open')
     });
 }
 testwordRender();

@@ -10,7 +10,6 @@ function goBack() {
 }
 goBack();
 
-
 function restartGame() {
     const resetBTN = document.querySelector('#restartBtn');
     resetBTN.addEventListener('click', () => {
@@ -18,8 +17,9 @@ function restartGame() {
     })
 }
 restartGame();
+
 function statValue() {
-    let count = 59;
+    let count = 0;
     let minuts = 0;
     const seconds = document.querySelector('#statTimer');
     const minut = document.querySelector('#startminuts');
@@ -43,6 +43,7 @@ function keyHint() {
     }
 }
 keyHint();
+
 function addClass(e, name) {
     if (!e) return;
     if (e.classList) {
