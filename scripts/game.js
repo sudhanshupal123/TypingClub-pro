@@ -147,27 +147,68 @@ function updateCaret(lastLetter = null) {
         cursor.style.left = ((nextletter ? targetRect.left : targetRect.right) - parentRect.left) + 'px';
     }
 }
+window.gameStart = null;
+let minuts = 0;
+let sLeft = null;
+function gettime() {
+    const gameTime = 0 * 1000;
+    if (!window.timer) {
+        window.timer = setInterval(() => {
+            if (!window.gameStart) {
+                window.gameStart = (new Date()).getTime();
+            }
+            const currentTime = (new Date()).getTime();
+            const msPassed = currentTime - window.gameStart;
+            const sPassed = Math.round(msPassed / 1000);
+            sLeft = Math.round((gameTime / 1000) + sPassed);
+            if (sLeft >= 60) {
+                minuts++
+                sLeft = 0;
+            }
+            document.querySelector('#startminuts').innerHTML = minuts;
+            document.querySelector('#statTimer').innerHTML = sLeft;
+            localStorage.setItem('minuts', minuts);
+            localStorage.setItem('sLeft', sLeft);
+        }, 1000);
+    }
+}
+
+let wpm = 0;
 
 function type() {
     const keybordIMG = document.querySelector('#keys');
-    let statTime = null;
     document.addEventListener('keydown', (e) => {
+        gettime();
         const letter = document.querySelector('.letter.Current');
         const letter_unit = document.querySelector('.letter_unit.Current');
-        const letter_unit2 = document.querySelectorAll('.letter_unit.Correct');
+        const correct = [...document.querySelectorAll('.letter_unit.Correct')].length + 1;
+        const totalletter = [...document.querySelectorAll('.letter_unit')].length - 1;
+        const Accuracayvalue = (correct / totalletter) * 100 || 0;
+        const Accuracay = Math.round(Accuracayvalue);
         const key = e.key;
         const isletter = key.length === 1 && key !== ' ';
         const isBackspace = key === 'Backspace';
         const isSpace = key === ' ';
         const expected = letter_unit.textContent;
-
-        const typed = letter_unit2.length
-        if (statTime === null && typed > 0) {
-            statTime = Date.now();
+        const statAcc = document.querySelector('#statAcc');
+        if (Accuracay >= 0 || Accuracay <= 100) {
+            statAcc.innerHTML = Accuracay;
         }
-        const elapsed = (Date.now() - statTime) / 1000;
-        const wpm = elapsed > 0 ? Math.round((typed / 5) * (60 / elapsed)) : 0;
-        document.querySelector('#statWpm').innerHTML = wpm;
+        getWpm(correct);
+        function getWpm(words) {
+            if (!words) return;
+            const totalcharcter = words;
+            let minut = JSON.parse(localStorage.getItem('minuts'));
+            let seconds = JSON.parse(localStorage.getItem('sLeft'));
+            let totalsec = (minut * 60) + seconds;
+            wpm = Math.round((totalcharcter * 60) / (5 * totalsec));
+            if (wpm === 'Infinity') {
+                seconds++;
+            }
+            document.querySelector('#statWpm').innerHTML = wpm;
+            console.log(wpm, minut, seconds)
+        }
+
 
         function keybordimg() {
             if (keybordIMG) {
@@ -204,9 +245,7 @@ function type() {
                 }
             }
 
-
         }
-        window.gameStart = null;
         if (isSpace) {
             if (expected !== ' ') {
                 const lettersToInvalidate = [...document.querySelectorAll('.letter.Current .letter_unit:not(.Correct)')];
@@ -214,21 +253,12 @@ function type() {
                     addClass(letter, 'Error');
                 });
             }
-            //here accuracay ===  Alllengthletter_unit,  if accuracy < Error then display flex
-            // const ErrorClass = document.querySelectorAll('.letter_unit.Error').length;
-            // const Alllengthletter_unit = document.querySelectorAll('.letter_unit').length;
-            // const forty = (ErrorClass > 40) && Alllengthletter_unit > 100;
-            // console.log(forty, ErrorClass, Alllengthletter_unit)
-            // if (forty) {
-            //     document.querySelector('.errorRestart').style.display = 'flex';
-            //     document.querySelector('.errorRestart button').addEventListener('click', () => {
-            //         window.location.reload();
-            //     })
-            // }
+
             removeClass(letter, 'Current');
             addClass(letter.nextSibling, 'Current');
             if (letter_unit) {
                 removeClass(letter_unit, 'Current');
+                addClass(letter_unit, "Correct")
             }
             addClass(letter.nextSibling.firstChild, 'Current');
         }
@@ -256,7 +286,7 @@ function type() {
                     }
                 }
             }
-            if (letter.getBoundingClientRect().top < 235) {
+            if (letter.getBoundingClientRect().top < 200) {
                 const words = document.querySelector('.words');
                 const margin = parseInt(words.style.marginTop || '0px');
                 words.style.marginTop = (margin + 35) + 'px';
@@ -270,14 +300,6 @@ function type() {
 
         updateCaret(letter);
 
-        function accuracay() {
-            //here
-            const correct = document.querySelectorAll('.letter_unit.Currect').length;
-            const totalletter = document.querySelectorAll('.letter_unit').length;
-            const Accuracay = (correct / totalletter) * 100;
-            console.log(Accuracay,correct,totalletter)
-        }
-        accuracay()
         const allletter_unit = document.querySelectorAll('.letter_unit');
         const lastWord = allletter_unit[allletter_unit.length - 1];
 
@@ -286,8 +308,24 @@ function type() {
             const nextlessonBtn = document.querySelector('.btn-primary');
             const retryBtn = document.querySelector('#retryBtn');
             const levelidx = JSON.parse(localStorage.getItem('levelidx'));
-            result.style.display = 'flex';
+            const incorrect = document.querySelectorAll('.letter_unit.Error');
+            const correct = document.querySelectorAll('.letter_unit.Correct');
+            const resErrors = document.querySelector('#resErrors');
+            const resCorrect = document.querySelector('#resCorrect');
+            const resAcc = document.querySelector('#resAcc');
+            const resWpm = document.querySelector('#resWpm');
 
+            resAcc.innerHTML = Math.round(Accuracay);
+            resErrors.innerHTML = incorrect.length;
+            resErrors.innerHTML = incorrect ? incorrect.length : 0;
+            resCorrect.innerHTML = correct.length;
+            result.style.display = 'flex';
+            function timeover() {
+                clearInterval(window.timer);
+                const displayresult = getWpm(correct);
+                resWpm.innerHTML = displayresult;
+            }
+            timeover();
             retryBtn.addEventListener('click', () => {
                 result.style.display = 'none';
                 window.location.reload();
