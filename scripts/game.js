@@ -41,7 +41,7 @@ function statValue() {
         minut.innerHTML = minuts;
     }, 1000);
 }
-statValue();
+
 
 
 function keyHint() {
@@ -111,21 +111,13 @@ function textDisplay() {
 
     fetch('../json/word.json').then(response => response.json()).then(data => {
         const urlParams = new URLSearchParams(window.location.search);
-        const urlidx = urlParams.get('id') || 200;
+        const urlidx = urlParams.get('id') ?? 0;
         const leveltexts = data[urlidx].text;
         const levelText = `<div class="words">${leveltexts.split(' ').map(word => `<span class="letter">${word.split('').map(letter => `<span class="letter_unit">${letter}</span>`).join('')}<span class="letter_unit"> </span></span>`).join('')}</div>`;
-//here
-        console.log(urlidx == 200)
-        if (urlidx == 200) {
-            const val = JSON.parse(localStorage.getItem('testWord'));
-            text.innerHTML = val;
-            console.log(val)
-        } else if (!urlidx == 200) {
-            text.innerHTML = levelText;
-        }
 
         levelNameText.innerHTML = data[urlidx].title;
         levelName.innerHTML = `Level ${data[urlidx].level}`;
+        text.innerHTML = levelText;
 
         const letter = document.querySelectorAll('.letter');
         displayWord.innerHTML = letter.length;
@@ -192,8 +184,7 @@ function type() {
         }
         keybordimg();
 
-
-        if (isletter || isSpace) {
+        if (isletter) {
             if (!letter || !letter_unit) return;
 
             addClass(letter_unit, key === expected ? 'Correct' : 'Error');
@@ -213,15 +204,35 @@ function type() {
                 }
             }
 
-            if (letter.getBoundingClientRect().top > 235) {
-                const words = document.querySelector('.words');
-                const margin = parseInt(words.style.marginTop || '0px');
-                words.style.marginTop = (margin - 35) + 'px';
-            }
+
         }
-
+        window.gameStart = null;
+        if (isSpace) {
+            if (expected !== ' ') {
+                const lettersToInvalidate = [...document.querySelectorAll('.letter.Current .letter_unit:not(.Correct)')];
+                lettersToInvalidate.forEach(letter => {
+                    addClass(letter, 'Error');
+                });
+            }
+            //here accuracay ===  Alllengthletter_unit,  if accuracy < Error then display flex
+            // const ErrorClass = document.querySelectorAll('.letter_unit.Error').length;
+            // const Alllengthletter_unit = document.querySelectorAll('.letter_unit').length;
+            // const forty = (ErrorClass > 40) && Alllengthletter_unit > 100;
+            // console.log(forty, ErrorClass, Alllengthletter_unit)
+            // if (forty) {
+            //     document.querySelector('.errorRestart').style.display = 'flex';
+            //     document.querySelector('.errorRestart button').addEventListener('click', () => {
+            //         window.location.reload();
+            //     })
+            // }
+            removeClass(letter, 'Current');
+            addClass(letter.nextSibling, 'Current');
+            if (letter_unit) {
+                removeClass(letter_unit, 'Current');
+            }
+            addClass(letter.nextSibling.firstChild, 'Current');
+        }
         if (isBackspace) {
-
             const prevUnit = letter_unit.previousElementSibling;
 
             if (prevUnit) {
@@ -245,10 +256,28 @@ function type() {
                     }
                 }
             }
+            if (letter.getBoundingClientRect().top < 235) {
+                const words = document.querySelector('.words');
+                const margin = parseInt(words.style.marginTop || '0px');
+                words.style.marginTop = (margin + 35) + 'px';
+            }
+        }
+        if (letter.getBoundingClientRect().top > 235) {
+            const words = document.querySelector('.words');
+            const margin = parseInt(words.style.marginTop || '0px');
+            words.style.marginTop = (margin - 35) + 'px';
         }
 
         updateCaret(letter);
 
+        function accuracay() {
+            //here
+            const correct = document.querySelectorAll('.letter_unit.Currect').length;
+            const totalletter = document.querySelectorAll('.letter_unit').length;
+            const Accuracay = (correct / totalletter) * 100;
+            console.log(Accuracay,correct,totalletter)
+        }
+        accuracay()
         const allletter_unit = document.querySelectorAll('.letter_unit');
         const lastWord = allletter_unit[allletter_unit.length - 1];
 

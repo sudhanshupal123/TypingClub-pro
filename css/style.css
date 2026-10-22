@@ -819,73 +819,6 @@ body::after {
   color: var(--backstone);
 }
 
-.lockUI {
-  display: none;
-  position: absolute;
-  width: 20rem;
-  background: var(--lockui-bg, white);
-  color: var(--text-primary);
-  height: 13rem;
-  padding: 5px;
-  z-index: 99;
-  border: 1px solid var(--border-color, rgba(186, 230, 253, 0.55));
-  border-radius: var(--radius-sm);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-  transition: background 0.3s ease;
-}
-
-.lockUI-close {
-  position: absolute;
-  right: 0;
-  top: 0;
-  font-weight: 700;
-  font-size: 1rem;
-  background: transparent;
-  padding: 5px;
-  border-radius: 2px;
-  line-height: 10px;
-  transition: all 0.15s;
-  cursor: pointer;
-  color: var(--text-primary);
-
-}
-
-.lockUI-close:hover {
-  background: gray;
-}
-
-.lockUI-header {
-  width: 100%;
-  height: 50%;
-  display: flex;
-  justify-content: center;
-}
-
-.lockUI-header p {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: var(--text-primary);
-  margin-top: 2rem;
-}
-
-.lockUI .buttona {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.lockUI button {
-  background: var(--accent);
-  padding: 0.2rem 0.5rem;
-  border-radius: 5px;
-  border: 1px solid var(--bg-dark);
-  font-size: clamp(0.3rem, 5vw, 1.3rem);
-  color: var(--text-primary);
-  font-weight: 700;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
 /* ── Difficulty section badge theming ── */
 .diff-easy .section-badge {
   background: var(--easy-bg);
@@ -1317,6 +1250,12 @@ body::after {
   background: var(--accent-2);
 }
 
+
+.headerWPM {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-black);
+}
 
 .copywrite {
   margin-top: 2rem;

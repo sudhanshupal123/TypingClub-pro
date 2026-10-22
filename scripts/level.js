@@ -1,9 +1,7 @@
 import { disableCopy } from './window.js';
 import { ThemeMode } from './ThemeMode.js';
-import { testwordRender } from './test.js';
 ThemeMode();
 disableCopy();
-testwordRender();
 
 const navlinks = [...document.querySelectorAll('.n')];
 navlinks.forEach((nav) => {
@@ -35,16 +33,10 @@ fetch('../json/word.json').then(response => response.json()).then(data => {
         levelHTML += `<div class="lessons" data-idx=${idx + 1}>
                         <h1 class="lessonNumber">${level.level}</h1>
                         <p class="lessonDescription">${level.title}</p>
-                        <div class="lock"><i class="fa-solid fa-lock"></i></div>
                     </div>`;
     });
 
     document.querySelector('.lesson-grid').innerHTML = `${levelHTML}`;
-    if (data[0]) {
-        document.querySelector('.lock').style.display = 'none';
-    } else {
-        console.error('Error in level first');
-    }
     const lessonEl = document.querySelectorAll('.lessons');
     lessonEl.forEach((lesson, d) => {
         const locklevel = document.querySelector(".locklevel");
@@ -58,16 +50,25 @@ fetch('../json/word.json').then(response => response.json()).then(data => {
 
             const left = Math.min(x, window.innerWidth - width - 5);
             const top = Math.min(y + 5, window.innerHeight - height - 5);
-            locklevel.style.left = Math.max(5, left) + 'px';
+            locklevel.style.left = Math.max(5, left - 170) + 'px';
             locklevel.style.top = Math.max(5, top) + 'px';
 
             const locklevelContinue = document.querySelector('.locklevelContinue');
+            const locklevelClose = document.querySelector(".locklevelClose");
             if (locklevel.style.display === "block") {
                 locklevelContinue.addEventListener('click', () => {
                     window.location.href = `./game.html?id=${encodeURIComponent(d)}`;
                     localStorage.setItem('levelidx', JSON.stringify(d));
                 })
             }
+
+            locklevelClose.addEventListener('click', () => {
+                locklevel.style.display = 'none';
+            });
+
+            setTimeout(() => {
+                locklevel.style.display = 'none';
+            }, 3000)
         })
     })
 });
