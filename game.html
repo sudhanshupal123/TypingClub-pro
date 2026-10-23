@@ -16,9 +16,203 @@
     crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/game.css" />
+  <!-- Skeleton Loader Styles -->
+  <link rel="stylesheet" href="./skeleton/skeleton.css" />
+  <style>
+    /* ── Skeleton overlay wrapper ── */
+    #sk-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0e0f13;
+      overflow-y: auto;
+      transition: opacity 0.45s ease, visibility 0.45s ease;
+    }
+    #sk-overlay.sk-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    /* keep real content hidden until skeleton fades */
+    body.sk-loading > *:not(#sk-overlay) {
+      visibility: hidden;
+    }
+    /* game-main inner layout for skeleton */
+    .game-main-sk {
+      display: flex;
+      flex-direction: column;
+      padding: 20px 0 32px;
+    }
+  </style>
 </head>
 
-<body class="game-body">
+<body class="game-body sk-loading">
+
+  <!-- ===================== SKELETON OVERLAY (game.html) ===================== -->
+  <div id="sk-overlay" role="status" aria-label="Loading game">
+
+    <!-- GAME HEADER -->
+    <header class="sk-game-header" aria-hidden="true">
+      <div class="sk sk-back-btn sk-pill sk-d1"></div>
+      <div class="sk sk-level-badge sk-pill sk-d2"></div>
+      <div class="sk sk-level-name sk-d2"></div>
+      <div class="sk-spacer"></div>
+      <div class="sk-stat-block">
+        <div class="sk sk-stat-value sk-d3"></div>
+        <div class="sk sk-stat-label sk-d3"></div>
+      </div>
+      <div class="sk-stat-block">
+        <div class="sk sk-stat-value sk-d4"></div>
+        <div class="sk sk-stat-label sk-d4"></div>
+      </div>
+      <div class="sk-stat-block">
+        <div class="sk sk-stat-value sk-d5"></div>
+        <div class="sk sk-stat-label sk-d5"></div>
+      </div>
+      <div class="sk-stat-block">
+        <div class="sk sk-stat-value sk-d6"></div>
+        <div class="sk sk-stat-label sk-d6"></div>
+      </div>
+      <div class="sk sk-icon-btn sk-d7"></div>
+      <div class="sk sk-icon-btn sk-circle sk-d8"></div>
+    </header>
+
+    <!-- PROGRESS BAR -->
+    <div class="sk-progress-bar" aria-hidden="true"></div>
+
+    <!-- GAME MAIN -->
+    <main class="game-main-sk" aria-hidden="true">
+
+      <!-- Key hint -->
+      <div style="display:flex; justify-content:center; margin-bottom:16px;">
+        <div class="sk sk-key-hint sk-pill sk-d1"></div>
+      </div>
+
+      <!-- Text display -->
+      <div class="sk-text-display-wrapper">
+        <div class="sk-text-display">
+          <div class="sk sk-word sk-d1" style="width:54px;"></div>
+          <div class="sk sk-word sk-d2" style="width:80px;"></div>
+          <div class="sk sk-word sk-d1" style="width:40px;"></div>
+          <div class="sk sk-word sk-d3" style="width:96px;"></div>
+          <div class="sk sk-word sk-d2" style="width:60px;"></div>
+          <div class="sk sk-word sk-d4" style="width:72px;"></div>
+          <div class="sk sk-word sk-d1" style="width:48px;"></div>
+          <div class="sk sk-word sk-d5" style="width:88px;"></div>
+          <div class="sk sk-word sk-d2" style="width:56px;"></div>
+          <div class="sk sk-word sk-d3" style="width:70px;"></div>
+          <div class="sk sk-word sk-d6" style="width:44px;"></div>
+          <div class="sk sk-word sk-d1" style="width:82px;"></div>
+          <div class="sk sk-word sk-d2" style="width:65px;"></div>
+          <div class="sk sk-word sk-d4" style="width:50px;"></div>
+          <div class="sk sk-word sk-d3" style="width:100px;"></div>
+          <div class="sk sk-word sk-d1" style="width:36px;"></div>
+          <div class="sk sk-word sk-d5" style="width:78px;"></div>
+          <div class="sk sk-word sk-d2" style="width:62px;"></div>
+          <div class="sk sk-word sk-d6" style="width:45px;"></div>
+          <div class="sk sk-word sk-d3" style="width:90px;"></div>
+          <div class="sk sk-word sk-d1" style="width:58px;"></div>
+          <div class="sk sk-word sk-d4" style="width:74px;"></div>
+          <div class="sk sk-word sk-d5" style="width:42px;"></div>
+          <div class="sk sk-word sk-d2" style="width:86px;"></div>
+          <div class="sk sk-word sk-d6" style="width:52px;"></div>
+          <div class="sk sk-word sk-d1" style="width:94px;"></div>
+          <div class="sk sk-word sk-d3" style="width:66px;"></div>
+          <div class="sk sk-word sk-d4" style="width:48px;"></div>
+          <div class="sk sk-word sk-d2" style="width:76px;"></div>
+          <div class="sk sk-word sk-d5" style="width:38px;"></div>
+        </div>
+      </div>
+
+      <!-- Lap strip -->
+      <div class="sk-lap-strip">
+        <div class="sk sk-lap-chip sk-pill sk-d1"></div>
+        <div class="sk sk-lap-chip sk-pill sk-d2"></div>
+        <div class="sk sk-lap-chip sk-pill sk-d3"></div>
+        <div class="sk sk-lap-chip sk-pill sk-d4"></div>
+        <div class="sk sk-lap-chip sk-pill sk-d5"></div>
+      </div>
+
+      <!-- Keyboard -->
+      <div class="sk-keyboard-wrapper" aria-hidden="true">
+        <!-- Number row -->
+        <div class="sk-keyboard-row">
+          <div class="sk sk-key sk-d1" style="width:42px;"></div>
+          <div class="sk sk-key sk-d1" style="width:42px;"></div>
+          <div class="sk sk-key sk-d1" style="width:42px;"></div>
+          <div class="sk sk-key sk-d1" style="width:42px;"></div>
+          <div class="sk sk-key sk-d1" style="width:42px;"></div>
+          <div class="sk sk-key sk-d1" style="width:42px;"></div>
+          <div class="sk sk-key sk-d1" style="width:42px;"></div>
+          <div class="sk sk-key sk-d1" style="width:42px;"></div>
+          <div class="sk sk-key sk-d1" style="width:42px;"></div>
+          <div class="sk sk-key sk-d1" style="width:42px;"></div>
+          <div class="sk sk-key sk-d1" style="width:42px;"></div>
+          <div class="sk sk-key sk-d1" style="width:42px;"></div>
+          <div class="sk sk-key sk-d1" style="width:42px;"></div>
+          <div class="sk sk-key sk-d1" style="width:72px;"></div>
+        </div>
+        <!-- QWERTY row -->
+        <div class="sk-keyboard-row">
+          <div class="sk sk-key sk-d2" style="width:62px;"></div>
+          <div class="sk sk-key sk-d2" style="width:42px;"></div>
+          <div class="sk sk-key sk-d2" style="width:42px;"></div>
+          <div class="sk sk-key sk-d2" style="width:42px;"></div>
+          <div class="sk sk-key sk-d2" style="width:42px;"></div>
+          <div class="sk sk-key sk-d2" style="width:42px;"></div>
+          <div class="sk sk-key sk-d2" style="width:42px;"></div>
+          <div class="sk sk-key sk-d2" style="width:42px;"></div>
+          <div class="sk sk-key sk-d2" style="width:42px;"></div>
+          <div class="sk sk-key sk-d2" style="width:42px;"></div>
+          <div class="sk sk-key sk-d2" style="width:42px;"></div>
+          <div class="sk sk-key sk-d2" style="width:42px;"></div>
+          <div class="sk sk-key sk-d2" style="width:42px;"></div>
+          <div class="sk sk-key sk-d2" style="width:62px;"></div>
+        </div>
+        <!-- ASDF row -->
+        <div class="sk-keyboard-row">
+          <div class="sk sk-key sk-d3" style="width:76px;"></div>
+          <div class="sk sk-key sk-d3" style="width:42px;"></div>
+          <div class="sk sk-key sk-d3" style="width:42px;"></div>
+          <div class="sk sk-key sk-d3" style="width:42px;"></div>
+          <div class="sk sk-key sk-d3" style="width:42px;"></div>
+          <div class="sk sk-key sk-d3" style="width:42px;"></div>
+          <div class="sk sk-key sk-d3" style="width:42px;"></div>
+          <div class="sk sk-key sk-d3" style="width:42px;"></div>
+          <div class="sk sk-key sk-d3" style="width:42px;"></div>
+          <div class="sk sk-key sk-d3" style="width:42px;"></div>
+          <div class="sk sk-key sk-d3" style="width:42px;"></div>
+          <div class="sk sk-key sk-d3" style="width:42px;"></div>
+          <div class="sk sk-key sk-d3" style="width:90px;"></div>
+        </div>
+        <!-- Shift / ZXCV row -->
+        <div class="sk-keyboard-row">
+          <div class="sk sk-key sk-d4" style="width:96px;"></div>
+          <div class="sk sk-key sk-d4" style="width:42px;"></div>
+          <div class="sk sk-key sk-d4" style="width:42px;"></div>
+          <div class="sk sk-key sk-d4" style="width:42px;"></div>
+          <div class="sk sk-key sk-d4" style="width:42px;"></div>
+          <div class="sk sk-key sk-d4" style="width:42px;"></div>
+          <div class="sk sk-key sk-d4" style="width:42px;"></div>
+          <div class="sk sk-key sk-d4" style="width:42px;"></div>
+          <div class="sk sk-key sk-d4" style="width:42px;"></div>
+          <div class="sk sk-key sk-d4" style="width:42px;"></div>
+          <div class="sk sk-key sk-d4" style="width:96px;"></div>
+        </div>
+        <!-- Space bar row -->
+        <div class="sk-keyboard-row">
+          <div class="sk sk-key sk-d5" style="width:68px;"></div>
+          <div class="sk sk-key sk-d5" style="width:68px;"></div>
+          <div class="sk sk-key sk-d5" style="width:240px; border-radius:8px;"></div>
+          <div class="sk sk-key sk-d5" style="width:68px;"></div>
+          <div class="sk sk-key sk-d5" style="width:68px;"></div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+  <!-- ===================== END SKELETON OVERLAY ===================== -->
   <!-- Game Header -->
   <header class="game-header">
     <div class="game-header-inner">
@@ -2585,6 +2779,28 @@ AAAAAASENQAAAAAAAAgIawAAAAAAABA4BBgAn/1UDJgCdNgAAAAASUVORK5CYII="
   </div>
 
   <script type="module" src="./scripts/game.js"></script>
+  <!-- Skeleton: hide overlay once game JS initializes -->
+  <script>
+    (function () {
+      function hideSkeleton() {
+        var overlay = document.getElementById('sk-overlay');
+        var body = document.body;
+        if (!overlay) return;
+        overlay.classList.add('sk-hidden');
+        body.classList.remove('sk-loading');
+        overlay.addEventListener('transitionend', function () {
+          overlay.remove();
+        }, { once: true });
+      }
+      if (document.readyState === 'complete') {
+        hideSkeleton();
+      } else {
+        window.addEventListener('load', hideSkeleton);
+        // Safety fallback: max 5s
+        setTimeout(hideSkeleton, 5000);
+      }
+    })();
+  </script>
 </body>
 
 </html>

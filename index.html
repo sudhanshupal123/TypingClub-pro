@@ -17,9 +17,149 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
     integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Skeleton Loader Styles -->
+  <link rel="stylesheet" href="./skeleton/skeleton.css" />
+  <style>
+    /* ── Skeleton overlay wrapper ── */
+    #sk-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0e0f13;
+      overflow-y: auto;
+      transition: opacity 0.45s ease, visibility 0.45s ease;
+    }
+
+    #sk-overlay.sk-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* keep real content hidden until skeleton fades */
+    body.sk-loading>*:not(#sk-overlay) {
+      visibility: hidden;
+    }
+  </style>
 </head>
 
-<body>
+<body class="sk-loading">
+
+  <!-- ===================== SKELETON OVERLAY (index.html) ===================== -->
+  <div id="sk-overlay" role="status" aria-label="Loading TypingClub Pro">
+    <div class="sk-combine">
+      <!-- NAV -->
+      <header class="sk-nav" aria-hidden="true">
+        <div class="sk sk-brand sk-d1"></div>
+        <div class="sk-badge-combine">
+          <div class="sk sk-wpm-badge sk-pill sk-d3"></div>
+          <div class="sk sk-wpm-badge sk-pill sk-d3"></div>
+          <div class="sk sk-theme-btn sk-pulse sk-d4"></div>
+        </div>
+
+      </header>
+    </div>
+
+    <!-- HERO STAGE -->
+    <section class="sk-hero-stage" aria-hidden="true">
+      <div class="sk sk-hero-bg-text sk-d1"></div>
+      <div class="sk-hero-left">
+        <div class="sk sk-hero-desc sk-d2" style="width:85%;"></div>
+        <div class="sk sk-hero-desc sk-d3" style="width:65%;"></div>
+        <div class="sk sk-hero-desc sk-d4" style="width:75%;"></div>
+        <div class="sk sk-badge-circle sk-pulse sk-d5"></div>
+      </div>
+      <div class="sk sk-hero-center sk-rounded sk-d3"></div>
+      <div class="sk-hero-right">
+        <div class="sk-card-stack">
+          <div class="sk sk-stack-card sk-rounded sk-d2"></div>
+          <div class="sk sk-stack-card sk-rounded sk-d4"></div>
+          <div class="sk sk-stack-card sk-rounded sk-d3"></div>
+        </div>
+        <div class="sk sk-hero-desc sk-d5" style="width:80%;">fsfsdfs</div>
+        <div class="sk sk-hero-desc sk-d6" style="width:60%;">fcgfh</div>
+      </div>
+    </section>
+
+    <!-- HERO BOTTOM GRID -->
+    <div class="sk-hero-grid" aria-hidden="true">
+      <div class="sk sk-grid-text-lg sk-d1"></div>
+      <div class="sk sk-grid-text-lg sk-d2"></div>
+      <div class="sk sk-grid-text-lg sk-d3"></div>
+    </div>
+
+    <!-- MAIN LESSONS -->
+    <main class="sk-main-content" aria-hidden="true">
+      <div class="sk sk-section-title sk-d1"></div>
+      <div class="sk sk-section-sub sk-d2"></div>
+      <div class="sk sk-section-sub sk-d3" style="width:320px; margin-bottom:44px;"></div>
+
+      <!-- Section 1 -->
+      <div class="sk-lesson-section">
+        <div class="sk sk-lesson-section-title sk-d1"></div>
+        <div class="sk-lesson-grid">
+          <div class="sk sk-lesson-card sk-rounded sk-d1"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d2"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d3"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d4"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d5"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d6"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d7"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d8"></div>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="sk-lesson-section">
+        <div class="sk sk-lesson-section-title sk-d2"></div>
+        <div class="sk-lesson-grid">
+          <div class="sk sk-lesson-card sk-rounded sk-d2"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d3"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d4"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d5"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d6"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d7"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d8"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d1"></div>
+        </div>
+      </div>
+
+      <!-- Section 3 -->
+      <div class="sk-lesson-section">
+        <div class="sk sk-lesson-section-title sk-d3"></div>
+        <div class="sk-lesson-grid">
+          <div class="sk sk-lesson-card sk-rounded sk-d3"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d4"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d5"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d6"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d7"></div>
+          <div class="sk sk-lesson-card sk-rounded sk-d1"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="sk-footer" aria-hidden="true">
+      <div style="display:flex; flex-direction:column;">
+        <div class="sk sk-footer-logo sk-d1"></div>
+        <div class="sk sk-footer-title sk-d2"></div>
+        <div class="sk-footer-social">
+          <div class="sk-pulse sk-social-icon sk-d3"></div>
+          <div class="sk-pulse sk-social-icon sk-d4"></div>
+          <div class="sk-pulse sk-social-icon sk-d5"></div>
+          <div class="sk-pulse sk-social-icon sk-d6"></div>
+        </div>
+      </div>
+      <div class="sk sk-footer-img sk-rounded sk-d4"></div>
+    </footer>
+
+    <!-- COPYRIGHT -->
+    <div class="sk-copyright" aria-hidden="true">
+      <div class="sk sk-copyright-text sk-pill sk-d1"></div>
+    </div>
+
+  </div>
+  <!-- ===================== END SKELETON OVERLAY ===================== -->
 
   <!-- Top Navigation Header -->
   <header class="metora-header">
@@ -207,7 +347,8 @@
                 class="fa-brands fa-square-instagram"></i></a>
             <a href="https://github.com/sudhanshupal123" target="_blank"><i class="fa-brands fa-github"></i></a>
             <a href=""><i class="fa-brands fa-product-hunt" target="_blank"></i></a>
-            <a href="https://www.linkedin.com/in/sudhanshu-pal-537a26403" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.linkedin.com/in/sudhanshu-pal-537a26403" target="_blank"><i
+                class="fa-brands fa-linkedin"></i></a>
           </div>
 
         </div>
@@ -222,6 +363,30 @@
     <h1>@:All rights reserove:TypingClub pro</h1>
   </footer>
   <script type="module" src="./scripts/level.js"></script>
+  <!-- Skeleton: hide overlay once page fully loads -->
+  <script>
+    (function () {
+      function hideSkeleton() {
+        var overlay = document.getElementById('sk-overlay');
+        var body = document.body;
+        if (!overlay) return;
+        overlay.classList.add('sk-hidden');
+        body.classList.remove('sk-loading');
+        // fully remove from DOM after transition
+        overlay.addEventListener('transitionend', function () {
+          overlay.remove();
+        }, { once: true });
+      }
+      // Hide when everything (images, scripts) is loaded
+      if (document.readyState === 'complete') {
+        hideSkeleton();
+      } else {
+        window.addEventListener('load', hideSkeleton);
+        // Safety fallback: max 5s
+        setTimeout(hideSkeleton, 5000);
+      }
+    })();
+  </script>
 </body>
 
 </html>
