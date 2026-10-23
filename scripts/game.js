@@ -185,7 +185,8 @@ function type() {
         const correct = [...document.querySelectorAll('.letter_unit.Correct')].length + 1;
         const totalletter = [...document.querySelectorAll('.letter_unit')].length - 1;
         const totalError = [...document.querySelectorAll('.letter_unit.Error')].length;
-        console.log(totalError)
+        const error20 = totalletter * 0.20;
+        const error30 = totalletter * 0.30;
         const Accuracayvalue = (correct / totalletter) * 100 || 0;
         const Accuracay = Math.round(Accuracayvalue);
         const key = e.key;
@@ -194,6 +195,25 @@ function type() {
         const isSpace = key === ' ';
         const expected = letter_unit.textContent;
         const statAcc = document.querySelector('#statAcc');
+
+        if (error20 <= totalError) {
+            if (error30 >= totalError) {
+                let removeErrorflex;
+                document.querySelector('.errorRestart').style.display = 'flex';
+                clearInterval(window.timer);
+                clearInterval(removeErrorflex);
+                const errorrestart = document.querySelector('.errorrestart');
+                errorrestart.addEventListener('click', () => {
+                    window.location.reload();
+                    clearInterval(window.timer);
+                    clearInterval(removeErrorflex);
+                });
+                removeErrorflex = setTimeout(() => {
+                    window.location.reload();
+                }, 5000);
+            }
+        }
+
         if (Accuracay >= 0 || Accuracay <= 100) {
             statAcc.innerHTML = Accuracay;
         }
