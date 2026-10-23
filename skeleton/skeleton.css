@@ -1,0 +1,475 @@
+/* =========================================================
+   Skeleton Loader — Shared Styles
+   Used by: skeleton/game.html & skeleton/index.html
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:          #0e0f13;
+  --surface:     #16181f;
+  --surface-2:   #1e2029;
+  --border:      #2a2d3a;
+  --shimmer-base: #1e2029;
+  --shimmer-highlight: #2c3048;
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-pill: 999px;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* ── Shimmer keyframe ── */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+
+/* ── Base skeleton block ── */
+.sk {
+  display: block;
+  background: linear-gradient(
+    90deg,
+    var(--shimmer-base)   25%,
+    var(--shimmer-highlight) 50%,
+    var(--shimmer-base)   75%
+  );
+  background-size: 600px 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+/* ── Pulse variant (circles / icons) ── */
+@keyframes pulse {
+  0%, 100% { opacity: .45; }
+  50%       { opacity: .8;  }
+}
+.sk-pulse {
+  animation: pulse 1.8s ease-in-out infinite;
+  background: var(--shimmer-base);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Utility sizes ── */
+.sk-circle  { border-radius: 50%; }
+.sk-pill    { border-radius: var(--radius-pill); }
+.sk-rounded { border-radius: var(--radius-md); }
+.sk-card    { border-radius: var(--radius-lg); background: var(--surface); padding: 20px; }
+
+/* =========================================================
+   GAME SKELETON
+   ========================================================= */
+
+/* — Header — */
+.sk-game-header {
+  width: 100%;
+  height: 64px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.sk-back-btn {
+  width: 80px;
+  height: 34px;
+  border-radius: var(--radius-pill);
+}
+
+.sk-level-badge {
+  width: 60px;
+  height: 26px;
+  border-radius: var(--radius-pill);
+}
+
+.sk-level-name {
+  width: 120px;
+  height: 18px;
+  border-radius: var(--radius-sm);
+}
+
+.sk-spacer { flex: 1; }
+
+.sk-stat-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.sk-stat-value {
+  width: 48px;
+  height: 22px;
+  border-radius: var(--radius-sm);
+}
+
+.sk-stat-label {
+  width: 36px;
+  height: 10px;
+  border-radius: var(--radius-sm);
+}
+
+.sk-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+}
+
+/* — Progress bar — */
+.sk-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.sk-progress-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, #4e5bff55, transparent);
+  animation: progressSlide 1.8s infinite;
+}
+@keyframes progressSlide {
+  0%   { transform: translateX(-200%); }
+  100% { transform: translateX(400%); }
+}
+
+/* — Key hint — */
+.sk-key-hint {
+  margin: 14px auto;
+  width: 220px;
+  height: 34px;
+  border-radius: var(--radius-pill);
+}
+
+/* — Text display — */
+.sk-text-display-wrapper {
+  margin: 0 auto 16px;
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.sk-text-display {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sk-word {
+  height: 20px;
+  border-radius: 4px;
+}
+
+/* — Lap strip — */
+.sk-lap-strip {
+  max-width: 900px;
+  margin: 0 auto 20px;
+  padding: 0 20px;
+  display: flex;
+  gap: 10px;
+}
+.sk-lap-chip {
+  height: 28px;
+  width: 72px;
+  border-radius: var(--radius-pill);
+}
+
+/* — Keyboard — */
+.sk-keyboard-wrapper {
+  max-width: 720px;
+  margin: 0 auto 32px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.sk-keyboard-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.sk-key {
+  height: 46px;
+  border-radius: var(--radius-sm);
+}
+
+/* =========================================================
+   INDEX SKELETON
+   ========================================================= */
+
+/* — Nav — */
+.sk-nav {
+  width: 100%;
+  height: 64px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.sk-brand {
+  width: 160px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+}
+
+.sk-nav-link {
+  width: 70px;
+  height: 18px;
+  border-radius: var(--radius-sm);
+}
+
+.sk-wpm-badge {
+  width: 80px;
+  height: 30px;
+  border-radius: var(--radius-pill);
+  margin-left: auto;
+}
+
+.sk-theme-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+/* — Hero stage — */
+.sk-hero-stage {
+  width: 100%;
+  min-height: 420px;
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 28px;
+}
+
+.sk-hero-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 100px;
+  border-radius: var(--radius-md);
+  opacity: .3;
+}
+
+.sk-hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 1;
+  flex: 1;
+}
+
+.sk-hero-desc {
+  height: 16px;
+  border-radius: var(--radius-sm);
+}
+
+.sk-badge-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.sk-hero-center {
+  width: 200px;
+  height: 340px;
+  border-radius: var(--radius-md);
+  z-index: 2;
+  margin: 0 32px;
+}
+
+.sk-hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+  z-index: 1;
+  flex: 1;
+}
+
+.sk-card-stack {
+  display: flex;
+  gap: -20px;
+  position: relative;
+  width: 180px;
+  height: 220px;
+}
+
+.sk-stack-card {
+  width: 130px;
+  height: 180px;
+  border-radius: var(--radius-md);
+  position: absolute;
+}
+
+.sk-stack-card:nth-child(1) { left: 0;   top: 0;  transform: rotate(-8deg); }
+.sk-stack-card:nth-child(2) { left: 30px; top: 10px; transform: rotate(6deg); }
+.sk-stack-card:nth-child(3) { left: 15px; top: 5px;  z-index: 3; }
+
+/* — Hero bottom grid — */
+.sk-hero-grid {
+  background: var(--surface-2);
+  border-top: 1px solid var(--border);
+  padding: 20px 28px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.sk-grid-text-lg {
+  height: 36px;
+  border-radius: var(--radius-sm);
+  flex: 1;
+}
+
+/* — Main content / lesson sections — */
+.sk-main-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 28px 60px;
+}
+
+.sk-section-title {
+  width: 280px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+}
+
+.sk-section-sub {
+  width: 420px;
+  height: 18px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 36px;
+}
+
+.sk-lesson-section {
+  margin-bottom: 40px;
+}
+
+.sk-lesson-section-title {
+  width: 180px;
+  height: 22px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 18px;
+}
+
+.sk-lesson-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 14px;
+}
+
+.sk-lesson-card {
+  height: 100px;
+  border-radius: var(--radius-lg);
+}
+
+/* — Footer — */
+.sk-footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 40px 28px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.sk-footer-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+}
+
+.sk-footer-title {
+  width: 180px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+}
+
+.sk-footer-social {
+  display: flex;
+  gap: 10px;
+}
+
+.sk-social-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+
+.sk-footer-img {
+  width: 180px;
+  height: 180px;
+  border-radius: var(--radius-md);
+  margin-left: auto;
+}
+
+/* — Copyright bar — */
+.sk-copyright {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 16px 28px;
+  display: flex;
+  justify-content: center;
+}
+
+.sk-copyright-text {
+  width: 320px;
+  height: 18px;
+  border-radius: var(--radius-pill);
+}
+
+/* =========================================================
+   Stagger delays (for richer feel)
+   ========================================================= */
+.sk-d1 { animation-delay: 0.0s; }
+.sk-d2 { animation-delay: 0.1s; }
+.sk-d3 { animation-delay: 0.2s; }
+.sk-d4 { animation-delay: 0.3s; }
+.sk-d5 { animation-delay: 0.4s; }
+.sk-d6 { animation-delay: 0.5s; }
+.sk-d7 { animation-delay: 0.6s; }
+.sk-d8 { animation-delay: 0.7s; }

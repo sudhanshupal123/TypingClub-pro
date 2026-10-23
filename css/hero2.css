@@ -35,7 +35,7 @@
   padding: 5px;
   z-index: 99999999;
   background: rgba(red, green, blue, alpha);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(10px);
   border: 1px solid var(--text-back);
   box-shadow: 0 0 5px var(--text-back), inset 0 0 2px var(--headerbg);
   display: flex;

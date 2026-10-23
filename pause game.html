@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  ```html
+  <div id="word">hello world javascript</div>
+
+  <textarea id="typingArea" placeholder="Start typing..."></textarea>
+
+  <h3>Time: <span id="time">60</span></h3>
+
+  <div id="pauseMessage" style="display: none; cursor: pointer;">
+    ⏸️ Game Paused — Click to Continue
+  </div>
+
+  <script>
+
+    const typingArea = document.getElementById("typingArea");
+    const timeText = document.getElementById("time");
+    const pauseMessage = document.getElementById("pauseMessage");
+
+    let timeLeft = 60;
+
+    let timer = null;
+    let inactivityTimer = null;
+
+    let gameStarted = false;
+    let gamePaused = false;
+    let gameFinished = false;
+
+
+    // Start or resume the game
+    function startGame() {
+
+      if (timer !== null || gameFinished) return;
+
+      gamePaused = false;
+
+      pauseMessage.style.display = "none";
+
+      timer = setInterval(() => {
+
+        timeLeft--;
+
+        timeText.textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          timer = null;
+
+          clearTimeout(inactivityTimer);
+
+          gameFinished = true;
+          typingArea.disabled = true;
+
+          pauseMessage.style.display = "none";
+
+          console.log("Game finished!");
+        }
+
+      }, 1000);
+    }
+
+
+    // Pause the game
+    function pauseGame() {
+
+      if (gameFinished || gamePaused) return;
+
+      clearInterval(timer);
+      timer = null;
+
+      gamePaused = true;
+
+      pauseMessage.textContent = "⏸️ Game Paused — Click to Continue";
+      pauseMessage.style.display = "block";
+    }
+
+
+    // Detect typing
+    typingArea.addEventListener("input", () => {
+
+      if (gameFinished || gamePaused) return;
+
+      // Start the game when the user first types
+      if (!gameStarted) {
+        gameStarted = true;
+        startGame();
+      }
+
+      // Reset inactivity countdown
+      clearTimeout(inactivityTimer);
+
+      inactivityTimer = setTimeout(() => {
+
+        pauseGame();
+
+      }, 2000);
+
+    });
+
+
+    // Continue by clicking the pause message
+
+    pauseMessage.addEventListener("click", () => {
+
+      if (!gamePaused || gameFinished) return;
+
+      startGame();
+
+      // Wait for the next typing input before checking inactivity again
+      clearTimeout(inactivityTimer);
+
+      inactivityTimer = setTimeout(() => {
+
+        pauseGame();
+
+      }, 2000);
+
+    });
+  </script>
+</body>
+
+</html>

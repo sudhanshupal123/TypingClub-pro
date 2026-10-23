@@ -7,9 +7,12 @@
    (Overrides the surface variables set in style.css lightMode / darkMode)
    ============================================================ */
 body.lightMode {
-  --color: #111111;
+  --colortext: #a3a2a2a5;
+  --hover: #d9dadf;
+  --color: #111111e3;
   --star: #cac7c7;
-  --game-body-bg: linear-gradient(135deg, #e0f7ff 0%, #f0e8ff 50%, #ffffff 100%);
+  --game-body-bg: #f5f5f8;
+  --game-display-bg: rgba(216, 216, 218, 0.8);
   --game-header-bg: rgba(255, 255, 255, 0.80);
   --game-header-border: rgba(255, 255, 255, 0.90);
   --game-header-shadow: 0 4px 24px rgba(56, 189, 248, 0.10);
@@ -56,9 +59,12 @@ body.lightMode {
 }
 
 body.darkMode {
-  --color: #f0f0f0;
+  --hover: #30313a;
+  --color: #f0f0f096;
+  --colortext: #dededea5;
   --star: #525050;
-  --game-body-bg: #0e0e0e;
+  --game-body-bg: #15161b;
+  --game-display-bg: rgba(32, 32, 35, 0.8);
   --game-header-bg: rgba(16, 16, 14, 0.90);
   --game-header-border: rgba(255, 255, 255, 0.06);
   --game-header-shadow: 0 4px 24px rgba(0, 0, 0, 0.50);
@@ -349,7 +355,7 @@ body.darkMode {
   min-height: 5rem;
   height: 15rem;
   padding: 1.5rem;
-  background: var(--game-text-bg, rgba(255, 255, 255, 0.78));
+  background: var(--game-display-bg);
   border-radius: var(--radius);
   font-family: 'Fira Code', 'Consolas', monospace;
   font-size: 1.5rem;
@@ -363,7 +369,7 @@ body.darkMode {
   align-content: flex-start;
   transition: border-color 0.3s, background 0.4s ease;
   backdrop-filter: blur(12px) saturate(160%);
-  box-shadow: 0 8px 32px rgba(56, 189, 248, 0.12);
+  box-shadow: 0 0 12px rgba(121, 137, 144, 0.12);
   flex-wrap: wrap;
 }
 
@@ -376,8 +382,8 @@ body.darkMode {
   font-size: 2rem;
   border-radius: var(--radius);
   padding: 1.5rem;
-  background: var(--star);
-  color: var(--color);
+  background: var(--hover);
+  color: var(--hover);
   display: none;
   flex-direction: column;
   justify-content: space-between;
@@ -400,8 +406,9 @@ body.darkMode {
   border: none;
   font-weight: 700;
   backdrop-filter: blur(10px);
-  color:black;
+  color: black;
   cursor: pointer;
+  background: var(--colortext);
 }
 
 .text-display.active {
@@ -418,6 +425,7 @@ body.darkMode {
 
 .words .letter_unit {
   margin: 1px;
+  font-size: 2rem;
 }
 
 /* Letter spans */
@@ -432,7 +440,7 @@ body.darkMode {
 .caret {
   position: absolute;
   width: 2px;
-  height: 2rem;
+  height: 2.7rem;
   background: var(--primary-blue);
   border-radius: 2px;
   pointer-events: none;
@@ -1316,14 +1324,12 @@ body.diff-alpha .level-badge {
 
 .Correct {
   background: #17ff0b;
-  color: var(--color);
-
+  color: #0a0a0a;
 }
 
 .Error {
   background: #ff2a2a;
-  color: var(--color);
-
+  color: #0a0a0a;
 }
 
 .extra {

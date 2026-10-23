@@ -25,34 +25,22 @@ fetch('../json/word.json').then(response => response.json()).then(data => {
     lessonEl.forEach((lesson, d) => {
         const locklevel = document.querySelector(".locklevel");
         lesson.addEventListener('click', (e) => {
-            const x = e.clientX;
-            const y = e.clientY;
-            locklevel.style.display = "block";
+            // const x = e.clientX;
+            // const y = e.clientY;
+            // locklevel.style.display = "block";
 
-            const width = locklevel.offsetWidth;
-            const height = locklevel.offsetHeight;
+            // const width = locklevel.offsetWidth;
+            // const height = locklevel.offsetHeight;
 
-            const left = Math.min(x, window.innerWidth - width - 5);
-            const top = Math.min(y + 5, window.innerHeight - height - 5);
-            locklevel.style.left = Math.max(5, left - 170) + 'px';
-            locklevel.style.top = Math.max(5, top) + 'px';
+            // const left = Math.min(x, window.innerWidth - width - 5);
+            // const top = Math.min(y + 5, window.innerHeight - height - 5);
+            // locklevel.style.left = Math.max(5, left - 170) + 'px';
+            // locklevel.style.top = Math.max(5, top) + 'px';
 
-            const locklevelContinue = document.querySelector('.locklevelContinue');
-            const locklevelClose = document.querySelector(".locklevelClose");
-            if (locklevel.style.display === "block") {
-                locklevelContinue.addEventListener('click', () => {
-                    window.location.href = `./game.html?id=${encodeURIComponent(d)}`;
-                    localStorage.setItem('levelidx', JSON.stringify(d));
-                })
-            }
-
-            locklevelClose.addEventListener('click', () => {
-                locklevel.style.display = 'none';
-            });
-
-            setTimeout(() => {
-                locklevel.style.display = 'none';
-            }, 3000)
+            // const locklevelContinue = document.querySelector('.locklevelContinue');
+            // const locklevelClose = document.querySelector(".locklevelClose");
+            window.location.href = `./game.html?id=${encodeURIComponent(d)}`;
+            localStorage.setItem('levelidx', JSON.stringify(d));
         })
     })
 });

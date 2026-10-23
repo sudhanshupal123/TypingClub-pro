@@ -1289,8 +1289,8 @@ body::after {
   margin-top: 2rem;
   width: 100%;
   height: auto;
-  background: rgb(221, 221, 221);
-  border-top: 1px solid var(--accent);
+  background: var(--whiteout);
+  border-top: 1px solid var(--accect);
   display: flex;
   justify-content: center;
   align-items: center;
