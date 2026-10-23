@@ -2,6 +2,8 @@ import { disableCopy } from './window.js';
 import { ThemeMode } from './ThemeMode.js';
 ThemeMode();
 disableCopy();
+const headerWPM = document.querySelector('.headerWPM');
+headerWPM.innerHTML = `WPM:${JSON.parse(localStorage.getItem('displayWPM'))}`;
 
 const navlinks = [...document.querySelectorAll('.n')];
 navlinks.forEach((nav) => {

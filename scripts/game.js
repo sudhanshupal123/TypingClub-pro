@@ -151,7 +151,7 @@ window.gameStart = null;
 let minuts = 0;
 let sLeft = null;
 function gettime() {
-    const gameTime = 0 * 1000;
+    let gameTime = 1 * 1000;
     if (!window.timer) {
         window.timer = setInterval(() => {
             if (!window.gameStart) {
@@ -162,7 +162,8 @@ function gettime() {
             const sPassed = Math.round(msPassed / 1000);
             sLeft = Math.round((gameTime / 1000) + sPassed);
             if (sLeft >= 60) {
-                minuts++
+                minuts += 1;
+                gameTime = -2 * 1000;
                 sLeft = 0;
             }
             document.querySelector('#startminuts').innerHTML = minuts;
@@ -183,6 +184,8 @@ function type() {
         const letter_unit = document.querySelector('.letter_unit.Current');
         const correct = [...document.querySelectorAll('.letter_unit.Correct')].length + 1;
         const totalletter = [...document.querySelectorAll('.letter_unit')].length - 1;
+        const totalError = [...document.querySelectorAll('.letter_unit.Error')].length;
+        console.log(totalError)
         const Accuracayvalue = (correct / totalletter) * 100 || 0;
         const Accuracay = Math.round(Accuracayvalue);
         const key = e.key;
@@ -205,8 +208,11 @@ function type() {
             if (wpm === 'Infinity') {
                 seconds++;
             }
-            document.querySelector('#statWpm').innerHTML = wpm;
-            console.log(wpm, minut, seconds)
+            setTimeout(() => {
+                document.querySelector('#statWpm').innerHTML = wpm;
+            }, 4000);
+
+            localStorage.setItem('wpm', JSON.stringify(wpm));
         }
 
 
@@ -314,7 +320,11 @@ function type() {
             const resCorrect = document.querySelector('#resCorrect');
             const resAcc = document.querySelector('#resAcc');
             const resWpm = document.querySelector('#resWpm');
+            const resTime = document.querySelector('#resTime');
+            const minuts = JSON.parse(localStorage.getItem('minuts'));
+            const second = JSON.parse(localStorage.getItem('sLeft'));
 
+            resTime.innerHTML = `${minuts}:${second}`
             resAcc.innerHTML = Math.round(Accuracay);
             resErrors.innerHTML = incorrect.length;
             resErrors.innerHTML = incorrect ? incorrect.length : 0;
@@ -322,8 +332,12 @@ function type() {
             result.style.display = 'flex';
             function timeover() {
                 clearInterval(window.timer);
-                const displayresult = getWpm(correct);
-                resWpm.innerHTML = displayresult;
+                const wpmresult = JSON.parse(localStorage.getItem('wpm'));//100
+                const displaywpm = localStorage.getItem('displayWPM');//110
+                if (wpmresult >= displaywpm) {//110 
+                    localStorage.setItem('displayWPM', JSON.stringify(wpmresult))
+                }
+                resWpm.innerHTML = wpmresult;
             }
             timeover();
             retryBtn.addEventListener('click', () => {
