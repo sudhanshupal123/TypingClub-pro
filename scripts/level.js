@@ -3,29 +3,11 @@ import { ThemeMode } from './ThemeMode.js';
 ThemeMode();
 disableCopy();
 const headerWPM = document.querySelector('.headerWPM');
-headerWPM.innerHTML = `WPM:${JSON.parse(localStorage.getItem('displayWPM'))}`;
-
-const navlinks = [...document.querySelectorAll('.n')];
-navlinks.forEach((nav) => {
-    nav.addEventListener('click', (e) => {
-        const text = document.querySelector('.InformationNavBar');
-        const x = e.clientX;
-        const y = e.clientY;
-        text.style.display = "block";
-
-        const width = text.offsetWidth;
-        const height = text.offsetHeight;
-
-        const left = Math.min(x, window.innerWidth - width - 5);
-        const top = Math.min(y + 5, window.innerHeight - height - 5);
-        text.style.left = Math.max(5, left - 60) + 'px';
-        text.style.top = Math.max(5, top) + 'px';
-        setTimeout(() => {
-            text.style.display = "none";
-        }, 1000)
-    })
-})
-
+const displayWPM = JSON.parse(localStorage.getItem('displayWPM'));
+if (displayWPM === null || displayWPM === undefined) {
+    headerWPM.innerHTML = `WPM:0`;
+}
+headerWPM.innerHTML = `WPM:${displayWPM}`;
 
 const TierName = ["Bronze", "Silver", "Platinum", "Gold", "Diamond", "TypeMaster", "TypeMaster Pro"];
 
