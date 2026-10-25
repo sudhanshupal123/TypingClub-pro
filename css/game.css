@@ -1402,19 +1402,39 @@ body.diff-alpha .level-badge {
   animation: shake 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .text-display {
-    font-size: 1rem;
-    padding: 25px 22px;
+/* ── Laptop (≤ 1200px) ── */
+@media (max-width: 1200px) {
+  .game-main {
+    width: 75%;
+    margin-top: 10rem;
+    padding: 60px 20px 20px;
+  }
+
+  .analytics-card {
+    width: 88dvw;
   }
 
   .modal-stats {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* ── Tablet (≤ 768px) ── */
+@media (max-width: 768px) {
+  /* Header */
+  .game-header-inner {
+    padding: 0 14px;
+    gap: 10px;
+    height: 56px;
   }
 
-  .analytics-tabs .atab {
-    font-size: 0.68rem;
-    padding: 7px 6px;
+  .back-btn {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+
+  .level-name {
+    display: none;
   }
 
   .stats-bar {
@@ -1422,28 +1442,245 @@ body.diff-alpha .level-badge {
   }
 
   .stat-block {
-    padding: 6px 12px;
-    min-width: 58px;
+    padding: 6px 10px;
+    min-width: 56px;
   }
 
   .stat-value {
     font-size: 1rem;
   }
 
+  /* Game Main */
+  .game-main {
+    width: 92%;
+    margin-top: 8rem;
+    padding: 60px 12px 20px;
+  }
+
+  /* Text Display */
+  .text-display {
+    font-size: 1.15rem;
+    padding: 20px 16px;
+    height: 13rem;
+  }
+
+  .text-display-wrapper {
+    height: 11rem;
+    margin-top: -80px;
+  }
+
+  .words .letter_unit {
+    font-size: 1.6rem;
+  }
+
+  .caret {
+    height: 2.2rem;
+  }
+
+  /* Keyboard — hidden on tablet */
   .keyboard-visual {
     display: none;
   }
 
-  .game-main {
-    padding-bottom: 30px;
+  /* Modal */
+  .analytics-card {
+    width: 96dvw;
+    height: auto;
+    max-height: 92dvh;
+    padding: 20px 14px;
+    gap: 14px;
+    overflow-y: auto;
   }
 
-  .level-name {
+  .modal-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .modal-stat-value {
+    font-size: 1.1rem;
+  }
+
+  .analytics-tabs .atab {
+    font-size: 0.68rem;
+    padding: 7px 6px;
+  }
+
+  /* Stars */
+  .star i {
+    font-size: 3.2rem;
+  }
+
+  #star1 i { left: 14rem; }
+  #star2 i { left: 21rem; top: -18px; }
+  #star3 i { left: 28rem; }
+
+  /* Lap strip */
+  .lap-strip {
+    max-width: 100%;
+  }
+}
+
+/* ── Mobile (≤ 480px) ── */
+@media (max-width: 480px) {
+  /* Header */
+  .game-header-inner {
+    padding: 0 10px;
+    gap: 6px;
+    height: 50px;
+  }
+
+  .back-btn {
+    padding: 5px 10px;
+    font-size: 0.72rem;
+  }
+
+  .level-badge {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+  }
+
+  .stat-block {
+    padding: 4px 8px;
+    min-width: 48px;
+  }
+
+  .stat-value {
+    font-size: 0.9rem;
+  }
+
+  .stat-label {
+    font-size: 0.55rem;
+  }
+
+  /* Only show WPM + Accuracy on mobile */
+  .stats-bar .stat-block:nth-child(n+3) {
     display: none;
   }
 
+  /* Game main */
+  .game-main {
+    width: 100%;
+    margin-top: 7rem;
+    padding: 50px 8px 12px;
+  }
+
+  /* Text display */
+  .text-display {
+    font-size: 1rem;
+    padding: 14px 12px;
+    height: 11rem;
+    border-radius: 14px;
+  }
+
+  .text-display-wrapper {
+    height: 9.5rem;
+    margin-top: -60px;
+  }
+
+  .words .letter_unit {
+    font-size: 1.4rem;
+  }
+
+  .caret {
+    height: 1.9rem;
+  }
+
+  /* Keyboard — hidden */
+  .keyboard-visual {
+    display: none;
+  }
+
+  /* Modal */
   .analytics-card {
-    padding: 20px 16px;
+    width: 99dvw;
+    padding: 14px 10px;
+    gap: 10px;
+    border-radius: 18px;
+  }
+
+  .modal-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .modal-stat {
+    padding: 10px 4px;
+  }
+
+  .modal-stat-value {
+    font-size: 1rem;
+  }
+
+  .modal-stat-label {
+    font-size: 0.55rem;
+  }
+
+  .modal-title {
+    font-size: 1.4rem;
+    top: 28px;
+  }
+
+  .analytics-tabs .atab {
+    font-size: 0.62rem;
+    padding: 6px 4px;
+  }
+
+  /* Stars */
+  .star i {
+    font-size: 2.5rem;
+  }
+
+  #star1 i { left: 5rem; top: 8px; }
+  #star2 i { left: 10rem; top: -16px; }
+  #star3 i { left: 15rem; top: 8px; }
+
+  /* Modal actions */
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .btn-secondary,
+  .btn-primary,
+  .btn-ghost {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 14px;
+  }
+
+  /* Stuck grid */
+  .stuck-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+
+  /* Error restart overlay */
+  .errorRestart p {
+    font-size: 1.4rem;
+  }
+
+  .errorRestart button {
+    font-size: 1.1rem;
+  }
+}
+
+/* ── Very small phones (≤ 360px) ── */
+@media (max-width: 360px) {
+  .game-main {
+    padding: 46px 6px 10px;
+  }
+
+  .text-display {
+    font-size: 0.9rem;
+    height: 10rem;
+  }
+
+  .modal-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Show only WPM stat on very small screens */
+  .stats-bar .stat-block:nth-child(n+2) {
+    display: none;
   }
 }
 

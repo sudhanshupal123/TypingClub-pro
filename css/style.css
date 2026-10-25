@@ -1302,33 +1302,286 @@ body::after {
 }
 
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE — LAPTOP / TABLET / MOBILE
    ============================================================ */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2rem;
-  }
 
-  .user-stats {
-    display: none;
+/* ── Laptop (≤ 1200px) ── */
+@media (max-width: 1200px) {
+  .main-content {
+    padding: 3rem 2.5rem;
   }
 
   .lesson-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
   }
 
-  .header-nav {
-    display: none;
+  .site-footer {
+    width: 95%;
   }
 
-  .btn-globe {
-    display: none;
+  .footer-name {
+    font-size: clamp(4rem, 18vw, 20rem);
+  }
+
+  .footerArticle-right img {
+    width: 15rem;
+  }
+}
+
+/* ── Tablet (≤ 768px) ── */
+@media (max-width: 768px) {
+  /* Header */
+  .metora-header {
+    width: 95%;
+    border-radius: 20px;
+    padding: 8px 14px;
+  }
+
+  .connectTheme {
+    gap: 5px;
+  }
+
+  .headerWPM {
+    font-size: 0.85rem;
   }
 
   .btn-official,
   .btn-download {
     padding: 8px 14px;
     font-size: 0.78rem;
+  }
+
+  /* Hero text */
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+
+  /* Main Content */
+  .main-content {
+    padding: 2rem 1.2rem;
+    width: 100dvw;
+  }
+
+  .hero-section {
+    margin-bottom: 36px;
+    gap: 20px;
+  }
+
+  /* Lesson Grid */
+  .lesson-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+  }
+
+  .lesson-card {
+    padding: 14px 10px 12px;
+    border-radius: 18px;
+  }
+
+  .card-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 1.5rem;
+  }
+
+  /* Footer */
+  .site-footer {
+    width: 100%;
+    height: auto;
+    border-radius: 1.2rem;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+  }
+
+  .infoFooter {
+    align-items: flex-start;
+  }
+
+  .footerarticle {
+    flex-direction: column;
+    height: auto;
+    gap: 1rem;
+  }
+
+  .footerArticle-left,
+  .footerArticle-right {
+    width: 100%;
+    height: auto;
+  }
+
+  .footerArticle-right {
+    justify-content: flex-start;
+    padding-left: 0.5rem;
+  }
+
+  .footerArticle-right img {
+    width: 10rem;
+    transform: none;
+  }
+
+  .footer-name {
+    font-size: clamp(3rem, 14vw, 10rem);
+    height: auto;
+    padding: 1rem 0;
+    text-align: center;
+  }
+
+  /* About tooltip */
+  .abouttext {
+    width: 13rem;
+    left: 0;
+  }
+
+  /* Lock UI */
+  .locklevel {
+    width: 90vw;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Copyright */
+  .copywrite {
+    padding: 0.75rem;
+  }
+
+  .copywrite h1 {
+    font-size: 0.78rem;
+    text-align: center;
+  }
+}
+
+/* ── Mobile (≤ 480px) ── */
+@media (max-width: 480px) {
+  /* Header */
+  .metora-header {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    width: 95%;
+    top: 8px;
+    padding: 6px 10px;
+    border-radius: 16px;
+    gap: 6px;
+  }
+.nav-menu{
+  width: 20%;
+  height: 100%;
+}
+  .brand-logo {
+    font-size: 1rem;
+    display: inline-flex;
+  }
+
+  .ThemeMode {
+    width: 2rem;
+  }
+
+  .headerWPM {
+    font-size: 0.75rem;
+  }
+
+  .btn-wallet {
+    padding: 7px 14px;
+    font-size: 0.75rem;
+  }
+
+  /* Hero */
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.82rem;
+    max-width: 100%;
+  }
+
+  .hero-section {
+    margin-bottom: 24px;
+  }
+
+  /* Main */
+  .main-content {
+    padding: 2rem 0.7rem;
+  }
+
+  /* Lesson grid — 2 columns on small phones */
+  .lesson-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+  }
+
+  .lesson-card {
+    padding: 12px 8px 10px;
+    border-radius: 16px;
+    gap: 8px;
+  }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
+    border-radius: 12px;
+  }
+
+  .card-label {
+    font-size: 0.67rem;
+  }
+
+  .card-wpm {
+    font-size: 0.6rem;
+    padding: 3px 8px;
+  }
+
+  /* Footer */
+  .site-footer {
+    border-radius: 1rem;
+    padding: 1rem 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .footerArticle-right img {
+    width: 8rem;
+  }
+
+  .footer-name {
+    font-size: clamp(2.5rem, 12vw, 8rem);
+  }
+
+  /* Lock UI */
+  .locklevel {
+    width: 95vw;
+    padding: 0.8rem;
+  }
+
+  .font-bold {
+    font-size: 16px;
+  }
+
+  .text-sm {
+    font-size: 12px;
+  }
+
+  .copywrite h1 {
+    font-size: 0.7rem;
+  }
+}
+
+/* ── Very small phones (≤ 360px) ── */
+@media (max-width: 360px) {
+  .lesson-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .hero-title {
+    font-size: 1.25rem;
+  }
+
+  .brand-logo {
+    font-size: 0.88rem;
   }
 }
