@@ -147,7 +147,7 @@ function updateCaret(lastLetter = null) {
         cursor.style.left = ((nextletter ? targetRect.left : targetRect.right) - parentRect.left) + 'px';
     }
 }
-window.gameStart = null;
+window.gameStart = 0;
 let minuts = 0;
 let sLeft = null;
 function gettime() {
