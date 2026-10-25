@@ -28,15 +28,18 @@
       overflow-y: auto;
       transition: opacity 0.45s ease, visibility 0.45s ease;
     }
+
     #sk-overlay.sk-hidden {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
     }
+
     /* keep real content hidden until skeleton fades */
-    body.sk-loading > *:not(#sk-overlay) {
+    body.sk-loading>*:not(#sk-overlay) {
       visibility: hidden;
     }
+
     /* game-main inner layout for skeleton */
     .game-main-sk {
       display: flex;
@@ -49,7 +52,7 @@
 <body class="game-body sk-loading">
 
   <!-- ===================== SKELETON OVERLAY (game.html) ===================== -->
-  <div id="sk-overlay" role="status" aria-label="Loading game">
+  <div id="sk-overlay" aria-label="Loading game">
 
     <!-- GAME HEADER -->
     <header class="sk-game-header" aria-hidden="true">
@@ -59,22 +62,19 @@
       <div class="sk-spacer"></div>
       <div class="sk-stat-block">
         <div class="sk sk-stat-value sk-d3"></div>
-        <div class="sk sk-stat-label sk-d3"></div>
       </div>
       <div class="sk-stat-block">
         <div class="sk sk-stat-value sk-d4"></div>
-        <div class="sk sk-stat-label sk-d4"></div>
       </div>
       <div class="sk-stat-block">
         <div class="sk sk-stat-value sk-d5"></div>
-        <div class="sk sk-stat-label sk-d5"></div>
       </div>
       <div class="sk-stat-block">
         <div class="sk sk-stat-value sk-d6"></div>
-        <div class="sk sk-stat-label sk-d6"></div>
       </div>
       <div class="sk sk-icon-btn sk-d7"></div>
       <div class="sk sk-icon-btn sk-circle sk-d8"></div>
+
     </header>
 
     <!-- PROGRESS BAR -->
@@ -82,11 +82,6 @@
 
     <!-- GAME MAIN -->
     <main class="game-main-sk" aria-hidden="true">
-
-      <!-- Key hint -->
-      <div style="display:flex; justify-content:center; margin-bottom:16px;">
-        <div class="sk sk-key-hint sk-pill sk-d1"></div>
-      </div>
 
       <!-- Text display -->
       <div class="sk-text-display-wrapper">
@@ -121,16 +116,19 @@
           <div class="sk sk-word sk-d4" style="width:48px;"></div>
           <div class="sk sk-word sk-d2" style="width:76px;"></div>
           <div class="sk sk-word sk-d5" style="width:38px;"></div>
+          <div class="sk sk-word sk-d1" style="width:54px;"></div>
+          <div class="sk sk-word sk-d2" style="width:80px;"></div>
+          <div class="sk sk-word sk-d1" style="width:40px;"></div>
+          <div class="sk sk-word sk-d3" style="width:96px;"></div>
+          <div class="sk sk-word sk-d2" style="width:60px;"></div>
+          <div class="sk sk-word sk-d4" style="width:72px;"></div>
+          <div class="sk sk-word sk-d1" style="width:48px;"></div>
+          <div class="sk sk-word sk-d5" style="width:88px;"></div>
+          <div class="sk sk-word sk-d2" style="width:56px;"></div>
+          <div class="sk sk-word sk-d3" style="width:70px;"></div>
+          <div class="sk sk-word sk-d6" style="width:44px;"></div>
+          <div class="sk sk-word sk-d1" style="width:82px;"></div>
         </div>
-      </div>
-
-      <!-- Lap strip -->
-      <div class="sk-lap-strip">
-        <div class="sk sk-lap-chip sk-pill sk-d1"></div>
-        <div class="sk sk-lap-chip sk-pill sk-d2"></div>
-        <div class="sk sk-lap-chip sk-pill sk-d3"></div>
-        <div class="sk sk-lap-chip sk-pill sk-d4"></div>
-        <div class="sk sk-lap-chip sk-pill sk-d5"></div>
       </div>
 
       <!-- Keyboard -->
@@ -298,7 +296,7 @@
         <p>Error: There are too many errors!</p>
         <button class="errorrestart">Restart</button>
       </div>
-      
+
       <!-- Cursor Caret -->
       <div class="caret" id="caret"></div>
     </div>
