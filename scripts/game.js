@@ -109,7 +109,7 @@ function textDisplay() {
     const levelNameText = document.querySelector('#levelName');
     const displayWord = document.querySelector('#statWords');
 
-    fetch('../json/word.json').then(response => response.json()).then(data => {
+    fetch('./json/word.json').then(response => response.json()).then(data => {
         const urlParams = new URLSearchParams(window.location.search);
         const urlidx = urlParams.get('id') ?? 0;
         const leveltexts = data[urlidx].text;
