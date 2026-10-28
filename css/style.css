@@ -1162,7 +1162,7 @@ body::after {
   justify-content: center;
   align-items: center;
   font-weight: 900;
-  font-size: clamp(5rem, 22vw, 10rem);
+  font-size: clamp(5rem, 20vw, 10rem);
   font-family: "Leveltext";
   color: var(--copyright-bg);
 }
