@@ -209,7 +209,7 @@ body {
 .sk-text-display-wrapper {
   margin: 5.5rem auto 16px;
   max-width: 900px;
-
+  overflow: hidden;
   padding: 0 20px;
 }
 
@@ -880,4 +880,4 @@ body {
   .sk-keyboard-wrapper {
     display: none;
   }
-}
+}

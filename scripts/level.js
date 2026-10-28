@@ -10,8 +10,8 @@ if (displayWPM === null || displayWPM === undefined) {
 headerWPM.innerHTML = `WPM:${displayWPM}`;
 
 const TierName = ["Bronze", "Silver", "Platinum", "Gold", "Diamond", "TypeMaster", "TypeMaster Pro"];
-
-fetch('../json/word.json').then(response => response.json()).then(data => {
+const fetchdatalevelurl = ['../json/word.json'];
+fetch(fetchdatalevelurl).then(response => response.json()).then(data => {
     let levelHTML = '';
     data.forEach((level, idx) => {
         levelHTML += `<div class="lessons" data-idx=${idx + 1}>
