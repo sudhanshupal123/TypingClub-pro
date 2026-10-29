@@ -573,6 +573,7 @@
     padding: 10px 16px;
     border-radius: 20px;
     flex-wrap: wrap;
+  backdrop-filter: blur(5px);
     justify-content: space-between;
     align-items: center;
     gap: 10px;
@@ -658,6 +659,7 @@
     padding: 8px 12px;
     border-radius: 16px;
     gap: 8px;
+      backdrop-filter: blur(5px);
   }
 
   .hero-pixel-title {
